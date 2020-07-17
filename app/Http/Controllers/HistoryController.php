@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SidangReg;
-use App\Models\User;
+use App\SidangReg;
+use App\User;
 
 class HistoryController extends Controller
 {
