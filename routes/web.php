@@ -21,3 +21,7 @@ Route::get('/pendaftaran', 'SidangRegController@index')->name('pendaftaran');
 Route::post('/pendaftaran/upload', 'SidangRegController@upload')->name('upload');
 
 Route::get('/pendaftaran/history', 'HistoryController@index')->name('history');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
