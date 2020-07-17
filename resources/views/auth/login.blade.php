@@ -1,11 +1,11 @@
-<!-- @extends('layouts.app')
+@extends('layouts.app')
 
-@section('content') -->
+@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-5">
         
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-body">
 
                     <!-- Header -->
@@ -85,4 +85,4 @@
         </div>
     </div>
 </div>
-<!-- @endsection -->
+@endsection

@@ -10929,20 +10929,17 @@ a.text-dark:focus {
 }
 
 body {
-  background: linear-gradient(-45deg, #004A74, #5AA0D0);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: #F1F3F4;
   color: #5F5F5F;
 }
 
 .judul {
+  color: #5AA0D0;
   font-size: 1.4rem;
   line-height: 1;
 }
 
-.card {
-  box-shadow: 5px 5px 25px #1a1a1a7f;
-}
+
 
 .card-body {
   padding: 2.5rem;
@@ -10964,7 +10961,17 @@ body {
 
 .form-control:focus {
   box-shadow: 0 0 0 0.1rem rgba(0, 73, 116, 0.25);
-  border: 2px solid rgba(0, 73, 116, 0.25);
+  border: 2px solid rgba(0, 73, 116, 0.5);
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid:focus{
+  box-shadow: 0 0 0 0.1rem rgba(227, 52, 47, 0.25);
+  border-width: 2px;
+}
+
+.was-validated .form-control:valid, .form-control.is-valid:focus{
+  box-shadow: 0 0 0 0.1rem rgba(56, 193, 114, 0.25);
+  border-width: 2px;
 }
 
 .lupa-sandi {
@@ -10973,7 +10980,7 @@ body {
 
 .copy-right {
   font-size: 0.8rem;
-  color: #ffffff;
+  color: #bababa;
   margin-top: 30px;
   margin-bottom: 0;
 }
