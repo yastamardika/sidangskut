@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SidangReg;
-use App\Models\User;
+use App\Mahasiswa;
+use App\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
@@ -25,15 +25,16 @@ class SidangRegController extends Controller
         // if(!Gate::allows('isSiswa')){
         //     abort(404,"Maaf, anda tidak memiliki akses");
         // }
+        // $mhs = Mahasiswa::all();
 
         return view('pages.sidangreg');
     }
 
     public function upload(Request $req){
-        $verifikasi1 = SidangReg::all()->where('id_mhs', $this->nim_comp[1])->first();
-        $verifikasi2 = SidangReg::where('status', "Diterima")->first();
-        $verifikasi3 = SidangReg::where('status', "Diproses")->orWhere('status', "Diverifikasi Akademik")->first();
-        
+        $verifikasi1 = Mahasiswa::all()->where('id_mhs', $this->nim_comp[1])->first();
+        $verifikasi2 = Mahasiswa::where('status', "Diterima")->first();
+        $verifikasi3 = Mahasiswa::where('status', "Diproses")->orWhere('status', "Diverifikasi Akademik")->first();
+
         $validate = Validator::make($req->all(),
         [
             'judulID' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
@@ -55,7 +56,7 @@ class SidangRegController extends Controller
                 'title' => 'PROSES DIBATALKAN',
                 'message' => 'Sidang Tugas Akhir sudah diterima! Silahkan lihat jadwal sidang Anda.',
                 'alert-type' => 'warning'
-            );            
+            );
 
             return redirect()->route('history')->with($notification);
         }
@@ -64,7 +65,7 @@ class SidangRegController extends Controller
                 'title' => 'PROSES GAGAL',
                 'message' => 'Terdapat sidang Tugas Akhir yang sedang diajukan!',
                 'alert-type' => 'failed'
-            );            
+            );
 
             return redirect()->route('history')->with($notification);
         }
@@ -89,7 +90,7 @@ class SidangRegController extends Controller
                 'title' => 'PROSES PENGAJUAN',
                 'message' => 'Data berhasil disimpan dan sedang diajukan!',
                 'alert-type' => 'success'
-            );            
+            );
 
             return Redirect::to('/pendaftaran/history')->with($notification);
 
@@ -97,7 +98,7 @@ class SidangRegController extends Controller
             // $upload->jumlah = $req->jumlah;
             // $upload->file_proposal = $req->$nama_proposal;
             // $upload->save();
-            
+
             // return redirect()->route('buat');
             // echo $path;
         }

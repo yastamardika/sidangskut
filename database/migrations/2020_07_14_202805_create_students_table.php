@@ -15,7 +15,7 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_mhs');
+            $table->integer('user_id')->unsigned();
             $table->string('nama_mhs');
             $table->string('email');
             $table->string('nim');
@@ -25,8 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('dosbing');
             $table->string('nomerhp');
             $table->date('tgl_acc_dosbing');
-            $table->bigInteger('id_status')->unsigned();
-
+            $table->bigInteger('id_status')->unsigned()->default('1');
             $table->string('file_cover_ta');
             $table->timestamps();
         });

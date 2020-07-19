@@ -34,6 +34,7 @@ class AddForeignkeyToMahasiswa extends Migration
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
             $table->dropForeign(['id_prodi']);
+            $table->dropForeign(['id_status']);
         });
     }
 }
