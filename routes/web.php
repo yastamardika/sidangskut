@@ -25,3 +25,7 @@ Route::get('/pendaftaran/history', 'HistoryController@index')->name('history');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('daftar', 'SidangRegController')->only([
+    'show', 'create'
+]);
+
