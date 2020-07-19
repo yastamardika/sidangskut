@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 @if(Session::has('message'))
    <div class="toast">
       <strong>{{ Session::get('title') }}</strong>
@@ -42,3 +45,4 @@
    </tbody>
 </table>
 </div>
+@endsection
