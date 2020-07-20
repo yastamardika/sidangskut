@@ -8,18 +8,18 @@
             <div class="card shadow">
                 <div class="card-body">
 
-                    <!-- Header -->
+                <!-- Header -->
                     <h1 class="text-uppercase font-weight-bold text-center judul">Selamat Datang</h1>
                     <p class="text-center">Silahkan login akun Anda.</p>
-                    <!-- End Header -->
+                <!-- End Header -->
 
-                    <!-- Form Login -->
+                <!-- Form Login -->
                     <form method="POST" action="{{ route('login') }}">
-                        @csrf
+                    @csrf
 
-                        <!-- Input Email -->
-                        <div class="form-group">
-                            <label for="email" class="col-md col-form-label">{{ __('E-Mail Address') }}</label>
+                    <!-- Input Email -->
+                        <div class="form-group mb-2">
+                            <label for="email" class="col-md col-form-label">Email UGM</label>
                             <div class="col-md">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
@@ -29,12 +29,12 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- End Input Email -->
+                    <!-- End Input Email -->
 
-                        <!-- Input Password -->
+                    <!-- Input Password -->
                         <div class="form-group">
                             <div class="col-md clearfix">
-                                <label for="password" class="float-left col-form-label">{{ __('Password') }}</label>
+                                <label for="password" class="float-left col-form-label">Password</label>
                                 @if (Route::has('password.request'))
                                     <a class="btn-link float-right lupa-sandi text-right" href="{{ route('password.request') }}">
                                         {{ __('Lupa sandi?') }}
@@ -51,7 +51,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- End Input Password -->
+                    <!-- End Input Password -->
 
                         <!-- <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
@@ -65,22 +65,28 @@
                             </div>
                         </div> -->
 
-                        <!-- Button Login -->
+                    <!-- Button Login -->
                         <div class="form-group mb-0 mt-4">
                             <div class="col-md-6 offset-md-6 text-right">
-                                <button type="submit" class="btn btn-primary">Masuk</button>
+                                <button type="submit" class="btn btn-primary text-uppercase">Masuk</button>
                             </div>
                         </div>
-                        <!-- End Button Login -->
+                    <!-- End Button Login -->
 
                     </form>
-                    <!-- End Form Login -->
+                <!-- End Form Login -->
+
+                <!-- Pindah Mendaftar Akun -->
+                    <div class="col-md mt-4 text-center">
+                        <label class="mb-0 mt-3">Belum memiliki akun? <a style="font-weight: 600;" href="{{ route('register') }}">Daftar disini</a></label>
+                    </div>
+                <!-- Pindah Mendaftar Akun -->
                 </div>
             </div>
 
-            <!-- Footer -->
+        <!-- Footer -->
             <p class="text-center copy-right">Copyright © 2020.<br>Akademik Departemen Teknik Elektro dan Informatika, <br>Sekolah Vokasi, Universitas Gadjah Mada</p>
-            <!-- End Footer -->
+        <!-- End Footer -->
             
         </div>
     </div>
