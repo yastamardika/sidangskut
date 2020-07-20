@@ -154,7 +154,6 @@ return [
         'terms' => 'ketentuan',
         '1000' => '1MB',
         'password' => 'kata sandi',
-        'password_confirmation' => 'kata sandi',
     ],
 
 ];

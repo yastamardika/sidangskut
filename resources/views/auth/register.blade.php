@@ -13,7 +13,7 @@
                 <!-- End Header -->
 
                 <!-- Form Login -->
-                    <form method="POST" class="needs-validation" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}">
                     @csrf
 
                     <!-- Input Nama -->
@@ -59,12 +59,7 @@
                                 
                             <div class="col-md-6 float-right pl-md-2">
                                 <label for="password-confirm" class="col-form-label">Konfirmasi Password</label>
-                                <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required title="Silahkan isi ulang kata sandi Anda." autocomplete="new-password">
-                                @error('password_confirmation')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required title="Silahkan isi ulang kata sandi Anda." autocomplete="new-password">
                             </div>
 
                         </div>
@@ -84,13 +79,13 @@
                         </div>
                     <!-- End Check Terms of Use -->
 
-                    <!-- Button Login -->
+                    <!-- Button Register -->
                         <div class="form-group">
                             <div class="col-md-5 p-0 offset-md-8">
                                 <button type="submit" class="btn btn-primary text-uppercase">Daftar</button>
                             </div>
                         </div>
-                    <!-- End Button Login -->
+                    <!-- End Button Register -->
 
                     </form>
                 <!-- End Form Login -->
