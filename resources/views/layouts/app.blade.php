@@ -14,14 +14,13 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="icon" href={{ asset('img/logo.png') }} type="image/png">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <!-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -31,14 +30,14 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                   // Left Side Of Navbar
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                   // Right Side Of Navbar
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                       // Authentication Links
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -70,9 +69,9 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
 
-        <main class="py-4">
+        <main class="py-4 pt-5 mt-3">
             @yield('content')
         </main>
     </div>

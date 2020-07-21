@@ -1,8 +1,66 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+body {
+   background: #F1F3F4;
+   color: #5F5F5F;
+ }
+ 
+ .judul {
+   color: #5AA0D0;
+   font-size: 1.4rem;
+   line-height: 1;
+ }
+ 
+ 
+ 
+ .card-body {
+   padding: 2.7rem 2.5rem;
+ }
+ 
+ .btn {
+   padding: 0.375rem 1.85rem;
+ }
+ 
+ .btn-primary {
+   background: linear-gradient(-45deg, #004A74, #5AA0D0);
+ }
+ 
+ .form-control {
+   height: calc(1.8em + 0.75rem + 2px);
+   background-color: #FAFAFA;
+   border-width: 2px;
+ }
+ 
+ .form-control:focus {
+   box-shadow: 0 0 0 0.1rem rgba(0, 73, 116, 0.25);
+   border: 2px solid rgba(0, 73, 116, 0.5);
+ }
+ 
+ .was-validated .form-control:invalid, .form-control.is-invalid:focus{
+   box-shadow: 0 0 0 0.1rem rgba(227, 52, 47, 0.25);
+   border-width: 2px;
+ }
+ 
+ .was-validated .form-control:valid, .form-control.is-valid:focus{
+   box-shadow: 0 0 0 0.1rem rgba(56, 193, 114, 0.25);
+   border-width: 2px;
+ }
+ 
+ .show{
+  z-index: 100;
+}
+
+ .lupa-sandi {
+   padding: 6px 0;
+ }
+ 
+ .copy-right {
+   font-size: 0.8rem;
+   color: #bababa;
+   margin-top: 40px;
+   margin-bottom: 0;
+ }
