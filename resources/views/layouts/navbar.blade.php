@@ -20,31 +20,34 @@
 </head>
 <body>
 <!-- Button Navigation Bar - Mobile Ver. -->
-<nav class="navbar navbar-dark sticky-top bg-dark navbar-expand-md flex-md-nowrap p-0">
-    <a class="navbar-brand" href="{{ url('/') }}">
-        {{ config('app.name', 'Laravel') }}
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
+    <nav class="navbar d-md-none d-lg-none d-xl-none d-sm-block navbar-dark bg-dark navbar-expand-md flex-md-nowrap shadow">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            {{ config('app.name', 'Laravel') }}
+        </a>
+        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
 <!-- End Button Navigation Bar - Mobile Ver. -->
 
 <div class="container-fluid">
     <div class="row">
-        <nav id="navbarSupportedContent" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="sidebar-sticky pt-3">
+
+    <!-- Navigation -->
+        <nav id="navbarSupportedContent" class="nav col-md-3 col-lg-2 vh-100 d-md-block bg-light sidebar collapse position-fixed shadow">
+            <div class="pt-3">
+            <!-- List Item Nav -->
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                        <span data-feather="home"></span>
-                        Dashboard <span class="sr-only">(current)</span>
+                        <a class="nav-link active" href="{{ url('/dashboard') }}">
+                            Dashboard <span class="sr-only">(current)</span>
+                            <span data-feather="home"></span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                        <span data-feather="file"></span>
-                        Orders
+                            Data
+                            <span data-feather="file"></span>
                         </a>
                     </li>
                 </ul>
@@ -55,42 +58,37 @@
                     <span data-feather="plus-circle"></span>
                 </a>
                 </h6> Dilanjut <ul>-->
+            <!-- End List Item Nav -->
             </div>
         </nav>
-        <main>
-            <!-- Konten -->
+    <!-- End Navigation -->
+
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-3">
+        <!-- Konten -->
+            <div class="content" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <!-- Header Wolcome & Logout -->
+                <div class="container-fluid px-md-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 px-md-2">
+                            <div class="card shadow" style="margin-bottom: 1.5rem;">
+                                <div class="header">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- End Header Wolcome & Logout -->
+                @yield('content')
+            </div>
+        <!-- End Konten -->
         </main>
+        
     </div>
 </div>
-
-
-    <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <a href="{{ url('/dashboard') }}">Dashboard</a>
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif
-
-        <div class="content">
-            @yield('content')
-        </div>
-    </div>
 </body>
 </html>
