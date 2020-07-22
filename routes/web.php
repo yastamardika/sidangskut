@@ -16,26 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/pendaftaran', 'SidangRegController@index')->name('pendaftaran');
 Route::post('/pendaftaran/upload', 'SidangRegController@upload')->name('upload');
-
 Route::get('/pendaftaran/history', 'HistoryController@index')->name('history');
 
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
-<<<<<<< HEAD
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-    Route::resource('daftar', 'SidangRegController')->only([
-        'show', 'create'
-    ]);
-=======
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::resource('daftar', 'SidangRegController')->only([
-    'show', 'create'
-]);
->>>>>>> ee6125922cc6cddf5a640b07b0324df7ace72e41
     //Route yang berada dalam group ini hanya dapat diakses oleh user
     //yang memiliki role admin
     Route::group(['middleware' => ['role:admin']], function () {
@@ -53,21 +40,33 @@ Route::resource('daftar', 'SidangRegController')->only([
         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
     });
 
-
-    //route yang berada dalam group ini, hanya bisa diakses oleh user
-    //yang memiliki permission yang telah disebutkan dibawah
-    Route::group(['middleware' => ['permission:show products|create products|delete products']], function () {
-        Route::resource('/kategori', 'CategorzyController')->except([
-            'create', 'show'
+    Route::group(['middleware' => ['role:mahasiswa']], function () {
+        Route::resource('daftar', 'SidangRegController')->only([
+            'show', 'create'
         ]);
-        Route::resource('/produk', 'ProductController');
+        Route::get('/pendaftaran', 'SidangRegController@index')->name('pendaftaran');
     });
 
-    //route group untuk kasir
+    //route group untuk petugas akademik
+    Route::group(['middleware' => ['role:akademik']], function () {
+        Route::get('/akademik', 'SidangRegController@index')->name('akademik.mahasiswa');
+        Route::post('/akademik/{id}', 'SidangRegController@ajukan')->name('akademik.ajukan');
+    });
+    //route yang berada dalam group ini, hanya bisa diakses oleh user
+    //yang memiliki permission yang telah disebutkan dibawah
+
+    //route group untuk mahasiswa
     Route::group(['middleware' => ['role:mahasiswa']], function () {
         Route::get('/pendaftaran', 'SidangRegController@index')->name('pendaftaran');
     });
 
-    //home kita taruh diluar group karena semua jenis user yg login bisa mengaksesnya
-    Route::get('/home', 'HomeController@index')->name('home');
+    //route group untuk kaprodi
+    Route::group(['middleware' => ['role:kaprodi']], function () {
+        Route::get('/kaprodi', 'MhsDiajukan@index')->name('kaprodi');
+    });
+
+    //route group untuk penguji
+    Route::group(['middleware' => ['role:penguji']], function () {
+        Route::get('/penguji', 'MhsDiujiController@index')->name('penguji');
+    });
 });
