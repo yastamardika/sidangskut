@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                            {{-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> --}}
                             <li class="breadcrumb-item active">Role</li>
                         </ol>
                     </div>
@@ -30,7 +30,7 @@
                             @slot('title')
                             Tambah
                             @endslot
-                            
+
                             @if (session('error'))
                                 @alert(['type' => 'danger'])
                                     {!! session('error') !!}
@@ -41,7 +41,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Role</label>
-                                    <input type="text" 
+                                    <input type="text"
                                     name="name"
                                     class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" id="name" required>
                                 </div>
@@ -58,13 +58,13 @@
                             @slot('title')
                             List Role
                             @endslot
-                            
+
                             @if (session('success'))
                                 @alert(['type' => 'success'])
                                     {!! session('success') !!}
                                 @endalert
                             @endif
-                            
+
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
