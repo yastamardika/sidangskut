@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
@@ -30,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -76,5 +77,28 @@ class RegisterController extends Controller
         $user->roles()->attach($role);
 
         return $user;
+    }
+
+    public function redirectTo()
+    {
+        if (Auth::user()->hasRole('admin')) {
+            $this->redirectTo = route('users.index');
+            return $this->redirectTo;
+        } elseif (Auth::user()->hasRole('mahasiswa')) {
+            $this->redirectTo = route('pendaftaran');
+            return $this->redirectTo;
+        } elseif (Auth::user()->hasRole('akademik')) {
+            $this->redirectTo = route('akademik.mahasiswa');
+            return $this->redirectTo;
+        } elseif (Auth::user()->hasRole('kaprodi')) {
+            $this->redirectTo = route('kaprodi.index');
+            return $this->redirectTo;
+        } elseif (Auth::user()->hasRole('penguji')) {
+            $this->redirectTo = route('penguji.index');
+            return $this->redirectTo;
+        }
+
+        $this->redirectTo = route('dashboard');
+        return $this->redirectTo;
     }
 }
