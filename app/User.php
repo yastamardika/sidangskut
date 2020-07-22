@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function kaprodi(){
+        return $this->hasOne('App\Prodi');
+    }
+
+    public function penguji(){
+
+    }
 }
