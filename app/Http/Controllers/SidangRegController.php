@@ -32,6 +32,7 @@ class SidangRegController extends Controller
 
     public function upload(Request $req){
         $verifikasi1 = Mahasiswa::all()->where('id_mhs', $this->nim_comp[1])->first();
+
         $verifikasi2 = Mahasiswa::where('status', "Diterima")->first();
         $verifikasi3 = Mahasiswa::where('status', "Diproses")->orWhere('status', "Diverifikasi Akademik")->first();
 
@@ -103,5 +104,11 @@ class SidangRegController extends Controller
             // echo $path;
         }
 
+    }
+    public function ajukan($id){
+        $mhs=Mahasiswa::find($id);
+        $mhs->toQuery()->update([
+            'id_status' => '2',
+        ]);
     }
 }
