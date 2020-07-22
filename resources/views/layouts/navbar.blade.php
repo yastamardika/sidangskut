@@ -16,7 +16,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body>
 <!-- Button Navigation Bar - Mobile Ver. -->
@@ -34,31 +34,93 @@
     <div class="row">
 
     <!-- Navigation -->
-        <nav id="navbarSupportedContent" class="nav col-md-3 col-lg-2 vh-100 d-md-block bg-light sidebar collapse position-fixed shadow">
+        <nav id="navbarSupportedContent" class="nav px-0 col-md-3 col-lg-2 vh-100 d-md-block bg-light sidebar collapse position-fixed shadow">
             <div class="pt-3">
             <!-- List Item Nav -->
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ url('/dashboard') }}">
-                            Dashboard <span class="sr-only">(current)</span>
-                            <span data-feather="home"></span>
+                <ul id="nav-active" class="nav flex-column">
+                    <li class="nav-item d-md-block d-lg-block d-xl-block d-sm-none">
+                        <a class="d-block mb-3 text-center" href="{{ url('/dashboard') }}">
+                            <img src="img/logo.png" class="w-50 mx-auto" alt="">
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Data
-                            <span data-feather="file"></span>
+                    <li class="nav-item {{ Request::segment(1) === 'dashboard' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/dashboard') }}">
+                            Dashboard<span class="sr-only">(current)</span>
+                            <i class='bx bxs-home bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
                         </a>
                     </li>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+                    Data
+                </h6>
+                    @role('mahasiswa')
+                        <li class="nav-item {{ Request::segment(1) === 'pendaftaran' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/pendaftaran') }}">
+                                Pengajuan Sidang
+                                <i class='bx bxs-file-blank bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+
+                {{-- Akademik --}}
+                    @elserole('akademik')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Pendaftar Sidang
+                                <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+                {{-- End Akademik --}}
+
+                    @elserole('kaprodi')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Pendaftar Sidang
+                                <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+                
+                
+                {{-- Penguji --}}
+                    @elserole('dosen_penguji')
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Mahasiswa Sidang
+                                <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+                {{-- End Penguji --}}
+
+                {{-- Admin --}}
+                    @elserole('admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/dashboard') }}">
+                                Pendaftar Sidang
+                                <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/dashboard') }}">
+                                Jadwal Sidang
+                                <i class='bx bxs-calendar bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+                            Menejemen
+                        </h6>
+                        <li class="nav-item {{ Request::segment(1) === 'users' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/users') }}">
+                                User
+                                <i class='bx bxs-id-card bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::segment(1) === 'role' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/role') }}">
+                                Role User
+                                <i class='bx bxs-shield bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                            </a>
+                        </li>
+                    @endrole
+                {{-- End Admin --}}
                 </ul>
-                <!-- TAMBAHAN
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Saved reports</span>
-                <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-                    <span data-feather="plus-circle"></span>
-                </a>
-                </h6> Dilanjut <ul>-->
-            <!-- End List Item Nav -->
             </div>
         </nav>
     <!-- End Navigation -->
@@ -83,7 +145,19 @@
                     </div>
                 </div>
             <!-- End Header Wolcome & Logout -->
-                @yield('content')
+            
+            <!-- Isi Konten -->
+                <div class="container-fluid px-md-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 px-md-2">
+                            <div class="card shadow">
+                                @yield('content')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- End Isi Konten -->
+
             </div>
         <!-- End Konten -->
         </main>
