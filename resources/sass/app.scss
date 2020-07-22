@@ -4,6 +4,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Icon
+@import '~boxicons';
+
 body {
    background: #F1F3F4;
    color: #5F5F5F;
@@ -15,7 +18,10 @@ body {
    line-height: 1;
  }
  
- 
+ table {
+  border-collapse: collapse;
+  font-size: small;
+}
  
  .card-body {
    padding: 2.7rem 2.5rem;

@@ -25,17 +25,10 @@ Route::get('/pendaftaran/history', 'HistoryController@index')->name('history');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
-<<<<<<< HEAD
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-    Route::resource('daftar', 'SidangRegController')->only([
-        'show', 'create'
-    ]);
-=======
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::resource('daftar', 'SidangRegController')->only([
     'show', 'create'
 ]);
->>>>>>> ee6125922cc6cddf5a640b07b0324df7ace72e41
     //Route yang berada dalam group ini hanya dapat diakses oleh user
     //yang memiliki role admin
     Route::group(['middleware' => ['role:admin']], function () {
