@@ -16,11 +16,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body>
 <!-- Button Navigation Bar - Mobile Ver. -->
-    <nav class="navbar d-md-none d-lg-none d-xl-none d-sm-block navbar-dark bg-dark navbar-expand-md flex-md-nowrap shadow">
+    <nav class="navbar fixed-top d-md-none d-lg-none d-xl-none d-sm-block navbar-dark bg-dark navbar-expand-md flex-md-nowrap shadow">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -34,15 +36,16 @@
     <div class="row">
 
     <!-- Navigation -->
-        <nav id="navbarSupportedContent" class="nav px-0 col-md-3 col-lg-2 vh-100 d-md-block bg-light sidebar collapse position-fixed shadow">
-            <div class="pt-3">
+        <nav id="navbarSupportedContent" class="nav px-0 col-md-3 col-lg-3 col-xl-2 vh-100 d-md-block bg-light sidebar position-fixed shadow overflow-auto pt-md-0 pt-5 pb-4 collapse">
+            <div class="pt-3 w-100">
             <!-- List Item Nav -->
                 <ul id="nav-active" class="nav flex-column">
-                    <li class="nav-item d-md-block d-lg-block d-xl-block d-sm-none">
-                        <a class="d-block mb-3 text-center" href="{{ url('/dashboard') }}">
-                            <img src="img/logo.png" class="w-50 mx-auto" alt="">
-                        </a>
+                    <li class="d-md-block d-none text-center">
+                        <img src="img/logo.png" class="mx-auto" style="height:100px" alt="">
                     </li>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+                    Beranda
+                </h6>
                     <li class="nav-item {{ Request::segment(1) === 'dashboard' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/dashboard') }}">
                             Dashboard<span class="sr-only">(current)</span>
@@ -104,7 +107,7 @@
                             </a>
                         </li>
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
-                            Menejemen
+                            Manajemen
                         </h6>
                         <li class="nav-item {{ Request::segment(1) === 'users' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('/users') }}">
@@ -115,7 +118,7 @@
                         <li class="nav-item {{ Request::segment(1) === 'role' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('/role') }}">
                                 Role User
-                                <i class='bx bxs-shield bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                                <i class='bx bx-shield-quarter bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
                             </a>
                         </li>
                     @endrole
@@ -125,7 +128,7 @@
         </nav>
     <!-- End Navigation -->
 
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-3">
+        <main class="col-md-9 col-lg-9 col-xl-10 ml-sm-auto my-5 p-0 my-md-0">
         <!-- Konten -->
             <div class="content" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
             <!-- Header Wolcome & Logout -->
@@ -164,5 +167,35 @@
         
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="//cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+<script src="//cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#table').DataTable( {
+        aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+        bProcessing: true,
+        oLanguage: {
+            sSearch: "Pencarian:",
+            sLengthMenu: "Menampilkan data: _MENU_",
+            sEmptyTable: "Tidak ada data. :(",
+            sZeroRecords: "Data tidak ditemukan. :("
+        },
+        responsive: {
+            details: {
+                type: 'column',
+                target: -1
+            }
+        },
+        columnDefs: [ {
+            className: 'control',
+            orderable: false,
+            targets:   -1
+        } ]
+    } );
+    } );
+   </script>
 </body>
 </html>

@@ -7,14 +7,15 @@
 @section('content')
 <!-- Header -->
     <div class="card-header">
-        <div class="col-md">
-            <h1 class="text-uppercase font-weight-bold">Manajemen Role User</h1>
-        </div>
-        <div class="col-md">
-            <ol class="breadcrumb">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> --}}
-                <li class="breadcrumb-item active">Role</li>
-            </ol>
+        <div class="d-inline-flex">
+            <div class="fit-content p-3 text-center align-middle shadow icon-head"><i class='bx bx-shield-quarter bx-sm'></i></div>
+            <div class="ml-4 my-auto fit-content">
+                <h3 class="text-uppercase font-weight-bold m-0">Manajemen Role User</h3>
+                <ol class="d-flex flex-row flex-wrap m-0 p-0">
+                    {{-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> --}}
+                    <li class="breadcrumb-item active">Role</li>
+                </ol>
+            </div>
         </div>
     </div>
 ​<!-- End Header -->
@@ -45,29 +46,31 @@
                     @endalert
                 @endif
                 
-                <table id="data" class="table table-striped table-bordered nowrap">
+                <table id="table" class="table table-hover dt-responsive nowrap" style="width:100%">
                     <thead>
                         <tr class="text-center">
                             <td>#</td>
                             <td>Role User</td>
                             <td>Created At</td>
                             <td>Aksi</td>
+                            <td>Detail</td>
                         </tr>
                     </thead>
                     <tbody>
                         @php $no = 1; @endphp
                         @forelse ($role as $row)
                         <tr>
-                            <td class="align-middle text-center">{{ $no++ }}</td>
-                            <td class="align-middle">{{ $row->name }}</td>
-                            <td class="align-middle">{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
+                            <td class="text-center">{{ $no++ }}</td>
+                            <td>{{ $row->name }}</td>
+                            <td>{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
                             <td>
                                 <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0 text-center">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger btn-sm"><i class='bx bx-trash bx-xs'></i></button>
+                                    <button class="btn btn-danger btn-sm px-sm-4"><i class='bx bxs-trash bx-xs'></i></button>
                                 </form>
                             </td>
+                            <td></td>
                         </tr>
                         @empty
                         <tr>
