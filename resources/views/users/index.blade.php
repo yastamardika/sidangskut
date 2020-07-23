@@ -38,7 +38,7 @@
                             @endif
 
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="table" class="table table-hover dt-responsive nowrap" style="width:100%">
                                     <thead>
                                         <tr>
                                             <td>#</td>
@@ -47,6 +47,7 @@
                                             <td>Role</td>
                                             <td>Status</td>
                                             <td>Aksi</td>
+                                            <td>Detail</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,11 +73,12 @@
                                                 <form action="{{ route('users.destroy', $row->id) }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <a href="{{ route('users.roles', $row->id) }}" class="btn btn-info btn-sm"><i class="fa fa-user-secret"></i></a>
-                                                    <a href="{{ route('users.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                    <a href="{{ route('users.roles', $row->id) }}" class="btn btn-warning btn-sm px-sm-4"><i class='bx bxs-check-shield bx-xs'></i></a>
+                                                    <a href="{{ route('users.edit', $row->id) }}" class="btn btn-dark btn-sm px-sm-4"><i class='bx bxs-user-detail bx-xs' ></i></a>
+                                                    <button class="btn btn-danger btn-sm px-sm-4"><i class='bx bxs-trash bx-xs'></i></button>
                                                 </form>
                                             </td>
+                                            <td></td>
                                         </tr>
                                         @empty
                                         <tr>

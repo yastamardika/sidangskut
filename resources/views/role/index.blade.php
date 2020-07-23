@@ -45,29 +45,31 @@
                     @endalert
                 @endif
                 
-                <table id="data" class="table table-striped table-bordered nowrap">
+                <table id="table" class="table table-hover dt-responsive nowrap" style="width:100%">
                     <thead>
                         <tr class="text-center">
                             <td>#</td>
                             <td>Role User</td>
                             <td>Created At</td>
                             <td>Aksi</td>
+                            <td>Detail</td>
                         </tr>
                     </thead>
                     <tbody>
                         @php $no = 1; @endphp
                         @forelse ($role as $row)
                         <tr>
-                            <td class="align-middle text-center">{{ $no++ }}</td>
-                            <td class="align-middle">{{ $row->name }}</td>
-                            <td class="align-middle">{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $row->name }}</td>
+                            <td>{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
                             <td>
                                 <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0 text-center">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger btn-sm"><i class='bx bx-trash bx-xs'></i></button>
+                                    <button class="btn btn-danger btn-sm px-sm-4"><i class='bx bxs-trash bx-xs'></i></button>
                                 </form>
                             </td>
+                            <td></td>
                         </tr>
                         @empty
                         <tr>

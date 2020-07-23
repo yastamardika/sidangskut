@@ -16,6 +16,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body>
@@ -104,7 +106,7 @@
                             </a>
                         </li>
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
-                            Menejemen
+                            Manajemen
                         </h6>
                         <li class="nav-item {{ Request::segment(1) === 'users' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('/users') }}">
@@ -164,5 +166,35 @@
         
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="//cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+<script src="//cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#table').DataTable( {
+        aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+        bProcessing: true,
+        oLanguage: {
+            sSearch: "Pencarian:",
+            sLengthMenu: "Menampilkan data: _MENU_",
+            sEmptyTable: "Tidak ada data. :(",
+            sZeroRecords: "Data tidak ditemukan. :("
+        },
+        responsive: {
+            details: {
+                type: 'column',
+                target: -1
+            }
+        },
+        columnDefs: [ {
+            className: 'control',
+            orderable: false,
+            targets:   -1
+        } ]
+    } );
+    } );
+   </script>
 </body>
 </html>
