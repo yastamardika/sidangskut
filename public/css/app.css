@@ -28,7 +28,7 @@
   --warning: #ffed4a;
   --danger: #e3342f;
   --light: #FAFAFA;
-  --dark: #5F5F5F;
+  --dark: #343a40;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -2993,8 +2993,8 @@ fieldset:disabled a.btn {
 
 .btn-dark {
   color: #fff;
-  background-color: #5F5F5F;
-  border-color: #5F5F5F;
+  background-color: #343a40;
+  border-color: #343a40;
 }
 
 .btn-dark:hover {
@@ -17198,10 +17198,38 @@ table {
 
 td {
   padding: 0.6rem 1rem !important;
+  vertical-align: middle !important;
+}
+
+.fit-content {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.card-header {
+  padding: 2rem 2.3rem;
+  border: 0px;
 }
 
 .card-body {
-  padding: 2.7rem 2.5rem;
+  padding: 2.5rem 2.3rem;
+}
+
+.breadcrumb-item.active {
+  color: rgba(117, 117, 117, 0.5);
+}
+
+.breadcrumb-item + .breadcrumb-item {
+  padding: 0 !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(117, 117, 117, 0.5);
+  padding: 0rem 0.25rem !important;
 }
 
 .btn {
@@ -17263,7 +17291,17 @@ td {
 .active > .nav-link {
   background: linear-gradient(-45deg, #004A74, #5AA0D0);
   color: #ffffff;
-}table.dataTable.dtr-column > tbody > tr > td.control:before,
+}
+
+label {
+  margin: 0;
+}
+
+table {
+  font-size: 0.8rem;
+}
+
+table.dataTable.dtr-column > tbody > tr > td.control:before,
 table.dataTable.dtr-column > tbody > tr > th.control:before {
   font-weight: bold;
   color: #ffffff;

@@ -7,14 +7,15 @@
 @section('content')
 <!-- Header -->
     <div class="card-header">
-        <div class="col-md">
-            <h1 class="text-uppercase font-weight-bold">Manajemen Role User</h1>
-        </div>
-        <div class="col-md">
-            <ol class="breadcrumb">
-                {{-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> --}}
-                <li class="breadcrumb-item active">Role</li>
-            </ol>
+        <div class="d-inline-flex">
+            <div class="fit-content p-3 text-center align-middle shadow icon-head"><i class='bx bx-shield-quarter bx-sm'></i></div>
+            <div class="ml-4 my-auto fit-content">
+                <h3 class="text-uppercase font-weight-bold m-0">Manajemen Role User</h3>
+                <ol class="d-flex flex-row flex-wrap m-0 p-0">
+                    {{-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> --}}
+                    <li class="breadcrumb-item active">Role</li>
+                </ol>
+            </div>
         </div>
     </div>
 ​<!-- End Header -->
@@ -59,7 +60,7 @@
                         @php $no = 1; @endphp
                         @forelse ($role as $row)
                         <tr>
-                            <td>{{ $no++ }}</td>
+                            <td class="text-center">{{ $no++ }}</td>
                             <td>{{ $row->name }}</td>
                             <td>{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
                             <td>

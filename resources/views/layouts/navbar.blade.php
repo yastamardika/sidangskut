@@ -22,7 +22,7 @@
 </head>
 <body>
 <!-- Button Navigation Bar - Mobile Ver. -->
-    <nav class="navbar d-md-none d-lg-none d-xl-none d-sm-block navbar-dark bg-dark navbar-expand-md flex-md-nowrap shadow">
+    <nav class="navbar fixed-top d-md-none d-lg-none d-xl-none d-sm-block navbar-dark bg-dark navbar-expand-md flex-md-nowrap shadow">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -36,15 +36,16 @@
     <div class="row">
 
     <!-- Navigation -->
-        <nav id="navbarSupportedContent" class="nav px-0 col-md-3 col-lg-2 vh-100 d-md-block bg-light sidebar collapse position-fixed shadow">
-            <div class="pt-3">
+        <nav id="navbarSupportedContent" class="nav px-0 col-md-3 col-lg-3 col-xl-2 vh-100 d-md-block bg-light sidebar position-fixed shadow overflow-auto pt-md-0 pt-5 pb-4 collapse">
+            <div class="pt-3 w-100">
             <!-- List Item Nav -->
                 <ul id="nav-active" class="nav flex-column">
-                    <li class="nav-item d-md-block d-lg-block d-xl-block d-sm-none">
-                        <a class="d-block mb-3 text-center" href="{{ url('/dashboard') }}">
-                            <img src="img/logo.png" class="w-50 mx-auto" alt="">
-                        </a>
+                    <li class="d-md-block d-none text-center">
+                        <img src="img/logo.png" class="mx-auto" style="height:100px" alt="">
                     </li>
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+                    Beranda
+                </h6>
                     <li class="nav-item {{ Request::segment(1) === 'dashboard' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/dashboard') }}">
                             Dashboard<span class="sr-only">(current)</span>
@@ -117,7 +118,7 @@
                         <li class="nav-item {{ Request::segment(1) === 'role' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('/role') }}">
                                 Role User
-                                <i class='bx bxs-shield bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                                <i class='bx bx-shield-quarter bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
                             </a>
                         </li>
                     @endrole
@@ -127,7 +128,7 @@
         </nav>
     <!-- End Navigation -->
 
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-3">
+        <main class="col-md-9 col-lg-9 col-xl-10 ml-sm-auto my-5 p-0 my-md-0">
         <!-- Konten -->
             <div class="content" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
             <!-- Header Wolcome & Logout -->
