@@ -20,7 +20,14 @@ body {
 
 table {
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+.konten-tabel {
+  min-width: 16vw;
+  width: 5rem;
+  max-width: fit-content;
+  vertical-align: middle;
 }
 
 td {
@@ -29,7 +36,11 @@ td {
 }
 
 .fit-content {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
 
@@ -134,9 +145,8 @@ table.dataTable.dtr-column > tbody > tr > th.control:before {
   top: 0.4rem;
   left: 20%;
   height: auto;
-  width: auto;
-  margin-top: auto;
-  margin-left: auto;
+  width: 20px;
+  margin: auto;
   display: block;
   position: initial;
   box-shadow: none;
@@ -150,7 +160,7 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   content: "\D7";
 }
 
-.icon-head{
+.icon-head {
   color: #ffffff;
   background: linear-gradient(-45deg, #004A74, #5AA0D0);
   border-radius: 6px;
@@ -158,4 +168,34 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
+}
+
+.account-header{
+  background: linear-gradient(-45deg, #004A74, #5AA0D0);
+  color: #ffffff;
+  padding: 1.5rem 1rem;
+  border: none;
+}
+
+.logout {
+  color: #ffffff !important;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+.logout:hover {
+  background: #ffffff;
+  color: #004A74 !important;
+}
+
+.btn-warning:hover {
+  background: #ffc04a;
+}
+
+.btn-danger:hover {
+  background: #c91c16;
 }

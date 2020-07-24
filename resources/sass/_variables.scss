@@ -27,3 +27,32 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+$gradients: () !default;
+
+$gradients: map-merge((
+   warning: linear-gradient(-45deg, #ffc04a, #ffed4a),
+   danger: linear-gradient(-45deg, #c91c16, #e3342f)
+), $gradients);
+
+// Gradient backgrounds
+@mixin bg-gradient($parent, $gradient) {
+   #{$parent} {
+     background: $gradient;
+     color: #ffffff !important;
+   }
+ }
+ // Gradient text
+ @mixin text-gradient($parent, $gradient) {
+   #{$parent} {
+     background-image: $gradient;
+     color: #ffffff;
+     -webkit-background-clip: text;
+     background-clip: text;
+   }
+ }
+ 
+ // Gradient Classes 
+@each $gradient, $value in $gradients {
+   @include bg-gradient(".btn-#{$gradient}", $value);
+  }

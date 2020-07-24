@@ -1,18 +1,17 @@
-@extends('layouts.navbar')
+@component('layouts.template')
 
-@section('content')
-@if(Session::has('message'))
-<div class="toast">
-    <strong>{{ Session::get('title') }}</strong>
-    <div>
-        {{ Session::get('message') }}
-    </div>
-    <small>Now</small>
-</div>
-@endif
-<div class="container">
-    <h3 class="text-center p-3">Buat Pengajuan</h3>
-
+    @slot('title_page')
+        Buat Pengajuan Sidang
+    @endslot
+    @slot('icon')
+        bxs-file
+    @endslot
+    @slot('link_breadcrumb')
+        {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
+    @endslot
+    
+<!-- Isi konten -->
+<div class="col-md">
     <form method="post" action="{{route('upload')}}" enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="row">
@@ -97,9 +96,6 @@
         <button type="submit" name="button" class="btn btn-primary d-flex mx-auto">Mengajukan</button>
     </form>
 </div>
-<script>
-    $(document).ready(function(){
-    $('.toast').toast('show');
-  });
-</script>
-@endsection
+<!-- End isi konten -->
+
+@endcomponent
