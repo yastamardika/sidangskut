@@ -1,4 +1,4 @@
-<!-- Isi konten -->    
+{{-- Isi konten --}}
    <ul id="nav-active" class="nav flex-column">
       <li class="d-md-block d-none text-center">
          <img src="{{ asset('img/logo.png') }}" class="mx-auto" style="height:100px" alt="">
@@ -22,7 +22,7 @@
       </h6>
       @else
       @endrole
-   <!-- Mahasiswa -->
+   {{-- Mahasiswa--}}
       @role('mahasiswa')
          <li class="nav-item {{ Request::segment(1) === 'pendaftaran' ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/pendaftaran') }}">
@@ -30,9 +30,9 @@
                   <i class='bx bxs-file bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
          </li>
-   <!-- End Mahasswa -->
+   {{-- End Mahasswa --}}
 
-   <!-- Akademik -->
+   {{-- Akademik --}}
       @elserole('akademik')
          <li class="nav-item">
             <a class="nav-link" href="#">
@@ -92,5 +92,6 @@
          </li>
       @endrole
    {{-- End Admin --}}
+
    </ul>
-<!-- End isi konten -->
+{{-- End isi konten --}}

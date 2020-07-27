@@ -27,7 +27,7 @@ class SidangRegController extends Controller
         // }
         // $mhs = Mahasiswa::all();
 
-        return view('pages.sidangreg');
+        return view('pages.pengajuan_sidang');
     }
 
     public function upload(Request $req){

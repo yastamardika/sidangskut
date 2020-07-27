@@ -12,7 +12,7 @@
     
 <!-- Isi konten -->
     <div>
-        <form class="px-2 px-md-0" role="form" action="{{ route('role.store') }}" method="POST">
+        <form role="form" action="{{ route('role.store') }}" method="POST">
             @csrf
             <label for="role">Tambah Role baru:</label>
             <div class="d-flex flex-column flex-md-row">
@@ -22,7 +22,7 @@
         </form>
     </div>
 
-    <div class="col-md p-0 p-sm-3">
+    <div class="col-md p-0">
         {{-- <h4 class="my-3 font-weight-bold text-center">List Role</h4> --}}
 
         <table id="table" class="table table-hover table-bordered dt-responsive nowrap" style="width:100%">

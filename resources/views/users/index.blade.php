@@ -40,7 +40,7 @@
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
                     <td><span class="d-inline-block text-truncate konten-tabel">{{ $row->name }}</span></td>
-                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="min-width: 9vw;">{{ $row->email }}</span></td>
+                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="min-width: 8vw;">{{ $row->email }}</span></td>
                     <td>
                         @foreach ($row->getRoleNames() as $role)
                         <label for="" class="badge badge-info p-2 text-wrap" style="max-width: 5rem">{{ $role }}</label>
