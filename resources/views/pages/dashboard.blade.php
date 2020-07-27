@@ -10,7 +10,7 @@
         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
     @endslot
     
-<!-- Isi konten -->
+{{-- Isi konten --}}
 <div class="col-md">
     @hasrole('admin|akademik|kaprodi|dosen_penguji|mahasiswa')
     You are logged in!
@@ -18,6 +18,6 @@
     Akun tidak memiliki akses data.
     @endhasrole
 </div>
-<!-- End isi konten -->
+{{-- End isi konten --}}
 
 @endcomponent
