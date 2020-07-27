@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //route group untuk kaprodi
     Route::group(['middleware' => ['role:kaprodi']], function () {
-        Route::get('/kaprodi', 'MhsDiajukan@index')->name('kaprodi');
+        Route::get('/kaprodi', 'MhsDiajukanController@index')->name('kaprodi');
     });
 
     //route group untuk penguji
