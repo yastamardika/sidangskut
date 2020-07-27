@@ -1,21 +1,23 @@
-@extends('layouts.navbar')
+@component('layouts.template')
 
-@section('content')
-<div class="container-fluid px-md-4">
-    <div class="row justify-content-center">
-        <div class="col-md-12 px-md-2">
-            <div class="card shadow">
-                <div class="card-header">Dashboard</div>
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
+    @slot('title_page')
+        Dashboard
+    @endslot
+    @slot('icon')
+        bxs-home
+    @endslot
+    @slot('link_breadcrumb')
+        {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
+    @endslot
+    
+<!-- Isi konten -->
+<div class="col-md">
+    @hasrole('admin|akademik|kaprodi|dosen_penguji|mahasiswa')
+    You are logged in!
+    @else
+    Akun tidak memiliki akses data.
+    @endhasrole
 </div>
-@endsection
+<!-- End isi konten -->
+
+@endcomponent

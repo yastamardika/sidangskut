@@ -16,9 +16,9 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:50'
+            'role' => 'required|string|max:50'
         ]);
-        $role = Role::firstOrCreate(['name' => $request->name]);
+        $role = Role::firstOrCreate(['name' => $request->role]);
         return redirect()->back()->with(['success' => 'Role: <strong>' . $role->name . '</strong> Ditambahkan']);
     }
 

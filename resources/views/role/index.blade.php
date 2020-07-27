@@ -1,116 +1,68 @@
-@extends('layouts.app')
-​
-@section('title')
-    <title>Manajemen Role</title>
-@endsection
-​
-@section('content')
-    <div class="content-wrapper">
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Manajemen Role</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            {{-- <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li> --}}
-                            <li class="breadcrumb-item active">Role</li>
-                        </ol>
-                    </div>
-                </div>
+@component('layouts.template')
+
+    @slot('title_page')
+        Manajemen Role User
+    @endslot
+    @slot('icon')
+        bx-shield-quarter
+    @endslot
+    @slot('link_breadcrumb')
+        {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
+    @endslot
+    
+<!-- Isi konten -->
+    <div>
+        <form class="px-2 px-md-0" role="form" action="{{ route('role.store') }}" method="POST">
+            @csrf
+            <label for="role">Tambah Role baru:</label>
+            <div class="d-flex flex-column flex-md-row">
+                <input type="text" name="role" class="col col-md-5 col-lg-3 form-control md-box mr-2 mb-2 mb-md-0 {{ $errors->has('role') ? 'is-invalid':'' }}" id="name" required="">
+                <button type="submit" class="btn btn-primary">+ Tambah</button>
             </div>
-        </div>
-​
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4">
-                        @card
-                            @slot('title')
-                            Tambah
-                            @endslot
-
-                            @if (session('error'))
-                                @alert(['type' => 'danger'])
-                                    {!! session('error') !!}
-                                @endalert
-                            @endif
-​
-                            <form role="form" action="{{ route('role.store') }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="name">Role</label>
-                                    <input type="text"
-                                    name="name"
-                                    class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" id="name" required>
-                                </div>
-                            @slot('footer')
-                                <div class="card-footer">
-                                    <button class="btn btn-primary">Simpan</button>
-                                </div>
-                            </form>
-                            @endslot
-                        @endcard
-                    </div>
-                    <div class="col-md-8">
-                        @card
-                            @slot('title')
-                            List Role
-                            @endslot
-
-                            @if (session('success'))
-                                @alert(['type' => 'success'])
-                                    {!! session('success') !!}
-                                @endalert
-                            @endif
-
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <td>#</td>
-                                            <td>Role</td>
-                                            <td>Guard</td>
-                                            <td>Created At</td>
-                                            <td>Aksi</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php $no = 1; @endphp
-                                        @forelse ($role as $row)
-                                        <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $row->name }}</td>
-                                            <td>{{ $row->guard_name }}</td>
-                                            <td>{{ $row->created_at }}</td>
-                                            <td>
-                                                <form action="{{ route('role.destroy', $row->id) }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data</td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-​
-                            <div class="float-right">
-                                {!! $role->links() !!}
-                            </div>
-                            @slot('footer')
-​
-                            @endslot
-                        @endcard
-                    </div>
-                </div>
-            </div>
-        </section>
+        </form>
     </div>
-@endsection
+
+    <div class="col-md p-0 p-sm-3">
+        {{-- <h4 class="my-3 font-weight-bold text-center">List Role</h4> --}}
+
+        <table id="table" class="table table-hover table-bordered dt-responsive nowrap" style="width:100%">
+            <thead>
+                <tr class="text-center">
+                    <td style="width: 30px">#</td>
+                    <td>Role User</td>
+                    <td>Created At</td>
+                    <td>Aksi</td>
+                    <td>Detail</td>
+                </tr>
+            </thead>
+            <tbody>
+                @php $no = 1; @endphp
+                @forelse ($role as $row)
+                <tr>
+                    <td class="text-center">{{ $no++ }}</td>
+                    <td>{{ $row->name }}</td>
+                    <td>{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
+                    <td>
+                        <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0 text-center">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger btn-sm px-sm-4"><i class='bx bxs-trash bx-xs'></i></button>
+                        </form>
+                    </td>
+                    <td></td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="5" class="text-center">Tidak ada data</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+
+        <div class="float-right">
+            {!! $role->links() !!}
+        </div>
+    </div>
+<!-- End isi konten -->
+
+@endcomponent
