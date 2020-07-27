@@ -10,6 +10,5 @@ class MhsDiujiController extends Controller
     function index(){
         $mhs = User::all()->where('id_status','3');
 
-
     }
 }

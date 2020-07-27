@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mahasiswa;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
@@ -76,15 +77,17 @@ class SidangRegController extends Controller
             $tujuan_upload = 'upload';
             $path->move($tujuan_upload,$nama_proposal);
 
-
-            SidangReg::create([
-                'id_mhs' => $this->nim_comp[1],
-                'judul_id' => $req->judulID,
+            Mahasiswa::create([
+                'nama_mhs' => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'user_id' => $this->nim_comp[1],
+                'id_prodi' -> $this->prodi,
+                'judul_idn' => $req->judulID,
                 'judul_eng' => $req->judulENG,
                 'dosbing' => $req->dosbing,
+                'nomerhp' => $this->nomerhp,
                 'tgl_acc_dosbing' => $req->tgl_acc,
                 'file_cover_ta' => $nama_proposal,
-                'status' => "Diproses"
             ]);
 
             $notification = array(
