@@ -112,10 +112,4 @@ class SidangRegController extends Controller
         }
 
     }
-    public function ajukan($id){
-        $mhs=Mahasiswa::find($id);
-        $mhs->toQuery()->update([
-            'id_status' => '2',
-        ]);
-    }
 }

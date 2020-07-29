@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/users/permission', 'UserController@addPermission')->name('users.add_permission');
         Route::get('/users/role-permission', 'UserController@rolePermission')->name('users.roles_permission');
         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
+        Route::get('/users/kaprodi','AdminKaprodiController@index');
     });
 
     Route::group(['middleware' => ['role:mahasiswa']], function () {

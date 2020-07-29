@@ -25,6 +25,15 @@ class HistoryController extends Controller
         return view('pages.akademik.all',$mhs);
     }
 
+    public function ajukan($id){
+        $mhs=Mahasiswa::find($id);
+        $mhs->toQuery()->update([
+            'id_status' => '2',
+        ]);
+
+        return view('pages.akademik.all');
+    }
+
     // public function editProposal($proposalId, Upload $upload){
     //     $upload = $upload->where('id', $proposalId)
     //                      ->first();
