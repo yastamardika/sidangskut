@@ -32,13 +32,13 @@
                     <td><span class="d-inline-block text-truncate konten-tabel">
                         {{ $row->nama_mhs }}
                     </span></td>
-                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="    min-width: calc(100% - 80px); width: 10vw;">
+                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="    min-width: 100%; width: 10vw;">
                         {{ $prodi->find($row->id_prodi)->program_studi }}
                     </span></td>
-                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="    min-width: calc(100% - 80px); width: 10vw;">
+                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="    min-width: 100%; width: 10vw;">
                         {{ date("d F Y", strtotime($row->created_at)) }}
                     </span></td>
-                    <td class="fit-content text-center"><span class="d-inline-block text-truncate konten-tabel" style=" min-width: calc(100% - 80px); width: 10vw;">
+                    <td class="fit-content text-center"><span class="d-inline-block text-truncate konten-tabel" style=" min-width: 100%; width: 10vw;">
                         {{ $status->find($row->id_status)->status }}
                     </span></td>
                     <td class="text-center p-0">

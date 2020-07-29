@@ -40,7 +40,7 @@
                 @forelse ($role as $row)
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
-                    <td>{{ $row->name }}</td>
+                    <td><span class="d-inline-block text-truncate konten-tabel">{{ $row->name }}</span></td>
                     <td>{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
                     <td>
                         <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0 text-center">
