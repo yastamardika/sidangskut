@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mahasiswa;
 use Illuminate\Http\Request;
-use App\SidangReg;
+use App\Mahasiswa;
+use App\Prodi;
+use App\Status;
 use App\User;
 
 class HistoryController extends Controller
@@ -20,9 +21,11 @@ class HistoryController extends Controller
     }
 
     public function index(){
-        $mhs = Mahasiswa::where('id_status', 1)->get();
+        $mahasiswa = Mahasiswa::all()->sortBy('id_prodi');
+        $status = Status::all();
+        $prodi = Prodi::all();
 
-        return view('pages.akademik.all',$mhs);
+        return view('pages.pendaftar_sidang', compact(['mahasiswa','status','prodi']));
     }
 
     // public function editProposal($proposalId, Upload $upload){

@@ -17394,6 +17394,10 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   content: "\D7";
 }
 
+table.dataTable>tbody>tr.child ul.dtr-details {
+  width: 100%;
+}
+
 .icon-head {
   color: #ffffff;
   background: linear-gradient(-45deg, #004A74, #5AA0D0);
