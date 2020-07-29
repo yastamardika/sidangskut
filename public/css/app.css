@@ -17192,7 +17192,25 @@ a.text-dark:focus {
 
 body {
   background: #F1F3F4;
-  color: #5F5F5F;
+  color: #343a40;
+}
+
+.bg-light {
+  background: #ffffff !important;
+}
+
+.navbar {
+  background: linear-gradient(-45deg, #004A74, #5AA0D0) !important;
+}
+
+.navbar-toggler {
+  color: #ffffff !important;
+  border: none;
+  font-size: 1.25rem !important;
+}
+
+.navbar-toggler:hover {
+  color: #ffffff;
 }
 
 .judul {
@@ -17229,6 +17247,15 @@ td {
   width: fit-content;
 }
 
+.card {
+  border-radius: 0.5rem;
+  border: 0px;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
 .card-header {
   padding: 2rem 2.3rem;
   border: 0px;
@@ -17236,6 +17263,16 @@ td {
 
 .card-body {
   padding: 2.5rem 2.3rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  border: 0px;
+}
+
+.shadow {
+  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.1) !important;
 }
 
 .breadcrumb-item.active {
@@ -17299,7 +17336,7 @@ td {
 
 .nav-link {
   color: #5f5f5f;
-  padding: 0.6rem 1.3rem;
+  padding: 0.6rem 1.5rem;
 }
 
 .nav-item:hover {
@@ -17314,6 +17351,18 @@ td {
 
 label {
   margin: 0;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+}
+
+.bx-upload {
+  padding-top: 0.1rem;
+}
+
+input[type="file" i] {
+  display: none;
 }
 
 table.dataTable.dtr-column > tbody > tr > td.control:before,
@@ -17362,7 +17411,7 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   border: none;
 }
 
-.logout {
+.logout-btn {
   color: #ffffff !important;
   border: 2px solid #ffffff;
   border-radius: 4px;
@@ -17372,7 +17421,7 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   -o-border-radius: 4px;
 }
 
-.logout:hover {
+.logout-btn:hover {
   background: #ffffff;
   color: #004A74 !important;
 }
@@ -17385,3 +17434,47 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   background: #c91c16;
 }
 
+.navbar-body {
+  width: 20%;
+  max-width: 250px;
+}
+
+.content-body {
+  width: 80%;
+  min-width: calc(100% - 250px) !important;
+}
+
+@media (max-width: 991px) {
+  .navbar-body {
+    width: 30%;
+  }
+
+  .content-body {
+    width: 70%;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-body {
+    min-width: 100%;
+  }
+
+  .content-body {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .account-header {
+    padding: 1rem;
+  }
+
+  .user {
+    margin-left: 0.5rem !important;
+    padding-bottom: 1rem;
+  }
+
+  .logout {
+    float: none !important;
+  }
+}
