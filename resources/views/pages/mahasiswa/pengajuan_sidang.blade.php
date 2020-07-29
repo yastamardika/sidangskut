@@ -21,11 +21,11 @@
         <div class="col">
             <div>
                 <label class="col-form-label">Nomor Induk Mahasiswa (NIM)</label>
-                <input class="form-control mb-2 @error('nim') is-invalid @enderror" type="text" placeholder="Masukkan NIM" name="nim" value="{{ old('nim') }}">
+                <input class="form-control mb-2 @error('nim') is-invalid @enderror" type="text" name="nim" value="{{ old('nim') }}">
             </div>
             <div>
                 <label class="col-form-label">Nomor HP/Whatsapp</label>
-                <input class="form-control mb-2 @error('nomerhp') is-invalid @enderror" type="text" placeholder="Masukkan No. HP/WA" name="nomerhp" value="{{ old('nomerhp') }}">
+                <input class="form-control mb-2 @error('nomerhp') is-invalid @enderror" type="text" name="nomerhp" value="{{ old('nomerhp') }}">
             </div>
             <div>
                 <label class="col-form-label">Program Studi</label>
@@ -41,22 +41,22 @@
         <div class="col">
             <div>
                 <label class="col-form-label">Judul Tugas Akhir (Indonesia)</label>
-                <input class="form-control mb-2 @error('judulIDN') is-invalid @enderror" type="text" placeholder="Masukkan judul" name="judulIDN" value="{{ old('judulIDN') }}" required>
+                <input class="form-control mb-2 @error('judulIDN') is-invalid @enderror" type="text" name="judulIDN" value="{{ old('judulIDN') }}" required>
             </div>
 
             <div>
                 <label class="col-form-label">Judul Tugas Akhir (English)</label>
-                <input class="form-control mb-2 @error('judulENG') is-invalid @enderror" type="text" placeholder="Masukkan judul" name="judulENG" value="{{ old('judulENG') }}" required>
+                <input class="form-control mb-2 @error('judulENG') is-invalid @enderror" type="text" name="judulENG" value="{{ old('judulENG') }}" required>
             </div>
 
             <div>
                 <label class="col-form-label">Dosen Pembimbing</label>
-                <input class="form-control mb-2 @error('dosbing') is-invalid @enderror" type="text" placeholder="Masukkan nama Dosen Pembimbing" name="dosbing" value="{{ old('dosbing') }}" required>
+                <input class="form-control mb-2 @error('dosbing') is-invalid @enderror" type="text" name="dosbing" value="{{ old('dosbing') }}" required>
             </div>
 
             <div>
                 <label class="col-form-label">Tanggal Persetujuan Proyek Akhir</label>
-                <input class="form-control mb-2 @error('tgl_acc') is-invalid @enderror" type="date" placeholder="Masukkan tanggal" name="tgl_acc" value="{{ old('tgl_acc') }}" required>
+                <input class="form-control mb-2 @error('tgl_acc') is-invalid @enderror" type="date" name="tgl_acc" value="{{ old('tgl_acc') }}" required>
             </div>
 
             <div>
