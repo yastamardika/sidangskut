@@ -12,13 +12,13 @@ class MhsDiajukanController extends Controller
     function index(){
         $mhs = Mahasiswa::all()->where('id_status', '2');
 
-        return view('kaprodi.dashboard',$mhs);
+        return view('pages.kaprodi.dashboard',$mhs);
     }
 
     function lihatPenguji($id){
         $role = Role::all()->where('name','penguji');
 
-        return view('kaprodi.penguji', $role);
+        return view('pages.kaprodi.penguji', $role);
     }
 
     function pilihPenguji(Request $request){

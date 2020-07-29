@@ -10,7 +10,7 @@ class RoleController extends Controller
     public function index()
     {
         $role = Role::orderBy('created_at', 'DESC')->paginate(10);
-        return view('role.index', compact('role'));
+        return view('pages.admin.role.index', compact('role'));
     }
 
     public function store(Request $request)

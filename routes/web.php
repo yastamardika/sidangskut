@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('/pendaftaran/upload', 'SidangRegController@upload')->name('upload');
-Route::get('/pendaftaran/history', 'HistoryController@index')->name('history');
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
     //Route yang berada dalam group ini hanya dapat diakses oleh user
     //yang memiliki role admin
     Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('/data-pendaftar', 'HistoryController@index');
+
         Route::resource('/role', 'RoleController')->except([
             'create', 'show', 'edit', 'update'
         ]);
@@ -40,16 +41,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
     });
 
-    Route::group(['middleware' => ['role:mahasiswa']], function () {
-        Route::resource('daftar', 'SidangRegController')->only([
-            'show', 'create'
-        ]);
-        Route::get('/pendaftaran', 'SidangRegController@index')->name('pendaftaran');
-    });
+    // Route::group(['middleware' => ['role:mahasiswa']], function () {
+    //     Route::resource('daftar', 'SidangRegController')->only([
+    //         'show', 'create'
+    //     ]);
+    //     Route::get('/pendaftaran', 'SidangRegController@index')->name('pendaftaran');
+    // });
 
     //route group untuk petugas akademik
     Route::group(['middleware' => ['role:akademik']], function () {
-        Route::get('/dashboard/akademik', 'HistoryController@index')->name('akademik.mahasiswa');
+        Route::get('/dashboard/pendaftar-sidang', 'HistoryController@index')->name('akademik.mahasiswa');
         Route::post('/dashboard/akademik/{id}', 'HistoryController@ajukan')->name('akademik.ajukan');
     });
     //route yang berada dalam group ini, hanya bisa diakses oleh user

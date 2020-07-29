@@ -6,7 +6,7 @@
    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
       Beranda
    </h6>
-      <li class="nav-item {{ Request::segment(1) === 'dashboard' ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
          <a class="nav-link" href="{{ url('/dashboard') }}">
             Dashboard<span class="sr-only">(current)</span>
             <i class='bx bxs-home bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
@@ -24,7 +24,7 @@
       @endrole
    {{-- Mahasiswa--}}
       @role('mahasiswa')
-         <li class="nav-item {{ Request::segment(1) === 'pendaftaran' ? 'active' : '' }}">
+         <li class="nav-item {{ Request::is('pendaftaran') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/pendaftaran') }}">
                   Pengajuan Sidang
                   <i class='bx bxs-file bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
@@ -34,8 +34,8 @@
 
    {{-- Akademik --}}
       @elserole('akademik')
-         <li class="nav-item">
-            <a class="nav-link" href="#">
+         <li class="nav-item {{ Request::is('dashboard/pendaftar-sidang') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/dashboard/pendaftar-sidang') }}">
                   Pendaftar Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
@@ -63,8 +63,8 @@
 
    {{-- Admin --}}
       @elserole('admin')
-         <li class="nav-item">
-            <a class="nav-link" href="{{ url('/dashboard') }}">
+         <li class="nav-item {{ Request::is('data-pendaftar*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/data-pendaftar') }}">
                   Pendaftar Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
@@ -78,13 +78,13 @@
          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
             Manajemen
          </h6>
-         <li class="nav-item {{ Request::segment(1) === 'users' ? 'active' : '' }}">
+         <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/users') }}">
                   User
                   <i class='bx bxs-id-card bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
          </li>
-         <li class="nav-item {{ Request::segment(1) === 'role' ? 'active' : '' }}">
+         <li class="nav-item {{ Request::is('role*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/role') }}">
                   Role User
                   <i class='bx bx-shield-quarter bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>

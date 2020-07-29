@@ -30,7 +30,7 @@ class SidangRegController extends Controller
         // $mhs = Mahasiswa::all();
 
         $prodis = Prodi::all();
-        return view('pages.pengajuan_sidang')->with('prodis', $prodis);
+        return view('pages.mahasiswa.pengajuan_sidang')->with('prodis', $prodis);
     }
 
     public function upload(Request $req){
