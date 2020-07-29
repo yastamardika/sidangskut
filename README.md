@@ -6,7 +6,11 @@
 5. Rename .env example to .env
 6. Configure the .env file and fill the DB_DATABASE same as the db name created before
 7. Run php artisan migrate --seed
-8. Ready to go
+8. Run php artisan serve
+9. Ready to go
+
+---
+
 # Newest Progress of Sidasi (sistem informasi daftar sidang)
 
 ---
