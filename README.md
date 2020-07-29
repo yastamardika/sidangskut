@@ -13,8 +13,6 @@
 
 # Newest Progress of Sidasi (sistem informasi daftar sidang)
 
----
-
 ### on Branch Dev :
 - Merged with db structure branch
     consist of:
