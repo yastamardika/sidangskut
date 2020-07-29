@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/users/role-permission', 'UserController@rolePermission')->name('users.roles_permission');
         Route::put('/users/permission/{role}', 'UserController@setRolePermission')->name('users.setRolePermission');
         Route::get('/users/kaprodi','AdminKaprodiController@index');
+        Route::get('/users/kaprodi/{id}', 'AdminKaprodiController@detailKaprodi');
+        Route::get('/users/kaprodi/{id}/setprodi', 'AdminKaprodiController@tambahKaprodi');
     });
 
     Route::group(['middleware' => ['role:mahasiswa']], function () {
