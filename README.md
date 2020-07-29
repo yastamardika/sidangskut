@@ -1,3 +1,12 @@
+# How to Use
+1. Clone the repository
+2. Open terminal/command prompt/powershell
+3. Run composer install
+4. Create db via Phpmyadmin/adminer
+5. Rename .env example to .env
+6. Configure the .env file and fill the DB_DATABASE same as the db name created before
+7. Run php artisan migrate --seed
+8. Ready to go
 # Newest Progress of Sidasi (sistem informasi daftar sidang)
 
 ---
