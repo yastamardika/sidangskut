@@ -11,7 +11,7 @@
     @endslot
     
 {{-- Isi konten --}}
-<div class="col-md">
+<div class="col-md p-0">
     @hasrole('admin|akademik|kaprodi|dosen_penguji|mahasiswa')
     You are logged in!
     @else

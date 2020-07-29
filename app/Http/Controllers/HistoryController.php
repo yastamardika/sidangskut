@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mahasiswa;
 use Illuminate\Http\Request;
 use App\SidangReg;
 use App\User;
@@ -19,11 +20,11 @@ class HistoryController extends Controller
     }
 
     public function index(){
-        $tview = SidangReg::where('id_mhs', $this->nim_comp[1])->get();
+        $mhs = Mahasiswa::where('id_status', 1)->get();
 
-        return view('pages.history',['tviews' => $tview]);
+        return view('pages.akademik.all',$mhs);
     }
-  
+
     // public function editProposal($proposalId, Upload $upload){
     //     $upload = $upload->where('id', $proposalId)
     //                      ->first();

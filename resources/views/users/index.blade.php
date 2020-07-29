@@ -11,7 +11,7 @@
     @endslot
     
 <!-- Isi konten -->
-    <div class="col-md-6">
+    <div class="col-md-6 p-0">
         <form role="form" action="{{ route('users.create') }}" method="GET">
             @csrf
             <label for="role">Tambah User baru:</label>
@@ -21,7 +21,7 @@
         </form>
     </div>
 
-    <div class="col-md p-0 p-sm-3">
+    <div class="col-md p-0">
         <table id="table" class="table table-hover table-bordered dt-responsive p-0" style="width:100%">
             <thead>
                 <tr class="text-center">
@@ -29,7 +29,6 @@
                     <td>Nama</td>
                     <td>Email</td>
                     <td>Role</td>
-                    <td>Status</td>
                     <td>Aksi</td>
                     <td>Detail</td>
                 </tr>
@@ -40,18 +39,11 @@
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
                     <td><span class="d-inline-block text-truncate konten-tabel">{{ $row->name }}</span></td>
-                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="min-width: 8vw;">{{ $row->email }}</span></td>
+                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="    min-width: calc(100% - 80px); width: 10vw;">{{ $row->email }}</span></td>
                     <td>
                         @foreach ($row->getRoleNames() as $role)
-                        <label for="" class="badge badge-info p-2 text-wrap" style="max-width: 5rem">{{ $role }}</label>
+                        <label for="" class="badge badge-info p-2 text-wrap" style="min-width: calc(100% - 80px); width: 11vw;">{{ $role }}</label>
                         @endforeach
-                    </td>
-                    <td class="text-center">
-                        @if ($row->status)
-                        <label class="badge badge-success">Aktif</label>
-                        @else
-                        <label for="" class="badge badge-default">Suspend</label>
-                        @endif
                     </td>
                     <td class="text-center p-0">
                         <form action="{{ route('users.destroy', $row->id) }}" method="POST" class="m-0">
