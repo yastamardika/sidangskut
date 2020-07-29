@@ -10,7 +10,7 @@
         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
     @endslot
 
-<!-- Isi konten -->
+{{-- Isi konten --}}
     <div class="col-md-6 p-0">
         <form role="form" action="{{ route('users.create') }}" method="GET">
             @csrf
@@ -64,6 +64,6 @@
             </tbody>
         </table>
     </div>
-<!-- End isi konten -->
+{{-- End isi konten --}}
 
 @endcomponent

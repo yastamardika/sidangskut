@@ -10,7 +10,7 @@
         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
     @endslot
     
-<!-- Isi konten -->
+{{-- Isi konten --}}
     <div>
         <form role="form" action="{{ route('role.store') }}" method="POST">
             @csrf
@@ -63,6 +63,6 @@
             {!! $role->links() !!}
         </div>
     </div>
-<!-- End isi konten -->
+{{-- End isi konten --}}
 
 @endcomponent

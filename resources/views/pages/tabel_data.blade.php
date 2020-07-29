@@ -12,11 +12,11 @@
 @endif
 
 <h3>History Pendaftaran Sidang</h3>
-<!-- <div>
+{{-- <div>
    <form action="" method="get">
       <input type="text" placeholder="Cari Judul" name="search">
    </form>
-</div> -->
+</div> --}}
 <table>
    <thead>
       <tr>

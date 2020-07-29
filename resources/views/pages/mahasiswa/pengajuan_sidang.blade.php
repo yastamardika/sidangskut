@@ -10,7 +10,7 @@
         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
     @endslot
     
-<!-- Isi konten -->
+{{-- Isi konten --}}
 <div class="col-md">
     <h4 class="my-1 font-weight-bold text-center">FORMULIR PENGAJUAN SIDANG TUGAS AKHIR</h4>
     <p class="mb-4 text-center">Departemen Teknik Elektro dan Informatika</p>
@@ -80,6 +80,6 @@
     </form>
 
 </div>
-<!-- End isi konten -->
+{{-- End isi konten --}}
 
 @endcomponent

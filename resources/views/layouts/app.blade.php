@@ -5,18 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+    {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
 
-    <!-- Scripts -->
+    {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
-    <!-- Styles -->
+    {{-- Icon --}}
+    <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    {{-- Styles --}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -24,7 +27,9 @@
 
 <body>
 
+{{-- Content --}}
     @yield('body')
+{{-- End Content --}}
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

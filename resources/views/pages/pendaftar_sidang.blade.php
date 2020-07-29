@@ -10,7 +10,7 @@
         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
     @endslot
     
-<!-- Isi konten -->
+{{-- Isi konten --}}
     <div class="col-md p-0">
         <table id="table" class="table table-hover table-bordered dt-responsive p-0" style="width:100%">
             <thead>
@@ -54,6 +54,6 @@
             </tbody>
         </table>
     </div>
-<!-- End isi konten -->
+{{-- End isi konten --}}
 
 @endcomponent
