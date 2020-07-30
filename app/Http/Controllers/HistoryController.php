@@ -28,13 +28,57 @@ class HistoryController extends Controller
         return view('pages.pendaftar_sidang', compact(['mahasiswa','status','prodi']));
     }
 
-    public function ajukan($id){
-        $mhs=Mahasiswa::find($id);
-        $mhs->toQuery()->update([
-            'id_status' => '2',
+    public function detail($id){
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        return view('pages.pendaftar_sidang', $mahasiswa);
+    }
+
+    public function update(Request $request, $id){
+
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|exists:users,email',
+            'password' => 'nullable|min:6',
         ]);
 
-        return view('pages.akademik.all');
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        $path=$request->file;
+        $nama_proposal = $this->nim_comp[1]."_".$request->judulIDN."_".date('Ym').".".$path->extension();
+        $tujuan_upload = 'upload';
+        $path->move($tujuan_upload,$nama_proposal);
+
+        Mahasiswa::update([
+            'nama_mhs' => Auth::user()->name,
+            'email' => Auth::user()->email,
+            'user_id' => $this->nim_comp[1],
+            'nim' => $request->nim,
+            'id_prodi' => $request->prodi,
+            'judul_idn' => $request->judulIDN,
+            'judul_eng' => $request->judulENG,
+            'dosbing' => $request->dosbing,
+            'nomerhp' => $request->nomerhp,
+            'tgl_acc_dosbing' => $request->tgl_acc,
+            'file_cover_ta' => $nama_proposal
+        ]);
+
+        return view('pages.pendaftar_sidang', $mahasiswa);
+    }
+
+    public function delete($id){
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->delete();
+        return redirect()->back()->with(['success' => 'Pengajuan oleh: <strong>' . $mahasiswa->nama_mhs . '</strong> Dihapus']);
+    }
+
+    public function ajukan($id){
+        $mhs=Mahasiswa::findOrFail($id);
+        $mhs->toQuery()->update([
+            'id_status' => 2,
+        ]);
+
+        return view('pages.pendaftar_sidang');
     }
 
     // public function editProposal($proposalId, Upload $upload){
