@@ -12,11 +12,11 @@ class SuperAdmin extends Seeder
      */
     public function run()
     {
-        DB::table('user')->insert([
+        DB::table('users')->insert([
             'id'=>1,
             'name' => 'admin',
             'email' => 'admin@sidasi.com',
-            'password' => 'admin123'
+            'password' => bcrypt('admin123')
         ]);
         DB::table('model_has_roles')->insert([
             'role_id'=>'5',
