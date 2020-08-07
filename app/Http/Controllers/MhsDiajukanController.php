@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Kaprodi;
 use App\Mahasiswa;
+use App\Penguji;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -10,19 +12,23 @@ use Spatie\Permission\Models\Role;
 class MhsDiajukanController extends Controller
 {
     function index(){
-        $mhs = Mahasiswa::all()->where('id_status', '2');
+        $idKaprodi =Auth::user()->id;
+        $prodi = Kaprodi::all()->where('id_user', $idKaprodi)->pluck('id_prodi');
+        $mhs = Mahasiswa::all()->where('id_status', '2')->where('id_prodi', $prodi);
 
-        return view('kaprodi.dashboard',$mhs);
+        return view('pages.kaprodi.dashboard',$mhs);
     }
 
     function lihatPenguji($id){
         $role = Role::all()->where('name','penguji');
+        $mhs = Mahasiswa::findOrFail($id);
 
-        return view('kaprodi.penguji', $role);
+        return view('pages.kaprodi.penguji', $role);
     }
 
     function pilihPenguji(Request $request){
 
+        $penguji = Penguji::all()->where('',);
          return redirect()->back();
     }
 }

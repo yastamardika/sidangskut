@@ -81,23 +81,6 @@ class RegisterController extends Controller
 
     public function redirectTo()
     {
-        if (Auth::user()->hasRole('admin')) {
-            $this->redirectTo = route('users.index');
-            return $this->redirectTo;
-        } elseif (Auth::user()->hasRole('mahasiswa')) {
-            $this->redirectTo = route('pendaftaran');
-            return $this->redirectTo;
-        } elseif (Auth::user()->hasRole('akademik')) {
-            $this->redirectTo = route('akademik.mahasiswa');
-            return $this->redirectTo;
-        } elseif (Auth::user()->hasRole('kaprodi')) {
-            $this->redirectTo = route('kaprodi.index');
-            return $this->redirectTo;
-        } elseif (Auth::user()->hasRole('penguji')) {
-            $this->redirectTo = route('penguji.index');
-            return $this->redirectTo;
-        }
-
         $this->redirectTo = route('dashboard');
         return $this->redirectTo;
     }

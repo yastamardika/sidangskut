@@ -6,10 +6,15 @@
 
         <title>Laravel</title>
 
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
+
         <style>
             html, body {
                 background-color: #fff;
@@ -68,7 +73,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/dashboard') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -80,19 +85,19 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="m-b-md">
+                    <i class="bx bxl-dev-to bx-flashing text-primary" style="font-size: 8rem;"></i>
                 </div>
-
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    &copy;2020<br><br>
+                    <h5><b>Rattyasta Rahumung Mardika | Bagas Nur Prasetyo | Abdurrahman Jaisy Muhammad</b></h5> 
+                    <br>
+                    <i class='bx bxs-analyse bx-spin bx-sm' ></i>
+                    <br><br>
+                </div>
+                <div class="links">
+                    <a href="https://github.com/yastamardika/sidangskut/blob/development/README.md" target="_blank" rel="noopener noreferrer">README</a> | 
+                    <a href="https://github.com/yastamardika/sidangskut" target="_blank" rel="noopener noreferrer">GitHub</a>
                 </div>
             </div>
         </div>

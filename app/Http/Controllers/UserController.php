@@ -13,13 +13,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at', 'DESC')->paginate(10);
-        return view('users.index', compact('users'));
+        return view('pages.admin.users.index', compact('users'));
     }
 
     public function create()
     {
         $role = Role::orderBy('name', 'ASC')->get();
-        return view('users.create', compact('role'));
+        return view('pages.admin.users.create', compact('role'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+        return view('pages.admin.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
@@ -98,7 +98,7 @@ class UserController extends Controller
             //Mengambil data permission
             $permissions = Permission::all()->pluck('name');
         }
-        return view('users.role_permission', compact('roles', 'permissions', 'hasPermission'));
+        return view('pages.admin.users.role_permission', compact('roles', 'permissions', 'hasPermission'));
     }
 
     public function addPermission(Request $request)
@@ -128,7 +128,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::all()->pluck('name');
-        return view('users.roles', compact('user', 'roles'));
+        return view('pages.admin.users.roles', compact('user', 'roles'));
     }
 
     public function setRole(Request $request, $id)

@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Prodi extends Model
+class Status extends Model
 {
-    protected $table = "prodis";
-    protected $fillable=['program_studi'];
+    protected $table = "status";
 
     public function user()
     {

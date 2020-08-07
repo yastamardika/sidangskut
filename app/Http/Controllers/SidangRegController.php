@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mahasiswa;
+use App\Prodi;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
@@ -13,10 +15,10 @@ class SidangRegController extends Controller
 {
     protected $nim_comp;
 
-    public function __construct()
+    public function __construct(Request $req)
     {
         // $this->middleware('auth');
-        $nim = "YY/123456/XX/NNNNN";
+        $nim = $req->nim;
         $pattern = "/[\/]/";
         $this->nim_comp = preg_split($pattern, $nim);
     }
@@ -27,18 +29,19 @@ class SidangRegController extends Controller
         // }
         // $mhs = Mahasiswa::all();
 
-        return view('pages.sidangreg');
+        $prodis = Prodi::all();
+        return view('pages.mahasiswa.pengajuan_sidang')->with('prodis', $prodis);
     }
 
     public function upload(Request $req){
-        $verifikasi1 = Mahasiswa::all()->where('id_mhs', $this->nim_comp[1])->first();
+        $verifikasi1 = Mahasiswa::all()->where('user_id', $this->nim_comp[1])->first();
 
-        $verifikasi2 = Mahasiswa::where('status', "Diterima")->first();
-        $verifikasi3 = Mahasiswa::where('status', "Diproses")->orWhere('status', "Diverifikasi Akademik")->first();
+        $verifikasi2 = Mahasiswa::where('id_status', "3")->first();
+        $verifikasi3 = Mahasiswa::where('id_status', "1")->orWhere('id_status', "2")->first();
 
         $validate = Validator::make($req->all(),
         [
-            'judulID' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
+            'judulIDN' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
             'judulENG' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
             'dosbing' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
             'tgl_acc' => 'required',
@@ -59,7 +62,7 @@ class SidangRegController extends Controller
                 'alert-type' => 'warning'
             );
 
-            return redirect()->route('history')->with($notification);
+            return redirect()->route('pendaftaran')->with($notification);
         }
         else if ($verifikasi1 != null && $verifikasi3 != null) {
             $notification = array(
@@ -68,23 +71,27 @@ class SidangRegController extends Controller
                 'alert-type' => 'failed'
             );
 
-            return redirect()->route('history')->with($notification);
+            return redirect()->route('pendaftaran')->with($notification);
         }
         else {
             $path=$req->file;
-            $nama_proposal = $this->nim_comp[1]."_".$req->judulID."_".date('Y').".".$path->extension();
+            $nama_proposal = $this->nim_comp[1]."_".$req->judulIDN."_".date('Ym').".".$path->extension();
             $tujuan_upload = 'upload';
             $path->move($tujuan_upload,$nama_proposal);
 
-
-            SidangReg::create([
-                'id_mhs' => $this->nim_comp[1],
-                'judul_id' => $req->judulID,
+            Mahasiswa::create([
+                'nama_mhs' => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'user_id' => $this->nim_comp[1],
+                'nim' => $req->nim,
+                'id_prodi' => $req->prodi,
+                'judul_idn' => $req->judulIDN,
                 'judul_eng' => $req->judulENG,
                 'dosbing' => $req->dosbing,
+                'nomerhp' => $req->nomerhp,
                 'tgl_acc_dosbing' => $req->tgl_acc,
                 'file_cover_ta' => $nama_proposal,
-                'status' => "Diproses"
+                'id_status' => '1',
             ]);
 
             $notification = array(
@@ -93,7 +100,7 @@ class SidangRegController extends Controller
                 'alert-type' => 'success'
             );
 
-            return Redirect::to('/pendaftaran/history')->with($notification);
+            return Redirect::to('/pendaftaran')->with($notification);
 
             // $upload->judul = $req->judul;
             // $upload->jumlah = $req->jumlah;
@@ -104,11 +111,5 @@ class SidangRegController extends Controller
             // echo $path;
         }
 
-    }
-    public function ajukan($id){
-        $mhs=Mahasiswa::find($id);
-        $mhs->toQuery()->update([
-            'id_status' => '2',
-        ]);
     }
 }
