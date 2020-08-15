@@ -21,6 +21,7 @@ class MhsDiajukanController extends Controller
     }
 
     function lihatPenguji($id){
+        $allPenguji = Role::all()->where('name', 'penguji');
         $prodi = Mahasiswa::findOrFail($id)->where('user_id', $id)->pluck('id_prodi');
         $penguji = Penguji::all()->where('id_prodi',$prodi);
         $mhs = Mahasiswa::findOrFail($id);
@@ -38,7 +39,6 @@ class MhsDiajukanController extends Controller
           'tanggal_sidang'=>$request->tanggal,
         ]);
         $sidang->save();
-
 
         $mhs=Mahasiswa::findOrFail($id);
         $mhs->toQuery()->update([
