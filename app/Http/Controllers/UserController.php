@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\User;
+use App\Prodi;
+use App\Mahasiswa;
+use App\Kaprodi;
 
 class UserController extends Controller
 {
@@ -46,23 +49,33 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('pages.admin.users.edit', compact('user'));
+        return view('pages.admin.users.edit_user', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $this->validate($request, [
             'name' => 'required|string|max:100',
-            'email' => 'required|email|exists:users,email',
-            'password' => 'nullable|min:6',
+            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'.$user->id ],
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        $user = User::findOrFail($id);
         $password = !empty($request->password) ? bcrypt($request->password) : $user->password;
-        $user->update([
-            'name' => $request->name,
-            'password' => $password
-        ]);
+        
+        if ($user->hasAnyRole('mahasiswa')) {
+            $mahasiswa = Mahasiswa::where('user_id', $id)->first();
+            $mahasiswa->nama_mhs = $request->name;
+            $mahasiswa->email = $request->email;
+            $mahasiswa->save();
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $password;
+        
+        $user->save();
         return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Diperbaharui']);
     }
 
