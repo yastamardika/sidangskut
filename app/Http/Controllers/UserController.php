@@ -81,7 +81,12 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        $kaprodi = Kaprodi::where('id_user', $id)->first();
         $user = User::findOrFail($id);
+
+        if($kaprodi != null){
+            $kaprodi->delete();
+        }
         $user->delete();
         return redirect()->back()->with(['success' => 'User: <strong>' . $user->name . '</strong> Dihapus']);
     }
