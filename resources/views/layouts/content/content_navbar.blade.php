@@ -22,7 +22,7 @@
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
          Data
       </h6>
-      @elserole('mahasiswa|penguji')
+      @elserole('mahasiswa|dosen_penguji')
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
          Sidang
       </h6>
@@ -49,8 +49,8 @@
    {{-- End Akademik --}}
 
       @elserole('kaprodi')
-         <li class="nav-item">
-            <a class="nav-link" href="#">
+         <li class="nav-item {{ Request::is('kaprodi/dashboard/pendaftar-sidang*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('kaprodi') }}">
                   Pendaftar Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>

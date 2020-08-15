@@ -17,6 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/detailKaprodi', function () {
+    return view('pages.kaprodi.detail_pengajuan');
+});
+Route::get('/detailEditAkademik', function () {
+    return view('pages.akademik.edit_mahasiswa');
+});
+Route::get('/detailSidang', function () {
+    return view('pages.penguji.detail_sidang');
+});
+
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/profil', 'HomeController@profil')->name('profil');
 
@@ -72,7 +82,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //route group untuk kaprodi
     Route::group(['middleware' => ['role:kaprodi']], function () {
-        Route::get('/kaprodi', 'MhsDiajukanController@index')->name('kaprodi');
+        Route::get('/kaprodi/dashboard/pendaftar-sidang', 'MhsDiajukanController@index')->name('kaprodi');
+        Route::get('/kaprodi/dashboard/pendaftar-sidang/{id}', 'HistoryController@detail')->name('kaprodi.detailmhs');
     });
 
     //route group untuk penguji
