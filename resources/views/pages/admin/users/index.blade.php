@@ -11,7 +11,7 @@
     @endslot
 
 {{-- Isi konten --}}
-    <div class="col-md-6 p-0">
+    <div class="col-md-6 p-0 mb-3">
         <form role="form" action="{{ route('users.create') }}" method="GET">
             @csrf
             <h5 for="role">Tambah User baru:</h5>
@@ -25,7 +25,7 @@
         <table id="table" class="table table-hover table-bordered dt-responsive p-0" style="width:100%">
             <thead>
                 <tr class="text-center">
-                    <td style="width: 30px">#</td>
+                    <td style="width: 10px"></td>
                     <td>Nama</td>
                     <td>Email</td>
                     <td>Role</td>
@@ -38,20 +38,26 @@
                 @forelse ($users as $row)
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
-                    <td><span class="d-inline-block text-truncate konten-tabel">{{ $row->name }}</span></td>
-                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="    min-width: calc(100% - 80px); width: 10vw;">{{ $row->email }}</span></td>
-                    <td>
+                    <td><span class="d-inline-block text-truncate konten-tabel">
+                        {{ $row->name }}
+                    </span></td>
+                    <td class="fit-content"><span class="d-inline-block text-truncate konten-tabel" style="min-width: 100%; width: 14vw;">
+                        {{ $row->email }}
+                    </span></td>
+                    <td class="text-center">
                         @foreach ($row->getRoleNames() as $role)
-                        <label for="" class="badge badge-info p-2 text-wrap" style="min-width: calc(100% - 80px); width: 11vw;">{{ $role }}</label>
+                        <label for="" class="badge badge-pill badge-success p-2 text-wrap" style="min-width: 50%; width: 8rem;">
+                            {{ $role }}
+                        </label>
                         @endforeach
                     </td>
                     <td class="text-center p-0">
                         <form action="{{ route('users.destroy', $row->id) }}" method="POST" class="m-0">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <a href="{{ route('users.roles', $row->id) }}" class="btn btn-warning btn-sm px-sm-4 m-1"><i class='bx bxs-check-shield bx-xs'></i></a>
-                            <a href="{{ route('users.edit', $row->id) }}" class="btn btn-dark btn-sm px-sm-4 m-1"><i class='bx bxs-user-detail bx-xs'></i></a>
-                            <button class="btn btn-danger btn-sm px-sm-4 m-1"><i class='bx bxs-trash bx-xs'></i></button>
+                            <a href="{{ route('users.roles', $row->id) }}" class="btn btn-warning btn-sm px-sm-4 m-1"><i class='bx bxs-key bx-xs text-black-50 align-middle'></i></a>
+                            <a href="{{ route('users.edit', $row->id) }}" class="btn btn-dark btn-sm px-sm-4 m-1"><i class='bx bxs-user-detail bx-xs align-middle'></i></a>
+                            <button class="btn btn-danger btn-sm px-sm-4 m-1"><i class='bx bx-trash bx-xs align-middle'></i></button>
                         </form>
                     </td>
                     <td></td>

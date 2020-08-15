@@ -11,7 +11,7 @@
     @endslot
     
 {{-- Isi konten --}}
-    <div>
+    <div class="mb-3">
         <form role="form" action="{{ route('role.store') }}" method="POST">
             @csrf
             <h5>Tambah Role baru:</h5>            
@@ -43,10 +43,10 @@
     <div class="col-md p-0">
         {{-- <h4 class="my-3 font-weight-bold text-center">List Role</h4> --}}
 
-        <table id="table" class="table table-hover table-bordered dt-responsive nowrap" style="width:100%">
+        <table id="table" class="table table-hover table-bordered dt-responsive p-0" style="width:100%">
             <thead>
                 <tr class="text-center">
-                    <td style="width: 30px">#</td>
+                    <td style="width: 10px"></td>
                     <td>Role User</td>
                     <td>Created At</td>
                     <td>Aksi</td>
@@ -70,7 +70,7 @@
                         <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger btn-sm px-sm-4"><i class='bx bxs-trash bx-xs'></i></button>
+                            <button class="btn btn-danger btn-sm px-sm-4 m-1"><i class='bx bx-trash bx-xs align-middle'></i></button>
                         </form>
                     </td>
                     <td></td>

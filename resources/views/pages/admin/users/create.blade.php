@@ -11,7 +11,7 @@
     @endslot
     
 {{-- Isi konten --}}
-    <div class="col-md">
+    <div class="col-md p-0">
         <form action="{{ route('users.store') }}" method="post">
             @csrf
             <div class="form-group">

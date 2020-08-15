@@ -85,6 +85,12 @@ body {
     width: 0px;
   }
 }
+
+.bg-primary {
+  background: linear-gradient(-45deg, #004A74, #5AA0D0) !important;
+  color: white !important;
+}
+
 .bg-light {
   background: #ffffff !important;
 }
@@ -115,8 +121,8 @@ table {
 }
 
 .konten-tabel {
-  min-width: 16vw;
-  width: 5rem;
+  min-width: 100%;
+  width: 8rem;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
@@ -138,12 +144,12 @@ td {
 }
 
 .card {
-  border-radius: 0.5rem;
+  border-radius: 6px;
   border: 0px;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
 }
 
 .card-header {
@@ -153,16 +159,16 @@ td {
 
 .card-body {
   padding: 2.5rem 2.3rem;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
   border: 0px;
 }
 
 .shadow {
-  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0.4rem 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
 
 .breadcrumb-item.active {
@@ -179,11 +185,15 @@ td {
 }
 
 .btn {
-  padding: 0.375rem 1.85rem;
+  padding: 0.375rem 1.5rem;
 }
 
 .btn-primary {
   background: linear-gradient(-45deg, #004A74, #5AA0D0);
+}
+
+.btn-primary:hover {
+  background: #2C74A1;
 }
 
 .form-control {
@@ -322,6 +332,15 @@ table.dataTable.dtr-column > tbody > tr > th.control:before {
 
 table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   content: "\D7";
+}
+
+table.dataTable > tbody > tr.child ul.dtr-details {
+  width: 100%;
+}
+
+#table_length,
+#table_filter {
+  margin: 0 0 0.5rem 0;
 }
 
 .icon-head {

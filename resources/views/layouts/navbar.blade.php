@@ -3,7 +3,7 @@
 @section('body')
 
 {{-- Button Navigation Bar - Mobile Ver. --}}
-    <nav class="navbar fixed-top d-md-none d-lg-none d-xl-none d-sm-block navbar-dark navbar-expand-md flex-md-nowrap shadow">
+    <nav class="navbar fixed-top d-md-none d-lg-none d-xl-none d-sm-flex navbar-dark navbar-expand-md flex-md-nowrap shadow align-content-center">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -17,7 +17,7 @@
     <div class="row">
 
     {{-- Navigation --}}
-        <nav id="navbarSupportedContent" class="nav px-0 vh-100 d-md-block bg-light sidebar position-fixed shadow overflow-auto pt-md-0 pt-4 pb-4 collapse navbar-body">
+        <nav id="navbarSupportedContent" class="nav px-0 vh-100 d-md-block bg-light sidebar position-fixed shadow overflow-auto pt-md-0 pt-5 pb-4 collapse navbar-body">
             <div class="pt-sm-3 pb-4 w-100">
 
             {{-- List Item Nav --}}
@@ -29,7 +29,7 @@
     {{-- End Navigation --}}
 
     {{-- Konten --}}
-        <main class="ml-sm-auto my-4 p-0 my-md-0 content-body">
+        <main class="ml-sm-auto my-5 p-0 my-md-0 content-body">
             <div class="content my-4 my-md-3">
             {{-- Header Wolcome & Logout --}}
                 <div class="container-fluid px-md-4">
@@ -83,6 +83,14 @@
                         @yield('content')
                         
                     </div>
+
+                    {{-- Footer --}}
+                        <p class="copy-right text-center clearfix mb-4">
+                            <span class="text-md-left float-md-left">Copyright © 2020.</span>
+                            <span class="text-md-right float-md-right">Akademik Departemen Teknik Elektro dan Informatika, <br>Sekolah Vokasi, Universitas Gadjah Mada</span>
+                        </p>
+                    {{-- End Footer --}}
+
                 </div>
             {{-- End Isi Konten --}}
 
