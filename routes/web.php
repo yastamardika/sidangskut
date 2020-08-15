@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard/pendaftar-sidang', 'HistoryController@index')->name('akademik.mahasiswa');
         Route::get('/dashboard/pendaftar-sidang/{id}', 'HistoryController@detail')->name('akademik.detailmhs');
         Route::post('/dashboard/akademik/{id}', 'HistoryController@ajukan')->name('akademik.ajukan');
+        Route::post('/dashboard/akademik/{id}/cancel', 'HistoryController@cancel')->name('akademik.cancel');
     });
     //route yang berada dalam group ini, hanya bisa diakses oleh user
     //yang memiliki permission yang telah disebutkan dibawah

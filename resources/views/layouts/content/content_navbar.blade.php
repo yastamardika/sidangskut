@@ -40,8 +40,8 @@
 
    {{-- Akademik --}}
       @elserole('akademik')
-         <li class="nav-item {{ Request::is('dashboard/pendaftar-sidang') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/dashboard/pendaftar-sidang') }}">
+         <li class="nav-item {{ Request::is('dashboard/pendaftar-sidang*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('akademik.mahasiswa') }}">
                   Pendaftar Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>

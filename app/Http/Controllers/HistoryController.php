@@ -30,8 +30,10 @@ class HistoryController extends Controller
 
     public function detail($id){
         $mahasiswa = Mahasiswa::findOrFail($id);
+        $prodi = Prodi::all();
+        $status = Status::all();
 
-        return view('pages.pendaftar_sidang', $mahasiswa);
+        return view('pages.akademik.detail_pengajuan', compact(['mahasiswa','status','prodi']));
     }
 
     public function update(Request $request, $id){
