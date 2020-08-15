@@ -1,9 +1,9 @@
 @extends('layouts.navbar')
-​
+
 @section('title')
     {{ $title_page }}
 @endsection
-​
+
 @section('content')
 
 {{-- Header --}}
@@ -21,7 +21,7 @@
       </div>
    </div>
 </div>
-{{-- ​End Header --}}
+{{-- End Header --}}
 
 {{-- Isi Body --}}
 <div class="card-body p-3 p-md-4">
