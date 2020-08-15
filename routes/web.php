@@ -63,8 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //route group untuk mahasiswa
     Route::group(['middleware' => ['role:mahasiswa']], function () {
-        Route::get('/pendaftaran', 'SidangRegController@index')->name('pendaftaran');
-        Route::post('/pendaftaran/upload', 'SidangRegController@upload')->name('upload');
+        Route::get('/pengajuan', 'SidangRegController@index')->name('pengajuan');
+        Route::post('/pengajuan/upload', 'SidangRegController@upload')->name('upload');
     });
 
     //route group untuk kaprodi

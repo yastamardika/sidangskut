@@ -355,6 +355,30 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
   min-width: calc(100% - 250px) !important;
 }
 
+.detail-pengajuan {
+  background: #fafafa;
+  border: 2px solid #c1c1c1;
+}
+
+.detail-mahasiswa th,
+.detail-mahasiswa td {
+  padding: 0.2rem 0rem 0.2rem 1rem !important;
+}
+
+.detail-mahasiswa th {
+  width: 35% !important;
+  font-weight: normal;
+  margin-right: 3%;
+}
+
+.detail-mahasiswa td {
+  width: 62% !important;
+}
+
+.d-flow-root {
+  display: flow-root;
+}
+
 @media (max-width: 991px) {
   .navbar-body {
     width: 30%;
@@ -387,5 +411,10 @@ table.dataTable.dtr-column > tbody > tr.parent td.control:before {
 
   .logout {
     float: none !important;
+  }
+
+  .detail-mahasiswa th,
+  .detail-mahasiswa td {
+    padding: 0.2rem 0.3rem !important;
   }
 }

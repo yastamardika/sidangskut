@@ -67,5 +67,9 @@ $(document).ready(function(){
         }
     });
 
+    $("#form-file").on("change", function(){
+        const file = document.getElementById("form-file").files[0];
+        document.getElementById("nameFiles").innerHTML = "File: "+file.name;
+    });
 });
 

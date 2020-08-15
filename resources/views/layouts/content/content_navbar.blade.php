@@ -30,8 +30,8 @@
       @endrole
    {{-- Mahasiswa--}}
       @role('mahasiswa')
-         <li class="nav-item {{ Request::is('pendaftaran') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/pendaftaran') }}">
+         <li class="nav-item {{ Request::is('pengajuan') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/pengajuan') }}">
                   Pengajuan Sidang
                   <i class='bx bxs-file bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
