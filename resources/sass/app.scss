@@ -260,6 +260,25 @@ td {
   color: #ffffff;
 }
 
+.nav-pills .nav-link {
+  color: #bababa;
+  padding: 0.75rem;
+  border-radius: 0;
+  border-bottom: 3px solid #bababa !important;
+}
+
+.nav-pills .nav-link:hover {
+  color: #5AA0D0;
+  border-bottom: 3px solid #5AA0D0 !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #5AA0D0 !important;
+  background-color: #ffffff;
+  border-color: #5AA0D0 !important;
+}
+
 label {
   margin: 0;
 }

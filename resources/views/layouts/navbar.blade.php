@@ -33,24 +33,44 @@
             <div class="content my-4 my-md-3">
             {{-- Header Wolcome & Logout --}}
                 <div class="container-fluid px-md-4">
-                    <div class="card shadow account-header" style="margin-bottom: 1rem;">
+                    <div class="card shadow" style="margin-bottom: 1rem;">
 
-                        <div class="clearfix">
-                            <div class="mx-4 my-auto pb-3 pb-sm-0 fit-content float-left user">
-                                <div class="d-flex flex-row flex-wrap m-0 p-0">
-                                    <span>Selamat datang,</span>
+                        <div class="card account-header" style="z-index:1;">
+                            <div class="clearfix">
+                                <div class="mx-4 my-auto pb-3 pb-sm-0 fit-content float-left user">
+                                    <div class="d-flex flex-row flex-wrap m-0 p-0">
+                                        <span>Selamat datang,</span>
+                                    </div>
+                                    <h3 class="bold m-0">{{ Auth::user()->name }}</h3>
                                 </div>
-                                <h3 class="font-weight-bold m-0">{{ Auth::user()->name }}</h3>
-                            </div>
-                            <div class="fit-content p-2 text-center align-middle float-right mr-4 logout">
-                                <a class="btn logout-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </a>
+                                <div class="fit-content p-2 text-center align-middle float-right mr-4 logout">
+                                    <a class="btn logout-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Logout
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+
+                    @role('akademik')
+                        @if (Request::is('dashboard'))    
+                        <div class="card-body p-0">
+                            <ul class="nav nav-pills nav-fill flex-nowrap" role="tablist">
+                                <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class='bx bxs-bar-chart-square bx-xs d-block d-sm-inline-flex pr-sm-2 align-middle'></i><span class="align-middle">Statistik</span></a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class='bx bxs-bell-ring bx-xs d-block d-sm-inline-flex pr-sm-2 align-middle'></i><span class="align-middle">Notifikasi</span></a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><i class='bx bxs-info-circle bx-xs d-block d-sm-inline-flex pr-sm-2 align-middle'></i><span class="align-middle">Tutorial</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        @endif
+                    @endrole
 
                     </div>
                 </div>

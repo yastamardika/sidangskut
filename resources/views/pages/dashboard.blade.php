@@ -36,6 +36,72 @@
             <button type="submit" class="btn btn-primary my-4"><i class='bx bxs-file bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Mengajukan Sidang</span></button>
         </div>
 
+    @elserole('akademik')
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 col-md-3 col-xl-2 p-0">
+                        <div class="card">
+                            <div>
+                                <canvas id="myChart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-xl-2 p-0">
+                        <div class="card">
+                            <div>
+                                <canvas id="myChart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-xl-2 p-0">
+                        <div class="card">
+                            <div>
+                                <canvas id="myChart3"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-xl-2 p-0">
+                        <div class="card">
+                            <div>
+                                <canvas id="myChart4"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                Content A
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                Content B
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                Content C
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script>
+            var i = 1;
+            while (i <= 6) {
+                var ctx = document.getElementById('myChart' + i);
+                var chart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+
+                            backgroundColor: ["#8e5ea2", "#bebebe6b"],
+                            data: [7, 10]
+                        }]
+                    },
+                    options: {
+                        cutoutPercentage: 60,
+                        legend: {position:'bottom'}
+                    }
+                });
+                i++;
+            }
+        </script>
+    @elserole('admin|kaprodi|dosen_penguji')
+        You are logged in!
     @else
         @slot('title_page')
             Akses Data Ditolak
