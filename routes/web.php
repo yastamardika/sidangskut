@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/profil', 'HomeController@profil')->name('profil');
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {

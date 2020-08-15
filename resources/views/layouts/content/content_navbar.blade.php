@@ -12,6 +12,12 @@
             <i class='bx bxs-home bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
          </a>
       </li>
+      <li class="nav-item {{ Request::is('profil') ? 'active' : '' }}">
+         <a class="nav-link" href="{{ url('/profil') }}">
+            Profil Akun<span class="sr-only">(current)</span>
+            <i class='bx bxs-user bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+         </a>
+      </li>
       @role('admin|akademik|kaprodi')
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
          Data
