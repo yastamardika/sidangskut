@@ -6505,35 +6505,6 @@ return DataTable;
 
 /***/ }),
 
-/***/ "./node_modules/datatables.net-dt/js/dataTables.dataTables.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/datatables.net-dt/js/dataTables.dataTables.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables styling integration
- * ©2018 SpryMedia Ltd - datatables.net/license
- */
-
-(function( factory ){
-	if ( true ) {
-		// AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ( $ ) {
-			return factory( $, window, document );
-		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	}
-	else {}
-}(function( $, window, document, undefined ) {
-
-return $.fn.dataTable;
-
-}));
-
-
-/***/ }),
-
 /***/ "./node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js":
 /*!********************************************************************************!*\
   !*** ./node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js ***!
@@ -54369,11 +54340,39 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! datatables.net-dt */ "./node_modules/datatables.net-dt/js/dataTables.dataTables.js");
+__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+__webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js");
+
+__webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");
+
+__webpack_require__(/*! datatables.net-responsive */ "./node_modules/datatables.net-responsive/js/dataTables.responsive.js");
 
 __webpack_require__(/*! datatables.net-responsive-bs4 */ "./node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js");
 
 $(document).ready(function () {
+  $('#table').DataTable({
+    aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    bProcessing: true,
+    oLanguage: {
+      sSearch: "Pencarian:",
+      sLengthMenu: "Menampilkan data: _MENU_",
+      sEmptyTable: "Tidak ada data. :(",
+      sZeroRecords: "Data tidak ditemukan. :("
+    },
+    responsive: {
+      details: {
+        type: 'column',
+        target: -1
+      }
+    },
+    columnDefs: [{
+      className: 'control',
+      orderable: false,
+      targets: -1
+    }]
+  });
+  
   loading();
   $('.loading').delay(1000).fadeOut();
 });
