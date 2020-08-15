@@ -92,7 +92,7 @@ return [
     ],
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'Format :attribute tidak boleh mengandung karakter \/*:?"<>|',
-    'numeric' => 'The :attribute must be a number.',
+    'numeric' => ':Attribute harus berupa angka.',
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
