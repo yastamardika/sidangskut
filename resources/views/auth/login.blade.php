@@ -42,14 +42,13 @@
                                         </a>
                                     @endif
                                 </div>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
                                 <div class="input-group mb-2 p-0">
+                                    <input id="password" type="password" class="form-control showHide @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                    <div id="togglePassword" class="input-group-prepend">
+                                      <span class="input-group-text">
+                                        <i class='bx bx-hide align-middle togglePassword' id="iconShowHide" style="font-size: 1.25rem;"></i>
                                         </span>
-                                    @enderror
+                                    </div>
                                 </div>
                             </div>
                         <!-- End Input Password -->

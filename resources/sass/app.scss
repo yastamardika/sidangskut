@@ -212,6 +212,28 @@ td {
   z-index: 100;
 }
 
+.input-group-text {
+  background: white;
+  color: #ced4da;
+  border: none;
+  border-top-right-radius: 0.15rem !important;
+  border-bottom-right-radius: 0.15rem !important;
+}
+
+#togglePassword, #toggleConfirmPassword {
+  cursor: pointer;
+  position: absolute;
+  height: calc(100% - 4px);
+  right: 3px;
+  top: 2px;
+  z-index: 5;
+}
+
+.showHide {
+  background: transparent !important;
+  border-radius: 0.25rem !important;
+}
+
 .lupa-sandi {
   padding: 6px 0;
 }

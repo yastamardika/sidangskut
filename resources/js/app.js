@@ -35,3 +35,37 @@ $(document).ready(function () {
 function loading() {
     $('.progress-bar');
 }
+
+$(document).ready(function(){
+    const icon = document.getElementById("iconShowHide");
+    const pwd = document.getElementById("password");
+    const pwdConfirm = document.getElementById("password-confirm");
+
+    $("#togglePassword").on('click', function (e) {
+        const type1 = pwd.getAttribute('type') === 'password' ? 'text' : 'password';
+        pwd.setAttribute('type', type1);
+        // toggle the eye slash icon
+        if (icon.classList.contains("bx-hide")) {
+            icon.classList.remove("bx-hide");
+            icon.classList.add("bx-show");
+        } else {
+            icon.classList.remove("bx-show");
+            icon.classList.add("bx-hide");
+        }
+    });
+
+    $("#toggleConfirmPassword").on('click', function (e) {
+        const type2 = pwdConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
+        pwdConfirm.setAttribute('type', type2);
+        // toggle the eye slash icon
+        if (icon.classList.contains("bx-hide")) {
+            icon.classList.remove("bx-hide");
+            icon.classList.add("bx-show");
+        } else {
+            icon.classList.remove("bx-show");
+            icon.classList.add("bx-hide");
+        }
+    });
+
+});
+

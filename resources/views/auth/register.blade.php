@@ -62,6 +62,11 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                        <div id="togglePassword" class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class='bx bx-hide align-middle togglePassword' id="iconShowHide" style="font-size: 1.25rem;"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                                     
@@ -69,6 +74,11 @@
                                     <label for="password-confirm" class="col-form-label">Konfirmasi Password</label>
                                     <div class="input-group mb-2 p-0">
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required title="Silahkan isi ulang kata sandi Anda." autocomplete="new-password">
+                                        <div id="toggleConfirmPassword" class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class='bx bx-hide align-middle togglePassword' id="iconShowHide" style="font-size: 1.25rem;"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
