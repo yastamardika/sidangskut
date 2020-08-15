@@ -146,18 +146,45 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::all()->pluck('name');
-        return view('pages.admin.users.roles', compact('user', 'roles'));
+        $prodi = Prodi::all();
+        $kaprodi = Kaprodi::where('id_user', $id)->first();
+
+        return view('pages.admin.users.roles', compact('user', 'roles', 'prodi', 'kaprodi'));
     }
 
     public function setRole(Request $request, $id)
     {
         $this->validate($request, [
-            'role' => 'required'
+            'role' => 'required',
+            'prodi' => 'required'
         ]);
         $user = User::findOrFail($id);
+        $kaprodiExists = Kaprodi::where('id_user', $id)->first();
+
+            if ($kaprodiExists == null) {
+                $kaprodi = Kaprodi::create([
+                    'id_prodi' => $request->prodi,
+                    'id_user' => $id
+                ]);
+                $kaprodi->save();
+            } else {
+                $kaprodi = Kaprodi::where('id_user', $id)->first();
+                $kaprodi->id_prodi = $request->prodi;
+                $kaprodi->save();
+            }
+
+            if ($user->hasAnyRole('kaprodi') == true && $request->role != 'kaprodi') {
+                $kaprodiExists = Kaprodi::where('id_user', $id)->first();
+    
+                if ($kaprodiExists) {
+                    $kaprodiExists->delete();
+                }
+            }
+
         //menggunakan syncRoles agar terlebih dahulu menghapus semua role yang dimiliki
         //kemudian di-set kembali agar tidak terjadi duplicate
         $user->syncRoles($request->role);
-        return redirect()->back()->with(['success' => 'Role Sudah Di Set']);
+
+        return redirect(route('users.index'))->with(['success' => 'Role Sudah Di Set']);
     }
 }

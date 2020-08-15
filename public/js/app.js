@@ -54416,6 +54416,33 @@ $(document).ready(function(){
     const file = document.getElementById("form-file").files[0];
     document.getElementById("nameFiles").innerHTML = "File: "+file.name;
   });
+  $("#changeRole").on("change", function(){
+    const value = $("input[name=role]:checked").val();
+    if (value == 'kaprodi') {
+        $("#prodi").addClass("d-table-row");
+        $("#prodi").removeClass("d-none");
+    } else {
+        $("#prodi").addClass("d-none");
+        $("#prodi").removeClass("d-table-row");
+    }
+  });
+
+});
+
+window.addEventListener("pageshow", function(){
+  const ele = document.getElementsByName('role');
+
+  for(i = 0; i < ele.length; i++) {
+      if(ele[i].checked) {
+          if (ele[i].value == 'kaprodi') {
+              $("#prodi").addClass("d-table-row");
+              $("#prodi").removeClass("d-none");
+          } else {
+              $("#prodi").addClass("d-none");
+              $("#prodi").removeClass("d-table-row");
+          }
+      }
+  }
 });
 
 /***/ }),
