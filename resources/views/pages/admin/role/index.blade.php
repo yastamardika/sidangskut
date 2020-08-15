@@ -14,10 +14,28 @@
     <div>
         <form role="form" action="{{ route('role.store') }}" method="POST">
             @csrf
-            <label for="role">Tambah Role baru:</label>
+            <h5>Tambah Role baru:</h5>            
             <div class="d-flex flex-column flex-md-row">
                 <input type="text" name="role" class="col col-md-5 col-lg-3 form-control md-box mr-2 mb-2 mb-md-0 {{ $errors->has('role') ? 'is-invalid':'' }}" id="name" required="">
                 <button type="submit" class="btn btn-primary">+ Tambah</button>
+            </div>
+            <p class="my-1">Default role: </p>
+            <div class="d-inline mb-4">
+                <label class="badge badge-success px-3 py-2 m-1 fit-content">
+                    mahasiswa
+                </label>
+                <label class="badge badge-success px-3 py-2 m-1 fit-content">
+                    akademik
+                </label>
+                <label class="badge badge-success px-3 py-2 m-1 fit-content">
+                    kaprodi
+                </label>
+                <label class="badge badge-success px-3 py-2 m-1 fit-content">
+                    dosen_penguji
+                </label>
+                <label class="badge badge-success px-3 py-2 m-1 fit-content">
+                    admin
+                </label>
             </div>
         </form>
     </div>
@@ -40,10 +58,16 @@
                 @forelse ($role as $row)
                 <tr>
                     <td class="text-center">{{ $no++ }}</td>
-                    <td><span class="d-inline-block text-truncate konten-tabel">{{ $row->name }}</span></td>
-                    <td>{{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}</td>
+                    <td><span class="d-inline-block text-truncate konten-tabel" style="min-width: 100%;">
+                        {{ $row->name }}
+                    </span></td>
                     <td>
-                        <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0 text-center">
+                        <span class="d-inline-block text-truncate konten-tabel" style="min-width: 100%; width: 10vw;">
+                            {{ date("d/m/Y H:i:s", strtotime($row->created_at)) }}
+                        </span>
+                    </td>
+                    <td class="text-center p-0">
+                        <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
                             <button class="btn btn-danger btn-sm px-sm-4"><i class='bx bxs-trash bx-xs'></i></button>
