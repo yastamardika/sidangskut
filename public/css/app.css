@@ -17371,7 +17371,6 @@ td {
 
 .form-control {
   height: calc(1.8em + 0.75rem + 2px);
-  background-color: #FAFAFA;
   border-width: 2px;
 }
 
@@ -17403,7 +17402,7 @@ td {
 .copy-right {
   font-size: 0.8rem;
   color: #bababa;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 0;
 }
 
