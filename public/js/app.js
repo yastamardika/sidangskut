@@ -54373,6 +54373,14 @@ __webpack_require__(/*! datatables.net-dt */ "./node_modules/datatables.net-dt/j
 
 __webpack_require__(/*! datatables.net-responsive-bs4 */ "./node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js");
 
+$(document).ready(function () {
+  loading();
+  $('.loading').delay(1000).fadeOut();
+});
+
+function loading() {
+  $('.progress-bar');
+}
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

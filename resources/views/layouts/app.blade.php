@@ -27,6 +27,15 @@
 
 <body>
 
+    <div class="loading">
+        <div class="progress-container card card-body fit-content p-3 shadow">
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+            <span class="text-center mt-2">Memuat data . . .</span>
+        </div>    
+    </div>
+
 {{-- Content --}}
     @yield('body')
 {{-- End Content --}}
