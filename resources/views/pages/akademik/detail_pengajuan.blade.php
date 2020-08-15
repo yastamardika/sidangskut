@@ -81,7 +81,8 @@
                         @csrf
                         <button type="submit" class="btn btn-primary m-1"><i class='bx bx-check bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Ajukan ke Kaprodi</span></button>
                     </form>
-                @else
+                @endif
+                @if ($mahasiswa->id_status == '2')
                 <form action="{{ route('akademik.cancel', $mahasiswa->id) }}" method="POST" class="m-0">
                     @csrf
                     <button type="submit" class="btn btn-danger m-1"><i class='bx bx-x bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-text-top">Batalkan Pengajuan</span></button>
