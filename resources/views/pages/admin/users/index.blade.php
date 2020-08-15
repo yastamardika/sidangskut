@@ -14,7 +14,7 @@
     <div class="col-md-6 p-0">
         <form role="form" action="{{ route('users.create') }}" method="GET">
             @csrf
-            <label for="role">Tambah User baru:</label>
+            <h5 for="role">Tambah User baru:</h5>
             <div class="d-flex flex-row">
                 <button type="submit" class="btn btn-primary">+ Tambah</button>
             </div>

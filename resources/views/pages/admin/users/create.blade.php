@@ -39,10 +39,9 @@
                 </select>
                 <p class="text-danger">{{ $errors->first('role') }}</p>
             </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-sm">
-                    <i class="fa fa-send"></i> Simpan
-                </button>
+            <div class="col-12 d-inline-flex flex-column-reverse flex-lg-row justify-content-end p-0 mt-4 mx-auto">
+                <a href="{{ route('users.index') }}" class="btn m-1"><span class="align-middle">Batal</span></a>
+                <button type="submit" class="btn btn-primary m-1"><i class='bx bx-save bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Simpan</span></button>
             </div>
         </form>
     </div>
