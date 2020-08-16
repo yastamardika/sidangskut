@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Kaprodi;
+use App\Prodi;
 use App\Mahasiswa;
 use App\Penguji;
 use App\Sidang;
+use App\Status;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class MhsDiajukanController extends Controller
 {
     function index(){
-        $idKaprodi =Auth::user()->id;
-        $prodi = Kaprodi::all()->where('id_user', $idKaprodi)->pluck('id_prodi');
-        $mhs = Mahasiswa::all()->where('id_status', '2')->where('id_prodi', $prodi);
+        $idKaprodi = Auth::user()->id;
+        $prodi = Kaprodi::where('id_user', $idKaprodi)->pluck('id_prodi');
+        $namaprodi = Prodi::where('id', $prodi)->first();
+        $mahasiswa = Mahasiswa::where('id_prodi', $prodi[0])->whereNotIn('id_status', [ 1 ])->get();
+        $status = Status::all();
 
-        return view('pages.kaprodi.dashboard',$mhs);
+        return view('pages.kaprodi.pendaftar_sidang', compact(['namaprodi','mahasiswa','status']));
     }
 
     function lihatPenguji($id){

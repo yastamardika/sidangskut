@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\User;
+use App\Prodi;
+use App\Mahasiswa;
+use App\Kaprodi;
 
 class UserController extends Controller
 {
@@ -26,8 +29,8 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'.$user->id ],
+            'password' => 'required|string|min:8',
             'role' => 'required|string|exists:roles,name'
         ]);
 
@@ -46,29 +49,44 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('pages.admin.users.edit', compact('user'));
+        return view('pages.admin.users.edit_user', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $this->validate($request, [
             'name' => 'required|string|max:100',
-            'email' => 'required|email|exists:users,email',
-            'password' => 'nullable|min:6',
+            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'.$user->id ],
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        $user = User::findOrFail($id);
         $password = !empty($request->password) ? bcrypt($request->password) : $user->password;
-        $user->update([
-            'name' => $request->name,
-            'password' => $password
-        ]);
+        
+        if ($user->hasAnyRole('mahasiswa')) {
+            $mahasiswa = Mahasiswa::where('user_id', $id)->first();
+            $mahasiswa->nama_mhs = $request->name;
+            $mahasiswa->email = $request->email;
+            $mahasiswa->save();
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $password;
+        
+        $user->save();
         return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Diperbaharui']);
     }
 
     public function destroy($id)
     {
+        $kaprodi = Kaprodi::where('id_user', $id)->first();
         $user = User::findOrFail($id);
+
+        if($kaprodi != null){
+            $kaprodi->delete();
+        }
         $user->delete();
         return redirect()->back()->with(['success' => 'User: <strong>' . $user->name . '</strong> Dihapus']);
     }
@@ -128,18 +146,45 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::all()->pluck('name');
-        return view('pages.admin.users.roles', compact('user', 'roles'));
+        $prodi = Prodi::all();
+        $kaprodi = Kaprodi::where('id_user', $id)->first();
+
+        return view('pages.admin.users.roles', compact('user', 'roles', 'prodi', 'kaprodi'));
     }
 
     public function setRole(Request $request, $id)
     {
         $this->validate($request, [
-            'role' => 'required'
+            'role' => 'required',
+            'prodi' => 'required'
         ]);
         $user = User::findOrFail($id);
+        $kaprodiExists = Kaprodi::where('id_user', $id)->first();
+
+            if ($kaprodiExists == null) {
+                $kaprodi = Kaprodi::create([
+                    'id_prodi' => $request->prodi,
+                    'id_user' => $id
+                ]);
+                $kaprodi->save();
+            } else {
+                $kaprodi = Kaprodi::where('id_user', $id)->first();
+                $kaprodi->id_prodi = $request->prodi;
+                $kaprodi->save();
+            }
+
+            if ($user->hasAnyRole('kaprodi') == true && $request->role != 'kaprodi') {
+                $kaprodiExists = Kaprodi::where('id_user', $id)->first();
+    
+                if ($kaprodiExists) {
+                    $kaprodiExists->delete();
+                }
+            }
+
         //menggunakan syncRoles agar terlebih dahulu menghapus semua role yang dimiliki
         //kemudian di-set kembali agar tidak terjadi duplicate
         $user->syncRoles($request->role);
-        return redirect()->back()->with(['success' => 'Role Sudah Di Set']);
+
+        return redirect(route('users.index'))->with(['success' => 'Role Sudah Di Set']);
     }
 }

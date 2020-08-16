@@ -25,13 +25,15 @@ class HistoryController extends Controller
         $status = Status::all();
         $prodi = Prodi::all();
 
-        return view('pages.pendaftar_sidang', compact(['mahasiswa','status','prodi']));
+        return view('pages.akademik.pendaftar_sidang', compact(['mahasiswa','status','prodi']));
     }
 
     public function detail($id){
         $mahasiswa = Mahasiswa::findOrFail($id);
+        $prodi = Prodi::all();
+        $status = Status::all();
 
-        return view('pages.pendaftar_sidang', $mahasiswa);
+        return view('pages.akademik.detail_pengajuan', compact(['mahasiswa','status','prodi']));
     }
 
     public function update(Request $request, $id){
@@ -63,7 +65,7 @@ class HistoryController extends Controller
             'file_cover_ta' => $nama_proposal
         ]);
 
-        return view('pages.pendaftar_sidang', $mahasiswa);
+        return view('pages.akademik.pendaftar_sidang', $mahasiswa);
     }
 
     public function delete($id){
@@ -73,12 +75,21 @@ class HistoryController extends Controller
     }
 
     public function ajukan($id){
-        $mhs=Mahasiswa::findOrFail($id);
-        $mhs->toQuery()->update([
-            'id_status' => 2,
-        ]);
+        $mahasiswa=Mahasiswa::findOrFail($id);
+        $mahasiswa->id_status = '2';
 
-        return view('pages.pendaftar_sidang');
+        $mahasiswa->save();
+
+        return redirect()->route('akademik.mahasiswa');
+    }
+
+    public function cancel($id){
+        $mahasiswa=Mahasiswa::findOrFail($id);
+        $mahasiswa->id_status = '1';
+
+        $mahasiswa->save();
+
+        return redirect()->route('akademik.mahasiswa');
     }
 
     // public function editProposal($proposalId, Upload $upload){

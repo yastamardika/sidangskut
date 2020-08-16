@@ -1,9 +1,9 @@
 @extends('layouts.navbar')
-​
+
 @section('title')
     <title>Role Permission</title>
 @endsection
-​
+
 @section('css')
     <style type="text/css">
         .tab-pane{
@@ -12,7 +12,7 @@
         }
     </style>
 @endsection
-​
+
 @section('content')
     <div class="content-wrapper">
         <div class="content-header">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-​
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -39,7 +39,7 @@
                             @slot('title')
                             <h4 class="card-title">Add New Permission</h4>
                             @endslot
-​
+
                             <form action="{{ route('users.add_permission') }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -54,17 +54,17 @@
                                 </div>
                             </form>
                             @slot('footer')
-​
+
                             @endslot
                         @endcard
                     </div>
-​
+
                     <div class="col-md-8">
                         @card
                             @slot('title')
                             Set Permission to Role
                             @endslot
-​
+
                             @if (session('success'))
                                 @alert(['type' => 'success'])
                                     {{ session('success') }}
