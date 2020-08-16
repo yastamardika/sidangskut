@@ -27,19 +27,19 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'.$user->id ],
-            'password' => 'required|string|min:8',
-            'role' => 'required|string|exists:roles,name'
-        ]);
-
         $user = User::firstOrCreate([
             'email' => $request->email
         ], [
             'name' => $request->name,
             'password' => bcrypt($request->password),
             'status' => true
+        ]);
+
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'],
+            'password' => 'required|string|min:8',
+            'role' => 'required|string|exists:roles,name'
         ]);
 
         $user->assignRole($request->role);
@@ -58,12 +58,12 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
-            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'.$user->id ],
+            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,' . $user->id],
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         $password = !empty($request->password) ? bcrypt($request->password) : $user->password;
-        
+
         if ($user->hasAnyRole('mahasiswa')) {
             $mahasiswa = Mahasiswa::where('user_id', $id)->first();
             $mahasiswa->nama_mhs = $request->name;
@@ -74,7 +74,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $password;
-        
+
         $user->save();
         return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Diperbaharui']);
     }
@@ -84,7 +84,7 @@ class UserController extends Controller
         $kaprodi = Kaprodi::where('id_user', $id)->first();
         $user = User::findOrFail($id);
 
-        if($kaprodi != null){
+        if ($kaprodi != null) {
             $kaprodi->delete();
         }
         $user->delete();
@@ -161,25 +161,32 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $kaprodiExists = Kaprodi::where('id_user', $id)->first();
 
-            if ($kaprodiExists == null) {
+        if ($kaprodiExists == null && $request->role == 'kaprodi') {
+            $kaprodi = Kaprodi::create([
+                'id_prodi' => $request->prodi,
+                'id_user' => $id
+            ]);
+            $kaprodi->save();
+        } else if ($request->role == 'kaprodi') {
+            if ($kaprodiExists != null) {
+                $kaprodi = Kaprodi::where('id_user', $id)->first();
+                $kaprodi->id_prodi = $request->prodi;
+                $kaprodi->save();
+            } else {
                 $kaprodi = Kaprodi::create([
                     'id_prodi' => $request->prodi,
                     'id_user' => $id
                 ]);
-                $kaprodi->save();
-            } else {
-                $kaprodi = Kaprodi::where('id_user', $id)->first();
-                $kaprodi->id_prodi = $request->prodi;
-                $kaprodi->save();
             }
+        }
 
-            if ($user->hasAnyRole('kaprodi') == true && $request->role != 'kaprodi') {
-                $kaprodiExists = Kaprodi::where('id_user', $id)->first();
-    
-                if ($kaprodiExists) {
-                    $kaprodiExists->delete();
-                }
+        if ($user->hasAnyRole('kaprodi') == true && $request->role != 'kaprodi') {
+            $kaprodiExists = Kaprodi::where('id_user', $id)->first();
+
+            if ($kaprodiExists) {
+                $kaprodiExists->delete();
             }
+        }
 
         //menggunakan syncRoles agar terlebih dahulu menghapus semua role yang dimiliki
         //kemudian di-set kembali agar tidak terjadi duplicate
