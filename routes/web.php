@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
     //route group untuk kaprodi
     Route::group(['middleware' => ['role:kaprodi']], function () {
         Route::get('/kaprodi/dashboard/pendaftar-sidang', 'MhsDiajukanController@index')->name('kaprodi');
-        Route::get('/kaprodi/dashboard/pendaftar-sidang/{id}', 'HistoryController@detail')->name('kaprodi.detailmhs');
+        Route::get('/kaprodi/dashboard/pendaftar-sidang/{id}', 'MhsDiajukanController@detail')->name('kaprodi.detailmhs');
     });
 
     //route group untuk penguji

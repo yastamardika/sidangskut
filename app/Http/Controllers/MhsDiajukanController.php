@@ -25,13 +25,12 @@ class MhsDiajukanController extends Controller
         return view('pages.kaprodi.pendaftar_sidang', compact(['namaprodi','mahasiswa','status']));
     }
 
-    function lihatPenguji($id){
+    function detail($id){
+        $mhs = Mahasiswa::findOrFail($id);
         $allPenguji = Role::all()->where('name', 'penguji');
         $prodi = Mahasiswa::findOrFail($id)->where('user_id', $id)->pluck('id_prodi');
         $penguji = Penguji::all()->where('id_prodi',$prodi);
-        $mhs = Mahasiswa::findOrFail($id);
-
-        return view('pages.kaprodi.penguji', $penguji);
+        return view('pages.kaprodi.detail_pengajuan', compact(['mhs','penguji']));
     }
 
     function pilihPenguji(Request $request,$id){
