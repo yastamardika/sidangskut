@@ -17,6 +17,7 @@ class CreateProdisTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('program_studi');
+            $table->string('prodi_full');
             $table->timestamps();
         });
 
