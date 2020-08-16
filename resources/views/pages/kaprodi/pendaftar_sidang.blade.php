@@ -9,7 +9,7 @@
     @slot('link_breadcrumb')
         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
     @endslot
-    
+
 {{-- Isi konten --}}
     <div class="col-md p-0">
         @role('kaprodi')
@@ -48,7 +48,7 @@
                                 {{ $status->find($row->id_status)->status }}
                             </span></td>
                             <td class="text-center p-0">
-                                <a href="{{ route('akademik.detailmhs',$row->id)}}" class="btn @switch($status->find($row->id_status)->status)
+                                <a href="{{ route('kaprodi.detailmhs',$row->id)}}" class="btn @switch($status->find($row->id_status)->status)
                                     @case('mendaftar')
                                         btn-primary
                                         @break
