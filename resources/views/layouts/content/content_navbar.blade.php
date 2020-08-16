@@ -12,11 +12,17 @@
             <i class='bx bxs-home bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
          </a>
       </li>
+      <li class="nav-item {{ Request::is('profil') ? 'active' : '' }}">
+         <a class="nav-link" href="{{ url('/profil') }}">
+            Profil Akun<span class="sr-only">(current)</span>
+            <i class='bx bxs-user bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+         </a>
+      </li>
       @role('admin|akademik|kaprodi')
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
          Data
       </h6>
-      @elserole('mahasiswa|penguji')
+      @elserole('mahasiswa|dosen_penguji')
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
          Sidang
       </h6>
@@ -24,8 +30,8 @@
       @endrole
    {{-- Mahasiswa--}}
       @role('mahasiswa')
-         <li class="nav-item {{ Request::is('pendaftaran') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/pendaftaran') }}">
+         <li class="nav-item {{ Request::is('pengajuan') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/pengajuan') }}">
                   Pengajuan Sidang
                   <i class='bx bxs-file bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
@@ -34,8 +40,8 @@
 
    {{-- Akademik --}}
       @elserole('akademik')
-         <li class="nav-item {{ Request::is('dashboard/pendaftar-sidang') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/dashboard/pendaftar-sidang') }}">
+         <li class="nav-item {{ Request::is('dashboard/pendaftar-sidang*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('akademik.mahasiswa') }}">
                   Pendaftar Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
@@ -43,8 +49,8 @@
    {{-- End Akademik --}}
 
       @elserole('kaprodi')
-         <li class="nav-item">
-            <a class="nav-link" href="#">
+         <li class="nav-item {{ Request::is('kaprodi/dashboard/pendaftar-sidang*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('kaprodi') }}">
                   Pendaftar Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
