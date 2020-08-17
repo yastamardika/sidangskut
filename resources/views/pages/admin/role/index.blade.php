@@ -82,10 +82,6 @@
                 @endforelse
             </tbody>
         </table>
-
-        <div class="float-right">
-            {!! $role->links() !!}
-        </div>
     </div>
 {{-- End isi konten --}}
 
