@@ -41,6 +41,7 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
+        alert()->success('Login akun berhasil.', '')->toToast()->timerProgressBar()->autoClose(3000);
         $this->redirectTo = route('dashboard');
         return $this->redirectTo;
     }

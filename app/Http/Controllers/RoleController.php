@@ -18,15 +18,25 @@ class RoleController extends Controller
         $this->validate($request, [
             'role' => 'required|string|max:50'
         ]);
+
+        if(!Role::where('name', $request->role)->first()) {
+            alert()->success('Berhasil','Role ' . $request->role . ' berhasil ditambahkan.');
+        } else {
+            alert()->error('Gagal','Role ' . $request->role . ' sudah ada.');
+        }
+
         $role = Role::firstOrCreate(['name' => $request->role]);
-        return redirect()->back()->with(['success' => 'Role: <strong>' . $role->name . '</strong> Ditambahkan']);
+
+        return redirect()->back();
     }
 
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
         $role->delete();
-        return redirect()->back()->with(['success' => 'Role: <strong>' . $role->name . '</strong> Dihapus']);
+
+        alert()->error('Berhasil','Role ' . $role->name . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
+        return redirect()->back();
     }
 
 }

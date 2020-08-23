@@ -72,7 +72,9 @@ class HistoryController extends Controller
         $mahasiswa = Mahasiswa::findOrFail($id);
         unlink("upload/" . $mahasiswa->file_cover_ta);
         $mahasiswa->delete();
-        return redirect()->back()->with(['success' => 'Pengajuan oleh: <strong>' . $mahasiswa->nama_mhs . '</strong> Dihapus']);
+
+        alert()->error('Berhasil Dihapus','Data pengajuan sidang oleh ' . $mahasiswa->nama_mhs . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
+        return redirect()->route('akademik.mahasiswa');
     }
 
     public function ajukan($id){
@@ -81,6 +83,7 @@ class HistoryController extends Controller
 
         $mahasiswa->save();
 
+        alert()->success('Berhasil Diajukan','Data berhasil diajukan ke Kaprodi.');
         return redirect()->route('akademik.mahasiswa');
     }
 
@@ -90,6 +93,7 @@ class HistoryController extends Controller
 
         $mahasiswa->save();
 
+        alert()->success('Berhasil Dibatalkan','Pembatalan pengajuan Data berhasil.');
         return redirect()->route('akademik.mahasiswa');
     }
 

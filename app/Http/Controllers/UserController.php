@@ -43,7 +43,9 @@ class UserController extends Controller
         ]);
 
         $user->assignRole($request->role);
-        return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Ditambahkan']);
+
+        alert()->success('Berhasil','User ' . $request->name . ' berhasil ditambahkan.');
+        return redirect(route('users.index'));
     }
 
     public function edit($id)
@@ -76,7 +78,9 @@ class UserController extends Controller
         $user->password = $password;
 
         $user->save();
-        return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Diperbaharui']);
+
+        alert()->success('Berhasil Update','User ' . $request->name . ' berhasil diperbarui.');
+        return redirect(route('users.index'));
     }
 
     public function destroy($id)
@@ -88,7 +92,9 @@ class UserController extends Controller
             $kaprodi->delete();
         }
         $user->delete();
-        return redirect()->back()->with(['success' => 'User: <strong>' . $user->name . '</strong> Dihapus']);
+
+        alert()->error('Berhasil','User ' . $user->name . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
+        return redirect()->back();
     }
 
     public function rolePermission(Request $request)
@@ -192,6 +198,7 @@ class UserController extends Controller
         //kemudian di-set kembali agar tidak terjadi duplicate
         $user->syncRoles($request->role);
 
-        return redirect(route('users.index'))->with(['success' => 'Role Sudah Di Set']);
+        alert()->success('Berhasil Update','Role User berhasil diperbarui.');
+        return redirect(route('users.index'));
     }
 }

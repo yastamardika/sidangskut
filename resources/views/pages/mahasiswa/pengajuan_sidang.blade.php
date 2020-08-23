@@ -16,7 +16,7 @@
         <h4 class="my-1 bold text-center">FORMULIR PENGAJUAN SIDANG TUGAS AKHIR</h4>
         <p class="mb-4 text-center">Departemen Teknik Elektro dan Informatika</p>
         
-        <form method="post" action="{{route('upload')}}" enctype="multipart/form-data">
+        <form id="ajukanSidang" method="post" action="{{route('upload')}}" enctype="multipart/form-data">
             {{csrf_field()}}
 
             <div class="col p-0">
@@ -83,8 +83,29 @@
                 <label>Saya telah mengisi data dengan benar.</label>
             </div>
 
-            <button type="submit" name="button" class="btn btn-primary d-flex mx-auto justify-content-center mt-4">Mengajukan</button>
+            <button type="submit" name="button" class="btn btn-primary d-flex mx-auto justify-content-center mt-4 simpan">Mengajukan</button>
         </form>
+        <script>
+            $('.simpan').on('click', function (e) {
+                e.preventDefault();
+    
+                Swal.fire({
+                    title: "Peringatan",
+                    text: "Anda hanya dapat mengajukan sidang 1 kali. Pastikan data yang Anda masukkan benar. Lanjutkan pengajuan?",
+                    footer: "Apabila terdapat kesalahan/perubahan silahkan hubungi Akademik DTEDI SV UGM.",
+                    icon: 'question',
+                    iconHtml: '<i class="bx bx-error bx-lg "></i>',
+                    showCancelButton: true,
+                    cancelButtonText: 'Kembali',
+                    confirmButtonText: 'Ajukan Sidang',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        document.getElementById("ajukanSidang").submit();
+                    }
+                });
+            });
+        </script>
     @else
         @slot('title_page')
             Akses Data Ditolak
