@@ -21,7 +21,7 @@ class HistoryController extends Controller
     }
 
     public function index(){
-        $mahasiswa = Mahasiswa::all()->sortBy('id_prodi');
+        $mahasiswa = Mahasiswa::all()->sortBy('id_status');
         $status = Status::all();
         $prodi = Prodi::all();
 
