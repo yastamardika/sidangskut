@@ -27,19 +27,19 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email'],
+            'password' => 'required|string|min:8',
+            'role' => 'required|string|exists:roles,name'
+        ]);
+
         $user = User::firstOrCreate([
             'email' => $request->email
         ], [
             'name' => $request->name,
             'password' => bcrypt($request->password),
             'status' => true
-        ]);
-
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'],
-            'password' => 'required|string|min:8',
-            'role' => 'required|string|exists:roles,name'
         ]);
 
         $user->assignRole($request->role);
@@ -66,7 +66,7 @@ class UserController extends Controller
 
         $password = !empty($request->password) ? bcrypt($request->password) : $user->password;
 
-        if ($user->hasAnyRole('mahasiswa')) {
+        if ($user->hasAnyRole('mahasiswa') && Mahasiswa::where('nama_mhs', $user->name)->first() != null) {
             $mahasiswa = Mahasiswa::where('user_id', $id)->first();
             $mahasiswa->nama_mhs = $request->name;
             $mahasiswa->email = $request->email;
