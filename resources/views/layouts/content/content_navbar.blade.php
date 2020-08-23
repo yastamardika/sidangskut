@@ -59,8 +59,8 @@
 
    {{-- Penguji --}}
       @elserole('dosen_penguji')
-         <li class="nav-item">
-            <a class="nav-link" href="#">
+         <li class="nav-item {{ Request::is('penguji*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('penguji') }}">
                   Mahasiswa Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
@@ -69,8 +69,8 @@
 
    {{-- Admin --}}
       @elserole('admin')
-         <li class="nav-item {{ Request::is('data-pendaftar*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/data-pendaftar') }}">
+         <li class="nav-item {{ Request::is('dashboard/pendaftar-sidang*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('akademik.mahasiswa') }}">
                   Pendaftar Sidang
                   <i class='bx bxs-spreadsheet bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>

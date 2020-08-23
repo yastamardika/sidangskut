@@ -52,12 +52,12 @@
                         @endforeach
                     </td>
                     <td class="text-center p-0">
-                        <form action="{{ route('users.destroy', $row->id) }}" method="POST" class="m-0">
+                        <form id="formDelete" action="{{ route('users.destroy', $row->id) }}" method="POST" class="m-0">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
                             <a href="{{ route('users.roles', $row->id) }}" class="btn btn-warning btn-sm px-sm-4 m-1"><i class='bx bxs-key bx-xs text-black-50 align-middle'></i></a>
                             <a href="{{ route('users.edit', $row->id) }}" class="btn btn-dark btn-sm px-sm-4 m-1"><i class='bx bxs-user-detail bx-xs align-middle'></i></a>
-                            <button class="btn btn-danger btn-sm px-sm-4 m-1"><i class='bx bx-trash bx-xs align-middle'></i></button>
+                            <button class="btn btn-danger btn-sm px-sm-4 m-1 delete" data-user="{{$row->name}}"><i class='bx bx-trash bx-xs align-middle'></i></button>
                         </form>
                     </td>
                     <td></td>
@@ -69,6 +69,30 @@
                 @endforelse
             </tbody>
         </table>
+        <script>
+            $('.delete').on('click', function (e) {
+                e.preventDefault();
+                const user = $('.delete').attr('data-user');
+
+                Swal.fire({
+                    title: "Hapus User",
+                    text: "Hapus data user \"" + user + "\"?",
+                    icon: 'warning',
+                    iconHtml: '<i class="bx bx-error bx-lg "></i>',
+                    confirmButtonColor: '#e3342f',
+                    showCancelButton: true,
+                    cancelButtonText: 'Kembali',
+                    confirmButtonText: 'Hapus',
+                    focusConfirm: false,
+                    focusCancel: false,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        document.getElementById("formDelete").submit();
+                    }
+                });
+            });
+        </script>
     </div>
 {{-- End isi konten --}}
 

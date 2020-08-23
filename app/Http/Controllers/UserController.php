@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('created_at', 'DESC')->paginate(10);
+        $users = User::orderBy('created_at', 'DESC')->get();
         return view('pages.admin.users.index', compact('users'));
     }
 
@@ -27,6 +27,13 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|string|max:100',
+            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email'],
+            'password' => 'required|string|min:8',
+            'role' => 'required|string|exists:roles,name'
+        ]);
+
         $user = User::firstOrCreate([
             'email' => $request->email
         ], [
@@ -35,15 +42,10 @@ class UserController extends Controller
             'status' => true
         ]);
 
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,'],
-            'password' => 'required|string|min:8',
-            'role' => 'required|string|exists:roles,name'
-        ]);
-
         $user->assignRole($request->role);
-        return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Ditambahkan']);
+
+        alert()->success('Berhasil','User ' . $request->name . ' berhasil ditambahkan.');
+        return redirect(route('users.index'));
     }
 
     public function edit($id)
@@ -64,7 +66,7 @@ class UserController extends Controller
 
         $password = !empty($request->password) ? bcrypt($request->password) : $user->password;
 
-        if ($user->hasAnyRole('mahasiswa')) {
+        if ($user->hasAnyRole('mahasiswa') && Mahasiswa::where('nama_mhs', $user->name)->first() != null) {
             $mahasiswa = Mahasiswa::where('user_id', $id)->first();
             $mahasiswa->nama_mhs = $request->name;
             $mahasiswa->email = $request->email;
@@ -76,7 +78,9 @@ class UserController extends Controller
         $user->password = $password;
 
         $user->save();
-        return redirect(route('users.index'))->with(['success' => 'User: <strong>' . $user->name . '</strong> Diperbaharui']);
+
+        alert()->success('Berhasil Update','User ' . $request->name . ' berhasil diperbarui.');
+        return redirect(route('users.index'));
     }
 
     public function destroy($id)
@@ -88,7 +92,9 @@ class UserController extends Controller
             $kaprodi->delete();
         }
         $user->delete();
-        return redirect()->back()->with(['success' => 'User: <strong>' . $user->name . '</strong> Dihapus']);
+
+        alert()->error('Berhasil','User ' . $user->name . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
+        return redirect()->back();
     }
 
     public function rolePermission(Request $request)
@@ -192,6 +198,7 @@ class UserController extends Controller
         //kemudian di-set kembali agar tidak terjadi duplicate
         $user->syncRoles($request->role);
 
-        return redirect(route('users.index'))->with(['success' => 'Role Sudah Di Set']);
+        alert()->success('Berhasil Update','Role User berhasil diperbarui.');
+        return redirect(route('users.index'));
     }
 }

@@ -81,6 +81,7 @@ class RegisterController extends Controller
 
     public function redirectTo()
     {
+        alert()->success('Akun anda berhasil dibuat.', '')->toToast()->timerProgressBar()->autoClose(3000);
         $this->redirectTo = route('dashboard');
         return $this->redirectTo;
     }

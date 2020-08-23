@@ -11,7 +11,8 @@
     <title>@yield('title')</title>
 
     {{-- Scripts --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,8 +21,8 @@
     <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     {{-- Styles --}}
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
     <link rel="icon" href="{{ asset('img/logo.png')}}" type="image/png" >
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
@@ -36,6 +37,10 @@
             <span class="text-center mt-2">Memuat data . . .</span>
         </div>
     </div>
+
+{{-- Sweet Alert --}}
+    @include('sweetalert::alert')
+{{-- End Sweet Alert --}}
 
 {{-- Content --}}
     @yield('body')

@@ -67,10 +67,10 @@
                         </span>
                     </td>
                     <td class="text-center p-0">
-                        <form action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0">
+                        <form id="formDelete" action="{{ route('role.destroy', $row->id) }}" method="POST" class="m-0">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger btn-sm px-sm-4 m-1"><i class='bx bx-trash bx-xs align-middle'></i></button>
+                            <button class="btn btn-danger btn-sm px-sm-4 m-1 delete" data-role="{{$row->name}}"><i class='bx bx-trash bx-xs align-middle'></i></button>
                         </form>
                     </td>
                     <td></td>
@@ -82,10 +82,30 @@
                 @endforelse
             </tbody>
         </table>
+        <script>
+            $('.delete').on('click', function (e) {
+                e.preventDefault();
+                const role = $('.delete').attr('data-role');
 
-        <div class="float-right">
-            {!! $role->links() !!}
-        </div>
+                Swal.fire({
+                    title: "Hapus Role",
+                    text: "Hapus role \"" + role + "\"?",
+                    icon: 'warning',
+                    iconHtml: '<i class="bx bx-error bx-lg "></i>',
+                    confirmButtonColor: '#e3342f',
+                    showCancelButton: true,
+                    cancelButtonText: 'Kembali',
+                    confirmButtonText: 'Hapus',
+                    focusConfirm: false,
+                    focusCancel: false,
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        document.getElementById("formDelete").submit();
+                    }
+                });
+            });
+        </script>
     </div>
 {{-- End isi konten --}}
 

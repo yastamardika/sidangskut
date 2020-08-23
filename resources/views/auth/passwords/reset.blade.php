@@ -6,10 +6,10 @@
 
 @section('body')
 
-<div class="container">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-lg-6">
+            <div class="card shadow">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
@@ -64,6 +64,9 @@
                     </form>
                 </div>
             </div>
+            <!-- Footer -->
+            <p class="text-center copy-right">Copyright © 2020. Akademik Departemen Teknik Elektro dan Informatika, <br>Sekolah Vokasi, Universitas Gadjah Mada</p>
+            <!-- End Footer -->
         </div>
     </div>
 </div>

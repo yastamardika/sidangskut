@@ -1,7 +1,7 @@
 @component('layouts.template')
 
     @slot('title_page')
-        Sidang Prodi {{ $namaprodi->program_studi }}
+        Penilaian Sidang
     @endslot
     @slot('icon')
         bxs-spreadsheet
@@ -12,7 +12,7 @@
 
 {{-- Isi konten --}}
     <div class="col-md p-0">
-        @role('kaprodi')
+        @role('dosen_penguji')
             @if ($mahasiswa->first() == null)
                 <div class="col p-0 text-center">
                     <img src="{{ asset('img/Illustrations/Status update-pana.svg') }}" class="mx-auto" style="min-height:20vh; height:30vw;" alt="Akun tidak memiliki akses data.">
