@@ -218,8 +218,9 @@ td {
   border-width: 2px;
 }
 
-.show {
-  z-index: 100;
+.input-group > .form-control {
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
 }
 
 .input-group-text {
@@ -230,7 +231,8 @@ td {
   border-bottom-right-radius: 0.15rem !important;
 }
 
-#togglePassword, #toggleConfirmPassword {
+#togglePassword,
+#toggleConfirmPassword {
   cursor: pointer;
   position: absolute;
   height: calc(100% - 4px);
@@ -301,7 +303,7 @@ label {
   padding-top: 0.1rem;
 }
 
-input[type="file" i] {
+input[type=file i] {
   display: none;
 }
 
