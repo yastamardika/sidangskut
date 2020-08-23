@@ -20,8 +20,8 @@
     <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     {{-- Styles --}}
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
     <link rel="icon" href="{{ asset('img/logo.png')}}" type="image/png" >
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
