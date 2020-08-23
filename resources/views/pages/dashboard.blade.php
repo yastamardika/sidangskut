@@ -30,8 +30,17 @@
                         <h4 class="card-title text-uppercase text-truncate mb-1"><b>{{ $mahasiswa->judul_idn }}</b></h4>
                         <h5 class="card-subtitle text-uppercase text-truncate"><i>{{ $mahasiswa->judul_eng }}</i></h5>
                         <p class="text-uppercase m-0 mt-2 mt-md-4">
-                            <label class="badge badge-success px-3 py-2 my-1 m-lg-0 fit-content" style="border: 2px solid white">
-                                Status: {{ $status->find($mahasiswa->id_status)->status }}
+                            <label class="badge @switch($status->find($mahasiswa->id_status)->status)
+                                @case('sidang')
+                                    badge-success
+                                    @break
+                                @case('selesai')
+                                    badge-success
+                                    @break
+                                @default
+                                    badge-warning
+                            @endswitch px-3 py-2 my-1 m-lg-0 fit-content" style="font-size:0.7rem; border: 2px solid white">
+                                {{ $status->find($mahasiswa->id_status)->status }}
                             </label>
                         </p>
                     </div>
