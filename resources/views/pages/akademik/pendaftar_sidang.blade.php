@@ -12,7 +12,7 @@
     
 {{-- Isi konten --}}
 <div class="col-md p-0">
-    @role('akademik')
+    @role('akademik|admin')
         {{-- <h6 class="card-text">Unduh semua data pengajuan: </h6>
         <button type="submit" class="btn btn-outline-dark mb-4"><i class='bx bxs-cloud-download bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Unduh file</span></button> --}}
 
