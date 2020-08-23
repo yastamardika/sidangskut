@@ -13,6 +13,12 @@
 {{-- Isi konten --}}
 <div class="col-md p-0">
     @role('akademik|admin')
+        @if ($mahasiswa->first() == null)
+            <div class="col p-0 text-center">
+                <img src="{{ asset('img/Illustrations/Status update-pana.svg') }}" class="mx-auto" style="min-height:20vh; height:30vw;" alt="Akun tidak memiliki akses data.">
+                <h6><i>Belum ada data pengajuan sidang mahasiswa.</i></h6>
+            </div>
+        @else
         {{-- <h6 class="card-text">Unduh semua data pengajuan: </h6>
         <button type="submit" class="btn btn-outline-dark mb-4"><i class='bx bxs-cloud-download bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Unduh file</span></button> --}}
 
@@ -69,6 +75,7 @@
                 @endforelse
             </tbody>
         </table>
+        @endif
     @else
         @slot('title_page')
             Akses Data Ditolak
