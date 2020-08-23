@@ -70,6 +70,7 @@ class HistoryController extends Controller
 
     public function delete($id){
         $mahasiswa = Mahasiswa::findOrFail($id);
+        unlink("upload/" . $mahasiswa->file_cover_ta);
         $mahasiswa->delete();
         return redirect()->back()->with(['success' => 'Pengajuan oleh: <strong>' . $mahasiswa->nama_mhs . '</strong> Dihapus']);
     }
