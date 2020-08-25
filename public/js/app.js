@@ -54415,7 +54415,7 @@ $(document).ready(function () {
   $("#changeRole").on("change", function () {
     var value = $("input[name=role]:checked").val();
 
-    if (value == 'kaprodi') {
+    if (value == 'kaprodi' || value == 'dosen_penguji') {
       $("#prodi").addClass("d-table-row");
       $("#prodi").removeClass("d-none");
     } else {
@@ -54429,7 +54429,7 @@ window.addEventListener("pageshow", function () {
 
   for (i = 0; i < ele.length; i++) {
     if (ele[i].checked) {
-      if (ele[i].value == 'kaprodi') {
+      if (ele[i].value == 'kaprodi' || ele[i].value == 'dosen_penguji') {
         $("#prodi").addClass("d-table-row");
         $("#prodi").removeClass("d-none");
       } else {
