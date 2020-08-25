@@ -40,12 +40,14 @@
                     <th>Program Studi</th>
                     <td>
                         <select class="form-control" id="inputGroupSelect01" name="prodi" required>
-                            <option>Pilih Program Studi...</option>
+                            <option disabled selected value>Pilih Program Studi...</option>
                             @foreach ($prodi as $rows)
                                 @if ($kaprodi != null)
-                                    <option value="{{ $rows->id }}" {{ $kaprodi->id_prodi == $rows->id ? 'selected' : '' }}>{{ $rows->program_studi }}</option>
+                                    <option value="{{ $rows->id }}" {{ $kaprodi->id_prodi == $rows->id ? 'selected' : '' }}>{{ $rows->prodi_full }}</option>
+                                @elseif ($penguji != null)
+                                <option value="{{ $rows->id }}" {{ $penguji->id_prodi == $rows->id ? 'selected' : '' }}>{{ $rows->prodi_full }}</option>
                                 @else
-                                    <option value="{{ $rows->id }}">{{ $rows->program_studi }}</option>
+                                    <option value="{{ $rows->id }}">{{ $rows->prodi_full }}</option>
                                 @endif
                             @endforeach
                         </select>

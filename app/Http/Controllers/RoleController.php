@@ -35,7 +35,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $role->delete();
 
-        alert()->error('Berhasil','Role ' . $role->name . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
+        alert()->error('Berhasil Dihapus','Role ' . $role->name . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
         return redirect()->back();
     }
 
