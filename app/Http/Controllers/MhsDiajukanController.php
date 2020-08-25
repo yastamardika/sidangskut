@@ -18,36 +18,46 @@ class MhsDiajukanController extends Controller
     function index(){
         $idKaprodi = Auth::user()->id;
         $prodi = Kaprodi::where('id_user', $idKaprodi)->pluck('id_prodi');
-        $namaprodi = Prodi::where('id', $prodi)->first();
-        $mahasiswa = Mahasiswa::where('id_prodi', $prodi[0])->whereBetween('id_status', [2, 3])->get()->sortBy('id_status');
-        $status = Status::all();
 
-        return view('pages.kaprodi.pendaftar_sidang', compact(['namaprodi','mahasiswa','status']));
+        if ($prodi->first() != null) {
+            $namaprodi = Prodi::where('id', $prodi)->first();
+            $mahasiswa = Mahasiswa::where('id_prodi', $prodi[0])->whereBetween('id_status', [2, 3])->get()->sortBy('id_status');
+            $status = Status::all();
+            return view('pages.kaprodi.pendaftar_sidang', compact(['namaprodi','mahasiswa','status']));
+        } else {
+            return view('errors.prodiNotFound');
+        }
     }
 
     function detail($id){
-        $mhs = Mahasiswa::findOrFail($id);
-        $allPenguji = Role::all()->where('name', 'penguji');
-        $prodi = Mahasiswa::findOrFail($id)->where('user_id', $id)->pluck('id_prodi');
-        $penguji = Penguji::all()->where('id_prodi',$prodi);
-        return view('pages.kaprodi.detail_pengajuan', compact(['mhs','penguji']));
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $idProdi = $mahasiswa->id_prodi;
+        $penguji = Penguji::all()->where('id_prodi',$idProdi);
+        // $allPenguji = Penguji::where('id_prodi', $prodi)->get();
+        $user = User::all();
+        $status = Status::all();
+        $prodi = Prodi::all();
+        $sidang = Sidang::where('id_mhs', $mahasiswa->user_id)->first();
+
+        return view('pages.kaprodi.detail_pengajuan', compact(['user','mahasiswa','status','prodi','penguji','sidang']));
     }
 
     function pilihPenguji(Request $request,$id){
 
         $sidang = Sidang::create([
-          'id_mhs'=> $id,
-          'id_penguji1'=> $request->penguji1,
-          'id_penguji2'=> $request->penguji2,
-          'id_pembimbing'=> $request->pembimbing,
-          'tanggal_sidang'=>$request->tanggal,
+          'id_mhs' => Mahasiswa::findOrFail($id)->user_id,
+          'id_penguji1' => $request->penguji1,
+          'id_penguji2' => $request->penguji2,
+          'id_pembimbing' => Mahasiswa::findOrFail($id)->pembimbing,
+          'tanggal_sidang' => $request->tanggal,
+          'waktu' => $request->waktu,
+          'tempat' => $request->tempat,
         ]);
         $sidang->save();
 
-        $mhs=Mahasiswa::findOrFail($id);
-        $mhs->toQuery()->update([
-            'id_status' => 2,
-        ]);
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->id_status = '3';
+        $mahasiswa->save();
 
         return redirect()->back();
     }
