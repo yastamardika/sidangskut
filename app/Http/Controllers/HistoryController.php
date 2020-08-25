@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mahasiswa;
+use App\Penguji;
+use App\Sidang;
 use App\Prodi;
 use App\Status;
 use App\User;
@@ -29,11 +31,14 @@ class HistoryController extends Controller
     }
 
     public function detail($id){
+        $user = User::all();
         $mahasiswa = Mahasiswa::findOrFail($id);
+        $penguji = Penguji::where('id_prodi',$mahasiswa->id_prodi)->get();
+        $sidang = Sidang::where('id_mhs', $mahasiswa->user_id)->first();
         $prodi = Prodi::all();
         $status = Status::all();
 
-        return view('pages.akademik.detail_pengajuan', compact(['mahasiswa','status','prodi']));
+        return view('pages.akademik.detail_pengajuan', compact(['sidang','user','penguji','mahasiswa','status','prodi']));
     }
 
     public function update(Request $request, $id){
@@ -59,7 +64,7 @@ class HistoryController extends Controller
             'id_prodi' => $request->prodi,
             'judul_idn' => $request->judulIDN,
             'judul_eng' => $request->judulENG,
-            'dosbing' => $request->dosbing,
+            'pembimbing' => $request->dosbing,
             'nomerhp' => $request->nomerhp,
             'tgl_acc_dosbing' => $request->tgl_acc,
             'file_cover_ta' => $nama_proposal

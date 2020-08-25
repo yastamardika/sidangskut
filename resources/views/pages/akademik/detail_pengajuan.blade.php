@@ -52,7 +52,7 @@
                             </tr>
                             <tr>
                                 <th>Dosen Pembimbing</th>
-                                <td>{{ $mahasiswa->dosbing }}</td>
+                                <td>{{ $user->find($mahasiswa->pembimbing)->name }}</td>
                             </tr>
                             <tr>
                                 <th>Tgl. Persetujuan Pembimbing</th>
@@ -111,7 +111,12 @@
                                                 
                                 <div class="col-md-6 float-left pr-md-2 p-0">
                                     <label for="password" class="col-form-label">Dosen Pembimbing</label>
-                                    <input class="form-control mb-2 @error('dosbing') is-invalid @enderror" type="text" name="dosbing" value="{{ $mahasiswa->dosbing }}" required>
+                                    <select class="form-control penguji" id="pembimbing" name="pembimbing" required>
+                                        <option disabled selected value>Pilih Dosen Penguji...</option>
+                                        @foreach ($penguji as $rows)
+                                            <option value="{{ $rows->id_user }}" {{ $mahasiswa->pembimbing == $rows->id_user ? 'selected' : '' }}>{{ $user->find($rows->id_user)->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                     
                                 <div class="col-md-6 float-right pl-md-2 p-0">
@@ -251,11 +256,11 @@
                                 <th>Dosen Penguji</th>
                                 <td>
                                     <b>Ketua Penguji</b>
-                                        <p class="mb-1">Nama Ketua Penguji</p>
+                                        <p class="mb-1">{{ $user->find($sidang->id_penguji1)->name }}</p>
                                     <b>Anggota Penguji</b>
-                                        <p class="mb-1">Nama Anggota Penguji</p>
+                                        <p class="mb-1">{{ $user->find($sidang->id_penguji2)->name }}</p>
                                     <b>Dosen Pembimbing</b>
-                                        <p class="mb-0">{{ $mahasiswa->dosbing }}</p>
+                                        <p class="mb-0">{{ $user->find($sidang->id_pembimbing)->name }}</p>
                                 </td>
                             </tr>
                         </table>
@@ -314,7 +319,7 @@
                         </tr>
                         <tr>
                             <th>Dosen Pembimbing</th>
-                            <td>{{ $mahasiswa->dosbing }}</td>
+                            <td>{{ $user->find($mahasiswa->pembimbing)->name }}</td>
                         </tr>
                         <tr>
                             <th>Tgl. Persetujuan Pembimbing</th>
@@ -361,7 +366,12 @@
                                             
                             <div class="col-md-6 float-left pr-md-2 p-0">
                                 <label for="password" class="col-form-label">Dosen Pembimbing</label>
-                                <input class="form-control mb-2 @error('dosbing') is-invalid @enderror" type="text" name="dosbing" value="{{ $mahasiswa->dosbing }}" required>
+                                <select class="form-control" id="pembimbing" name="pembimbing" required>
+                                    <option disabled selected value>Pilih Dosen Penguji...</option>
+                                    @foreach ($penguji as $rows)
+                                        <option value="{{ $rows->id_user }}" {{ $mahasiswa->pembimbing == $rows->id_user ? 'selected' : '' }}>{{ $user->find($rows->id_user)->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                                 
                             <div class="col-md-6 float-right pl-md-2 p-0">
@@ -424,6 +434,51 @@
                 });
             });
         </script>
+
+        @if ($mahasiswa->id_status == '3' || $mahasiswa->id_status == '4')
+        <h6 class="card-text mt-4">Detail sidang mahasiswa:</h6>
+        <div class="d-flow-root">
+            <div class="col-12 col-lg-7 p-0 float-lg-left">
+                <div class="table-responsive">
+                    <table class="table table-borderless m-0 detail-mahasiswa">
+                        <tr>
+                            <th>Jadwal Sidang</th>
+                            <td>
+                                <b>Tanggal</b>
+                                    <p class="mb-1">{{ date("l, d F Y", strtotime($sidang->tanggal_sidang)) }}</p>
+                                <b>Pukul</b>
+                                    <p class="mb-1">{{ date("H:i", strtotime($sidang->waktu)) }} WIB</p>
+                                <b>Tempat</b>
+                                    <p class="mb-0">{{ $sidang->tempat }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Dosen Penguji</th>
+                            <td>
+                                <b>Ketua Penguji</b>
+                                    <p class="mb-1">{{ $user->find($sidang->id_penguji1)->name }}</p>
+                                <b>Anggota Penguji</b>
+                                    <p class="mb-1">{{ $user->find($sidang->id_penguji2)->name }}</p>
+                                <b>Dosen Pembimbing</b>
+                                    <p class="mb-0">{{ $user->find($sidang->id_pembimbing)->name }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5 p-0 mt-3 mt-lg-0 float-lg-right">
+                <div class="text-center mt-1">
+                    <i class="bx bx-file" style="font-size: 4rem !important;"></i>
+                    <p class="my-2">Berkas Berita Acara</p>
+                    <a href="/upload/{{$mahasiswa->file_cover_ta}}" target="_blank" class="text-center btn btn-outline-dark">Lihat File</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 d-inline-flex flex-column-reverse flex-lg-row justify-content-end p-0 mt-4 mx-auto">
+            <button type="submit" class="btn btn-outline-dark m-1"><i class='bx bx-cloud-download bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Unduh Berita Aca</span></button>
+        </div>
+        @endif
     @else
         @slot('title_page')
             Akses Data Ditolak
