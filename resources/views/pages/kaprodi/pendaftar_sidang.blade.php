@@ -46,10 +46,10 @@
                             <td class="text-center p-0">
                                 <a href="{{ route('kaprodi.detailmhs',$row->id)}}" class="btn @switch($status->find($row->id_status)->status)
                                     @case('sidang')
-                                        btn-dark disabled
+                                        btn-dark
                                         @break
                                     @default
-                                        btn-warning
+                                        btn-primary
                                 @endswitch btn-sm px-sm-4 m-1"><i class='bx bx-calendar bx-xs align-middle'></i></a>
                             </td>
                             <td></td>

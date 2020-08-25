@@ -3,7 +3,7 @@
       <li class="d-md-block d-none text-center">
          <img src="{{ asset('img/logo.png') }}" class="mx-auto" style="height:100px" alt="">
       </li>
-   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-4 mt-4 mb-2 text-muted text-bold">
       Beranda
    </h6>
       <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
@@ -19,11 +19,11 @@
          </a>
       </li>
       @role('admin|akademik|kaprodi')
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-4 mt-4 mb-2 text-muted text-bold">
          Data
       </h6>
       @elserole('mahasiswa|dosen_penguji')
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-4 mt-4 mb-2 text-muted text-bold">
          Sidang
       </h6>
       @else
@@ -81,7 +81,7 @@
                   <i class='bx bxs-calendar bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
             </a>
          </li>
-         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-2 text-muted">
+         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-4 mt-4 mb-2 text-muted text-bold">
             Manajemen
          </h6>
          <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">

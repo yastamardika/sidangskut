@@ -57,13 +57,21 @@
                                 btn-primary
                                 @break
                             @case('sidang')
+                            @role('admin')
+                                btn-primary
+                            @else
                                 btn-dark disabled
+                            @endrole
                                 @break
                             @case('selesai')
                                 btn-success
                                 @break
                             @default
+                            @role('admin')
+                                btn-primary
+                            @else
                                 btn-warning
+                            @endrole
                         @endswitch btn-sm px-sm-4 m-1"><i class='bx bx-spreadsheet bx-xs align-middle'></i></a>
                     </td>
                     <td></td>

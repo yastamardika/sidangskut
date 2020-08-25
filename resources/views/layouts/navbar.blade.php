@@ -4,9 +4,7 @@
 
 {{-- Button Navigation Bar - Mobile Ver. --}}
     <nav class="navbar fixed-top d-md-none d-lg-none d-xl-none d-sm-flex navbar-dark navbar-expand-md flex-md-nowrap shadow align-content-center">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
-        </a>
+        <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('img/logo_w.png') }}" alt=""></a>
         <a class="navbar-toggler float-right" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <i class='bx bx-menu'></i>
         </a>
@@ -37,13 +35,13 @@
 
                         <div class="card account-header" style="z-index:1;">
                             <div class="clearfix">
-                                <div class="mx-4 my-auto pb-3 pb-sm-0 fit-content float-left user">
+                                <div class="mx-2 mx-md-3 mx-lg-4 my-auto pb-3 pb-sm-0 fit-content float-left user">
                                     <div class="d-flex flex-row flex-wrap m-0 p-0">
                                         <span>Selamat datang,</span>
                                     </div>
-                                    <h3 class="bold m-0">{{ Auth::user()->name }}</h3>
+                                    <h3 class="bold m-0 mb-sm-2">{{ Auth::user()->name }}</h3>
                                 </div>
-                                <div class="fit-content p-2 text-center align-middle float-right mr-4 logout">
+                                <div class="fit-content p-2 text-center align-middle float-right mr-md-3 mr-lg-4 logout">
                                     <a class="btn logout-btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         Logout
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

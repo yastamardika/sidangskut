@@ -17292,6 +17292,10 @@ body {
   color: #ffffff;
 }
 
+#navbarSupportedContent.show {
+  z-index: 101;
+}
+
 .judul {
   color: #5AA0D0;
   font-size: 1.4rem;
@@ -17418,7 +17422,7 @@ td {
 #toggleConfirmPassword {
   cursor: pointer;
   position: absolute;
-  height: calc(100% - 4px);
+  height: 33px;
   right: 3px;
   top: 2px;
   z-index: 5;
@@ -17438,6 +17442,11 @@ td {
   color: #bababa;
   margin-top: 30px;
   margin-bottom: 0;
+}
+
+.navbar-brand, .navbar-brand img {
+  height: 40px;
+  padding: 3px;
 }
 
 .nav-link {
@@ -17488,6 +17497,14 @@ label {
 
 input[type=file i] {
   display: none;
+}
+
+select.form-control option:disabled {
+  background: #bababa40;
+}
+
+select.form-control option {
+  padding: 3px 5px;
 }
 
 table.dataTable.dtr-column > tbody > tr > td.control:before,
@@ -17628,6 +17645,10 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 }
 
 @media (max-width: 991px) {
+  h3 {
+    font-size: 1.2rem;
+  }
+
   .navbar-body {
     width: 30%;
   }
@@ -17638,6 +17659,14 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 }
 
 @media (max-width: 767px) {
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .account-header {
+    padding: 1rem 1rem;
+  }
+
   .navbar-body {
     min-width: 100%;
   }
@@ -17653,7 +17682,7 @@ table.dataTable > tbody > tr.child ul.dtr-details {
   }
 
   .user {
-    margin-left: 0.5rem !important;
+    margin: 0 0.5rem !important;
     padding-bottom: 1rem;
   }
 

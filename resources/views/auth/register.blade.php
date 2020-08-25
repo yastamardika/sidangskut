@@ -26,7 +26,7 @@
                             <div class="form-group mb-2">
                                 <label for="name" class="col-md col-form-label px-0">Nama Lengkap</label>
                                 <div class="col-md p-0">
-                                    <input id="name" type="text" class="form-control mb-2 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required title="Silahkan isi nama Anda." autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required title="Silahkan isi nama Anda." autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
                             <div class="form-group mb-2">
                                 <label for="email" class="col-md col-form-label px-0">Email UGM</label>
                                 <div class="col-md p-0">
-                                    <input id="email" type="email" class="form-control mb-2 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required title="Silahkan isi dengan Email UGM Anda." autocomplete="email">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required title="Silahkan isi dengan Email UGM Anda." autocomplete="email">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
