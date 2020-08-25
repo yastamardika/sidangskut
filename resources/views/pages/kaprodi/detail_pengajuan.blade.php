@@ -80,7 +80,7 @@
     @else
     <div class="col-12 d-inline-flex flex-column-reverse flex-lg-row justify-content-end p-0 mt-4 mx-auto">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            <i class='bx bx-calendar bx-xs d-inline-flex pr-2 align-middle'></i>Jadwalkan Sidang
+            <i class='bx bx-calendar bx-xs d-inline-flex pr-2 align-middle'style="margin: 0 0 1px"></i>Jadwalkan Sidang
         </button>
     </div>
     <!-- Modal -->

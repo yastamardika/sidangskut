@@ -53,7 +53,7 @@
                                     @break
                                     @default
                                         disabled
-                                @endswitch btn-sm px-sm-4 m-1"><i class='bx bx-calendar bx-xs align-middle'></i></a>
+                                @endswitch btn-sm px-sm-4 m-1"><i class='bx bx-calendar bx-xs align-middle'style="margin: 0 0 1px"></i></a>
                             </td>
                             <td></td>
                         </tr>

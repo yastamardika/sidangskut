@@ -78,7 +78,7 @@
          <li class="nav-item">
             <a class="nav-link" href="{{ url('/dashboard') }}">
                   Jadwal Sidang
-                  <i class='bx bxs-calendar bx-xs bx-pull-right' style="margin-top: 0.2rem"></i>
+                  <i class='bx bxs-calendar bx-xs bx-pull-right' style="margin: 0 0 1px"></i>
             </a>
          </li>
          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-4 mt-4 mb-2 text-muted text-bold">

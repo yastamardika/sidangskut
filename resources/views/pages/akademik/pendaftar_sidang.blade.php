@@ -19,8 +19,8 @@
                 <h6><i>Belum ada data pengajuan sidang mahasiswa.</i></h6>
             </div>
         @else
-        {{-- <h6 class="card-text">Unduh semua data pengajuan: </h6>
-        <button type="submit" class="btn btn-outline-dark mb-4"><i class='bx bxs-cloud-download bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Unduh file</span></button> --}}
+        <h6 class="card-text">Unduh semua data pengajuan: </h6>
+        <a href="{{ route('akademik.mahasiswa.unduh') }}" class="btn btn-outline-dark mb-4"><i class='bx bxs-cloud-download bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Unduh file</span></a>
 
         <table id="table" class="table table-hover table-bordered dt-responsive p-0" style="width:100%">
             <thead>
