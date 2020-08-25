@@ -182,6 +182,8 @@ return [
          * SweetAlert Providers...
          */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        // Export to Excel Provider
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -234,7 +236,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

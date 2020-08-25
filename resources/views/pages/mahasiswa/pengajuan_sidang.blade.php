@@ -17,7 +17,7 @@
         <p class="mb-4 text-center">Departemen Teknik Elektro dan Informatika</p>
         
         <form id="ajukanSidang" method="post" action="{{route('upload')}}" enctype="multipart/form-data">
-            {{csrf_field()}}
+            @csrf
 
             <div class="col p-0">
                 <h5 class="bold">Identitas Mahasiswa</h5>
@@ -61,21 +61,21 @@
                         <select class="form-control penguji" id="pembimbing" name="pembimbing" required>
                             <option disabled selected value>Pilih Dosen Penguji...</option>
                             @foreach ($penguji as $rows)
-                                <option class="dosen d-none" data-prodi="{{ $rows->id_prodi }}" value="{{ $rows->id_user }}">{{ $user->find($rows->id_user)->name }}</option>
+                                <option class="d{{ $rows->id_prodi }} d-none" value="{{ $rows->id_user }}">{{ $user->find($rows->id_user)->name }}</option>
                             @endforeach
                             <script type="text/javascript">
                                 $("#programStudi").on("change", function () {
-                                    const dosen = $('.dosen').attr('data-prodi');
-                                    const prodi = document.getElementById("programStudi");
-                                    const x = document.getElementById("pembimbing");
-                                    const id = prodi.options[prodi.selectedIndex].value;
+                                    var prodi = document.getElementById("programStudi");
+                                    var id = prodi.options[prodi.selectedIndex].value;
 
-                                    if (dosen == id) {
-                                        $(".dosen").addClass("d-block");
-                                        $(".dosen").removeClass("d-none");
-                                    } else {
-                                        $(".dosen").addClass("d-none");
-                                        $(".dosen").removeClass("d-block");
+                                    for (var i=1; i<=id+1; i++) {
+                                        if (i == id) {
+                                            $(".d" + i).addClass("d-block");
+                                            $(".d" + i).removeClass("d-none");
+                                        } else {
+                                            $(".d" + i).addClass("d-none");
+                                            $(".d" + i).removeClass("d-block");
+                                        }
                                     }
                                 });
                             </script>

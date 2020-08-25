@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PengujiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     //route group untuk petugas akademik
     Route::group(['middleware' => ['role:akademik|admin']], function () {
         Route::get('/dashboard/pendaftar-sidang', 'HistoryController@index')->name('akademik.mahasiswa');
+        Route::get('/dashboard/pendaftar-sidang/unduh', 'HistoryController@exportMahasiswa')->name('akademik.mahasiswa.unduh');
         Route::get('/dashboard/pendaftar-sidang/{id}', 'HistoryController@detail')->name('akademik.detailmhs');
         Route::post('/dashboard/akademik/{id}', 'HistoryController@ajukan')->name('akademik.ajukan');
         Route::post('/dashboard/akademik/{id}/cancel', 'HistoryController@cancel')->name('akademik.cancel');
@@ -93,5 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['role:dosen_penguji']], function () {
         Route::get('/penguji/dashboard/mahasiswa-sidang', 'MhsDiujiController@index')->name('penguji');
         Route::get('/penguji/dashboard/mahasiswa-sidang/{id}', 'MhsDiujiController@detail')->name('penguji.detailmhs');
+        Route::get('/prodi-penguji', 'PengujiController@index')->name('penguji.daftarprodi');
+        Route::post('/prodi-penguji/tambah-prodi', 'PengujiController@pilihProdi')->name('penguji.pilihprodi');
+        Route::post('/prodi-penguji/ganti-prodi', 'PengujiController@gantiProdi')->name('penguji.gantiprodi');
     });
 });

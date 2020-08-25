@@ -37,7 +37,7 @@ class SidangRegController extends Controller
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
         $penguji = Penguji::all();
         $prodi = Prodi::all();
-        $sidang = Sidang::where('id_mhs', $mahasiswa->user_id)->first();
+        $sidang = Sidang::where('id_mhs', Auth::user()->id)->first();
         $status = Status::all();
 
         if( $mahasiswa == null ){

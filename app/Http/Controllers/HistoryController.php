@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SiswaExport;
 use Illuminate\Http\Request;
 use App\Mahasiswa;
 use App\Penguji;
@@ -9,6 +10,7 @@ use App\Sidang;
 use App\Prodi;
 use App\Status;
 use App\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HistoryController extends Controller
 {
@@ -28,6 +30,10 @@ class HistoryController extends Controller
         $prodi = Prodi::all();
 
         return view('pages.akademik.pendaftar_sidang', compact(['mahasiswa','status','prodi']));
+    }
+
+    public function exportMahasiswa(){
+        return Excel::download(new SiswaExport, 'data_sidang.xlsx');
     }
 
     public function detail($id){
@@ -64,7 +70,7 @@ class HistoryController extends Controller
             'id_prodi' => $request->prodi,
             'judul_idn' => $request->judulIDN,
             'judul_eng' => $request->judulENG,
-            'pembimbing' => $request->dosbing,
+            'pembimbing' => $request->pembimbing,
             'nomerhp' => $request->nomerhp,
             'tgl_acc_dosbing' => $request->tgl_acc,
             'file_cover_ta' => $nama_proposal
