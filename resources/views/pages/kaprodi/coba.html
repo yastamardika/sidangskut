@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <select id="mySelect" onchange="myFunction()" name="prodi" required>
+      <option disabled selected value>Pilih Dosen Penguji...</option>
+      <option value="1">Value 1</option>
+      <option value="2">Value 2</option>
+      <option value="3">Value 3</option>
+  </select>
+   <select id="mySelect2" onchange="myFunction()" name="prodi" required>
+      <option disabled selected value>Pilih Dosen Penguji...</option>
+      <option value="1">Value 1</option>
+      <option value="2">Value 2</option>
+      <option value="3">Value 3</option>
+  </select>
+  <p id="demo"></p>
+  <p id="demo2"></p>
+  <script>
+      function myFunction() {
+         var x = document.getElementById("mySelect");
+         var y = document.getElementById("mySelect2");
+         var id = x.options[x.selectedIndex].value;
+         var id2 = y.options[y.selectedIndex].value;
+
+         for (var i = 1; i < y.length; i++) {
+            (y[i].value == id) ? y[i].disabled = true : y[i].disabled = false ;
+         }
+         for (var i = 1; i < x.length; i++) {
+            (x[i].value == id2) ? x[i].disabled = true : x[i].disabled = false ;
+         }
+
+         document.getElementById("demo").innerHTML = id ;
+         document.getElementById("demo2").innerHTML = id2 ;
+      }
+  </script>
+</body>
+</html>
