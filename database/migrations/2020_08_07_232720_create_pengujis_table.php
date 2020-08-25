@@ -15,8 +15,9 @@ class CreatePengujisTable extends Migration
     {
         Schema::create('pengujis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('id_user');
-            $table->unsignedInteger('id_prodi');
+            $table->bigInteger('id_prodi')->unsigned();
+            $table->bigInteger('id_user')->unsigned();
+            $table->timestamps();
         });
     }
 
