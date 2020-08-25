@@ -35,13 +35,13 @@ class SidangRegController extends Controller
 
         $user = User::all();
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
-        $penguji = Penguji::all();
+        $pembimbing = User::role('dosen_penguji')->get();
         $prodi = Prodi::all();
         $sidang = Sidang::where('id_mhs', Auth::user()->id)->first();
         $status = Status::all();
 
         if( $mahasiswa == null ){
-            return view('pages.mahasiswa.pengajuan_sidang', compact('user','penguji','prodi'));
+            return view('pages.mahasiswa.pengajuan_sidang', compact('user','pembimbing','prodi'));
         } else {
             return view('pages.mahasiswa.history_pengajuan', compact(['sidang','user','prodi','mahasiswa','status']));
         }

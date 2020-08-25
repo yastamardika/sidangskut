@@ -9,13 +9,13 @@
     @slot('link_breadcrumb')
         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li> --}}
     @endslot
-    
+
 {{-- Isi konten --}}
 <div class="col-md p-0">
     @role('mahasiswa')
         <h4 class="my-1 bold text-center">FORMULIR PENGAJUAN SIDANG TUGAS AKHIR</h4>
         <p class="mb-4 text-center">Departemen Teknik Elektro dan Informatika</p>
-        
+
         <form id="ajukanSidang" method="post" action="{{route('upload')}}" enctype="multipart/form-data">
             @csrf
 
@@ -26,7 +26,7 @@
                     <input class="form-control mb-2 @error('nim') is-invalid @enderror" type="text" name="nim" placeholder="Contoh: 16/123456/SV/09876" value="{{ old('nim') }}" required>
                 </div>
 
-                <div class="clearfix">                                
+                <div class="clearfix">
                     <div class="col-md-6 float-left p-0 pr-md-2">
                         <label class="col-form-label">Program Studi</label>
                         <select class="form-control mb-2" id="programStudi" name="prodi" value="{{ old('prodi') }}" required>
@@ -55,15 +55,16 @@
                     <input class="form-control mb-2 @error('judulENG') is-invalid @enderror" type="text" name="judulENG" value="{{ old('judulENG') }}" required>
                 </div>
 
-                <div class="clearfix">                                
+                <div class="clearfix">
                     <div class="col-md-6 float-left p-0 pr-md-2">
                         <label class="col-form-label">Dosen Pembimbing</label>
                         <select class="form-control penguji" id="pembimbing" name="pembimbing" required>
                             <option disabled selected value>Pilih Dosen Penguji...</option>
-                            @foreach ($penguji as $rows)
-                                <option class="d{{ $rows->id_prodi }} d-none" value="{{ $rows->id_user }}">{{ $user->find($rows->id_user)->name }}</option>
+                            @foreach ($pembimbing as $rows)
+                                {{-- <option class="d" value="{{ $rows->id_user }}">{{ $user->find($rows->id_user)->name }}</option> --}}
+                                <option class="d" value="{{ $rows->id }}">{{ $rows->name }}</option>
                             @endforeach
-                            <script type="text/javascript">
+                            {{-- <script type="text/javascript">
                                 $("#programStudi").on("change", function () {
                                     var prodi = document.getElementById("programStudi");
                                     var id = prodi.options[prodi.selectedIndex].value;
@@ -78,7 +79,7 @@
                                         }
                                     }
                                 });
-                            </script>
+                            </script> --}}
                         </select>
                     </div>
 
@@ -87,7 +88,7 @@
                         <input class="form-control mb-2 @error('tgl_acc') is-invalid @enderror" type="date" name="tgl_acc" value="{{ old('tgl_acc') }}" required>
                     </div>
                 </div>
-                
+
                 <div>
                     <label class="col-form-label">Cover Laporan Tugas Akhir</label>
                     <label for="form-file" class="custom-file-upload mb-1 btn btn-dark d-flex fit-content"><i class='bx bx-upload pr-2 bx-xs'></i>Upload file</label>
@@ -122,7 +123,7 @@
         <script>
             $('.simpan').on('click', function (e) {
                 e.preventDefault();
-    
+
                 Swal.fire({
                     title: "Peringatan",
                     text: "Anda hanya dapat mengajukan sidang 1 kali. Pastikan data yang Anda masukkan benar. Lanjutkan pengajuan?",
