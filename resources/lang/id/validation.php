@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'accepted' => 'Anda harus menerima :attribute ini.',
+    'accepted' => 'Anda harus menerima :attribute yang ada.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
     'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
@@ -95,7 +95,7 @@ return [
     'numeric' => ':Attribute harus berupa angka.',
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
-    'regex' => 'The :attribute format is invalid.',
+    'regex' => ':Attribute format is invalid.',
     'required' => ':Attribute wajib diisi.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
@@ -147,9 +147,12 @@ return [
     */
 
     'attributes' => [
-        'judulID' => 'judul',
-        'judulENG' => 'judul',
-        'dosbing' => 'nama dosen',
+        'nim' => 'NIM',
+        'judulIDN' => 'judul TA (Indonesia)',
+        'judulENG' => 'judul TA (English)',
+        'pembimbing' => 'nama dosen',
+        'prodi' => 'program studi',
+        'nomerhp' => 'Nomor Tlp.',
         'tgl_acc' => 'tanggal',
         'terms' => 'ketentuan',
         '1000' => '1MB',
