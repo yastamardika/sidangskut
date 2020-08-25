@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Mahasiswa;
 use App\Prodi;
 use App\Status;
+use App\Penguji;
+use App\Sidang;
 use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -31,14 +33,17 @@ class SidangRegController extends Controller
         // }
         // $mhs = Mahasiswa::all();
 
+        $user = User::all();
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->id)->first();
+        $penguji = Penguji::all();
         $prodi = Prodi::all();
+        $sidang = Sidang::where('id_mhs', $mahasiswa->user_id)->first();
         $status = Status::all();
 
         if( $mahasiswa == null ){
-            return view('pages.mahasiswa.pengajuan_sidang', compact('prodi'));
+            return view('pages.mahasiswa.pengajuan_sidang', compact('user','penguji','prodi'));
         } else {
-            return view('pages.mahasiswa.history_pengajuan', compact(['prodi','mahasiswa','status']));
+            return view('pages.mahasiswa.history_pengajuan', compact(['sidang','user','prodi','mahasiswa','status']));
         }
     }
 
@@ -54,10 +59,10 @@ class SidangRegController extends Controller
             'nomerhp' => ['required','numeric'],
             'judulIDN' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
             'judulENG' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
-            'dosbing' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
+            'pembimbing' => 'required',
             'tgl_acc' => 'required',
             'file' => ['required','mimes:pdf','max:1000'],
-            'terms' => 'accepted'
+            'syarat' => 'accepted'
         ]
         );
 
@@ -98,7 +103,7 @@ class SidangRegController extends Controller
                 'id_prodi' => $req->prodi,
                 'judul_idn' => $req->judulIDN,
                 'judul_eng' => $req->judulENG,
-                'dosbing' => $req->dosbing,
+                'pembimbing' => $req->pembimbing,
                 'nomerhp' => $req->nomerhp,
                 'tgl_acc_dosbing' => $req->tgl_acc,
                 'file_cover_ta' => $nama_proposal,

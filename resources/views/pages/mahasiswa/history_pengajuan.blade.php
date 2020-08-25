@@ -39,11 +39,11 @@
                             </tr>
                             <tr>
                                 <th>Dosen Pembimbing</th>
-                                <td>{{ $mahasiswa->dosbing }}</td>
+                                <td>{{ $user->find($mahasiswa->pembimbing)->name }}</td>
                             </tr>
                             <tr>
-                                <th>Tgl. Pengajuan</th>
-                                <td>{{ date("l, d F Y", strtotime($mahasiswa->created_at)) }}</td>
+                                <th>Tgl. Persetujuan Pembimbing</th>
+                                <td>{{ date("l, d F Y", strtotime($mahasiswa->tgl_acc_dosbing)) }}</td>
                             </tr>
                         </table>
                     </div>
@@ -56,7 +56,8 @@
                     </div>
                 </div>
             </div>
-            
+
+            @if ($mahasiswa->id_status == '3' || $mahasiswa->id_status == '4')    
             <h6 class="card-text mt-4">Jadwal Sidang:</h6>
             <div class="d-flow-root">
                 <div class="col-12 col-lg-7 p-0 float-lg-left">
@@ -64,15 +65,15 @@
                         <table class="table table-borderless m-0 detail-mahasiswa">
                             <tr>
                                 <th>Hari/Tanggal</th>
-                                <td class="text-capitalize"><b>Monday, 21 March 2021</b></td>
+                                <td class="text-capitalize"><b>{{ date("l, d F Y", strtotime($sidang->tanggal_sidang)) }}</b></td>
                             </tr>
                             <tr>
                                 <th>Waktu</th>
-                                <td>09.00 - 10.00 WIB</td>
+                                <td>{{ date("H:i", strtotime($sidang->waktu)) }} WIB</td>
                             </tr>
                             <tr>
                                 <th>Tempat</th>
-                                <td>Via CISCO Webex</td>
+                                <td>{{ $sidang->tempat }}</td>
                             </tr>
                         </table>
                     </div>
@@ -86,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             
     @else
         @slot('title_page')

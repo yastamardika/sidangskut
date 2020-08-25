@@ -29,10 +29,10 @@
                 <div class="clearfix">                                
                     <div class="col-md-6 float-left p-0 pr-md-2">
                         <label class="col-form-label">Program Studi</label>
-                        <select class="form-control mb-2" id="inputGroupSelect01" name="prodi" value="{{ old('prodi') }}" required>
-                            <option selected>Pilih Program Studi...</option>
+                        <select class="form-control mb-2" id="programStudi" name="prodi" value="{{ old('prodi') }}" required>
+                            <option disabled selected value>Pilih Program Studi...</option>
                             @foreach ($prodi as $rows)
-                            <option value="{{ $rows->id }}">{{ $rows->program_studi }}</option>
+                            <option value="{{ $rows->id }}">{{ $rows->prodi_full }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -58,7 +58,28 @@
                 <div class="clearfix">                                
                     <div class="col-md-6 float-left p-0 pr-md-2">
                         <label class="col-form-label">Dosen Pembimbing</label>
-                        <input class="form-control mb-2 @error('dosbing') is-invalid @enderror" type="text" name="dosbing" value="{{ old('dosbing') }}" required>
+                        <select class="form-control penguji" id="pembimbing" name="pembimbing" required>
+                            <option disabled selected value>Pilih Dosen Penguji...</option>
+                            @foreach ($penguji as $rows)
+                                <option class="dosen d-none" data-prodi="{{ $rows->id_prodi }}" value="{{ $rows->id_user }}">{{ $user->find($rows->id_user)->name }}</option>
+                            @endforeach
+                            <script type="text/javascript">
+                                $("#programStudi").on("change", function () {
+                                    const dosen = $('.dosen').attr('data-prodi');
+                                    const prodi = document.getElementById("programStudi");
+                                    const x = document.getElementById("pembimbing");
+                                    const id = prodi.options[prodi.selectedIndex].value;
+
+                                    if (dosen == id) {
+                                        $(".dosen").addClass("d-block");
+                                        $(".dosen").removeClass("d-none");
+                                    } else {
+                                        $(".dosen").addClass("d-none");
+                                        $(".dosen").removeClass("d-block");
+                                    }
+                                });
+                            </script>
+                        </select>
                     </div>
 
                     <div class="col-md-6 float-right p-0 pl-md-2">
@@ -71,7 +92,7 @@
                     <label class="col-form-label">Cover Laporan Tugas Akhir</label>
                     <label for="form-file" class="custom-file-upload mb-1 btn btn-dark d-flex fit-content"><i class='bx bx-upload pr-2 bx-xs'></i>Upload file</label>
                     <span id="nameFiles" class="d-inline-block text-truncate align-middle" style="min-width: 175px; max-width: 20vw"></span>
-                    <input id="form-file" type="file" class="mb-3 @error('file') is-invalid @enderror" name="file" onchange="NameFile()" value="{{ old('file') }}" required>
+                    <input id="form-file" type="file" class="mb-3 @error('file') is-invalid @enderror" name="file" onchange="NameFile()" required>
                     {{-- @error('file')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror --}}
@@ -79,9 +100,22 @@
             </div>
 
             <div class="form-check d-inline-flex p-0 mt-2">
-                <input type="checkbox" name="terms" class="mr-2 mt-1">
+                <input type="checkbox" name="syarat" class="mr-2 mt-1 @error('syarat') is-invalid @enderror">
                 <label>Saya telah mengisi data dengan benar.</label>
             </div>
+
+            @if ($errors->all())
+                <div class="alert alert-danger my-3 p-3 d-flex">
+                    <span><i class='bx bxs-error bx-xs align-middle'></i></span>
+                    <div class="m-0 pl-3">
+                        <ul class="m-0 pl-2">
+                            @foreach ($errors->all() as $error)
+                            <li><span>{{ $error }}</span></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
 
             <button type="submit" name="button" class="btn btn-primary d-flex mx-auto justify-content-center mt-4 simpan">Mengajukan</button>
         </form>
