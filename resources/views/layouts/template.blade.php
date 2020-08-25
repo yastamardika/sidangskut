@@ -39,7 +39,7 @@
    @endif
 
    {{ $slot }}
-   
+
    {{-- End Body-content --}}
 </div>
 {{-- End Isi Body --}}
