@@ -21,6 +21,9 @@ class CreateSidangsTable extends Migration
             $table->unsignedInteger('id_pembimbing')->nullable();
             $table->unsignedInteger('id_penilaian')->nullable();
             $table->date('tanggal_sidang')->nullable();
+            $table->time('waktu')->nullable();
+            $table->string('tempat')->nullable();
+            $table->timestamps();
         });
     }
 
