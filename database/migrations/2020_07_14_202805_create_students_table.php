@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration
             $table->bigInteger('id_prodi')->unsigned();
             $table->string('judul_idn');
             $table->string('judul_eng');
-            $table->bigInteger('pembimbing');
+            $table->bigInteger('pembimbing')->unsigned();
             $table->string('nomerhp');
             $table->date('tgl_acc_dosbing');
             $table->bigInteger('id_status')->unsigned()->default('1');
