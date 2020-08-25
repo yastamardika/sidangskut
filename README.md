@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Newest Progress of Sidasi (sistem informasi daftar sidang)
-=======
 # Sidasi
 
 ## How to Use
@@ -14,7 +11,6 @@
 7. Run php artisan migrate --seed
 8. Run php artisan serve
 9. Ready to go
->>>>>>> development
 
 ---
 
