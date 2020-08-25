@@ -10,6 +10,7 @@ use App\User;
 use App\Prodi;
 use App\Mahasiswa;
 use App\Kaprodi;
+use App\Penguji;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:100',
-            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => 'required|string|min:8',
             'role' => 'required|string|exists:roles,name'
         ]);
@@ -60,7 +61,7 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required|string|max:100',
-            'email' => ['required', 'string', 'email', 'max:255', 'regex:/.+ugm.ac.id+$/', 'unique:users,email,' . $user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
@@ -93,7 +94,7 @@ class UserController extends Controller
         }
         $user->delete();
 
-        alert()->error('Berhasil','User ' . $user->name . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
+        alert()->error('Berhasil Dihapus','User ' . $user->name . ' berhasil dihapus.')->iconHtml('<i class="bx bx-trash bx-lg "></i>');
         return redirect()->back();
     }
 
@@ -154,8 +155,9 @@ class UserController extends Controller
         $roles = Role::all()->pluck('name');
         $prodi = Prodi::all();
         $kaprodi = Kaprodi::where('id_user', $id)->first();
+        $penguji = Penguji::where('id_user', $id)->first();
 
-        return view('pages.admin.users.roles', compact('user', 'roles', 'prodi', 'kaprodi'));
+        return view('pages.admin.users.roles', compact('user', 'roles', 'prodi', 'kaprodi', 'penguji'));
     }
 
     public function setRole(Request $request, $id)
@@ -166,6 +168,7 @@ class UserController extends Controller
         ]);
         $user = User::findOrFail($id);
         $kaprodiExists = Kaprodi::where('id_user', $id)->first();
+        $pengujiExists = Penguji::where('id_user', $id)->first();
 
         if ($kaprodiExists == null && $request->role == 'kaprodi') {
             $kaprodi = Kaprodi::create([
@@ -183,14 +186,35 @@ class UserController extends Controller
                     'id_prodi' => $request->prodi,
                     'id_user' => $id
                 ]);
+                $kaprodi->save();
+            }
+        } else if ($pengujiExists == null && $request->role == 'dosen_penguji') {
+            $penguji = Penguji::create([
+                'id_prodi' => $request->prodi,
+                'id_user' => $id
+            ]);
+            $penguji->save();
+        } else if ($request->role == 'dosen_penguji') {
+            if ($pengujiExists != null) {
+                $penguji = Penguji::where('id_user', $id)->first();
+                $penguji->id_prodi = $request->prodi;
+                $penguji->save();
+            } else {
+                $penguji = Penguji::create([
+                    'id_prodi' => $request->prodi,
+                    'id_user' => $id
+                ]);
+                $penguji->save();
             }
         }
 
         if ($user->hasAnyRole('kaprodi') == true && $request->role != 'kaprodi') {
-            $kaprodiExists = Kaprodi::where('id_user', $id)->first();
-
             if ($kaprodiExists) {
                 $kaprodiExists->delete();
+            }
+        } else if ($user->hasAnyRole('dosen_penguji') == true && $request->role != 'dosen_penguji') {
+            if ($pengujiExists) {
+                $pengujiExists->delete();
             }
         }
 
