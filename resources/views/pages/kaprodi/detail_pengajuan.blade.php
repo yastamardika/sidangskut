@@ -96,7 +96,7 @@
                         <select class="form-control penguji" id="ketuaPenguji" data-pembimbing="{{ $mahasiswa->pembimbing }}" name="penguji1" required>
                             <option disabled selected value>Pilih Dosen Penguji...</option>
                             @foreach ($penguji as $rows)
-                                <option value="{{ $rows->id_user }}">{{ $user->find($rows->id_user)->name }}</option>
+                                <option value="{{ $rows->id }}">{{ $user->find($rows->id)->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -105,18 +105,18 @@
                         <select class="form-control penguji" id="anggotaPenguji" name="penguji2" required>
                             <option disabled selected value>Pilih Dosen Penguji...</option>
                             @foreach ($penguji as $rows)
-                                <option value="{{ $rows->id_user }}">{{ $user->find($rows->id_user)->name }}</option>
+                                <option value="{{ $rows->id }}">{{ $user->find($rows->id)->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <h5 class="bold mt-4">Jadwal Sidang</h5>
                     <div class="form-group mt-1">
-                                        
+
                         <div class="col-md-6 float-left pr-md-2 p-0">
                             <label for="password" class="col-form-label">Tanggal Sidang</label>
                             <input class="form-control mb-1 @error('tanggal') is-invalid @enderror" type="date" name="tanggal" required>
                         </div>
-                            
+
                         <div class="col-md-6 float-right pl-md-2 p-0">
                             <label for="password-confirm" class="col-form-label">Waktu</label>
                             <input class="form-control mb-1 @error('waktu') is-invalid @enderror" type="time" name="waktu" required>
@@ -143,7 +143,7 @@
             var y = document.getElementById("anggotaPenguji");
             var id = x.options[x.selectedIndex].value;
             var id2 = y.options[y.selectedIndex].value;
-            
+
             for (var i = 1; i < x.length; i++) {
                 if (x.options[i].value == idPembimbing) {
                     x[i].disabled = true ;

@@ -32,7 +32,7 @@ class MhsDiajukanController extends Controller
     function detail($id){
         $mahasiswa = Mahasiswa::findOrFail($id);
         $idProdi = $mahasiswa->id_prodi;
-        $penguji = Penguji::all()->where('id_prodi',$idProdi);
+        $penguji = User::role('dosen_penguji')->get();
         // $allPenguji = Penguji::where('id_prodi', $prodi)->get();
         $user = User::all();
         $status = Status::all();

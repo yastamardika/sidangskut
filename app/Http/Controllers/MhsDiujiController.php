@@ -16,17 +16,22 @@ class MhsDiujiController extends Controller
 {
     function index(){
         $idPenguji = Auth::user()->id;
-        $prodi = Penguji::where('id_user', $idPenguji)->pluck('id_prodi');
-
-        if ($prodi->first() != null) {
-            $mahasiswa = Mahasiswa::where('id_prodi', $prodi[0])->whereBetween('id_status', [3, 4])->get();
-            $status = Status::all();
-            $user = User::all();
-            $sidang = Sidang::where('id_penguji1', $idPenguji)->orWhere('id_penguji2', $idPenguji)->orWhere('id_pembimbing', $idPenguji)->get()->sortBy('tanggal_sidang');
-            return view('pages.penguji.mahasiswa_sidang', compact(['mahasiswa','status','user','sidang']));
-        } else {
-            return view('errors.prodiNotFound');
-        }
+        // $prodi = Penguji::where('id_user', $idPenguji)->pluck('id_prodi');
+        $prodi = Penguji::all();
+        $mahasiswa = Mahasiswa::whereBetween('id_status', [3, 4])->get();
+        $status = Status::all();
+        $user = User::all();
+        $sidang = Sidang::where('id_penguji1', $idPenguji)->orWhere('id_penguji2', $idPenguji)->orWhere('id_pembimbing', $idPenguji)->get()->sortBy('tanggal_sidang');
+        return view('pages.penguji.mahasiswa_sidang', compact(['mahasiswa','status','user','sidang']));
+        // if ($prodi->first() != null) {
+        //     $mahasiswa = Mahasiswa::whereBetween('id_status', [3, 4])->get();
+        //     $status = Status::all();
+        //     $user = User::all();
+        //     $sidang = Sidang::where('id_penguji1', $idPenguji)->orWhere('id_penguji2', $idPenguji)->orWhere('id_pembimbing', $idPenguji)->get()->sortBy('tanggal_sidang');
+        //     return view('pages.penguji.mahasiswa_sidang', compact(['mahasiswa','status','user','sidang']));
+        // } else {
+        //     return view('errors.prodiNotFound');
+        // }
     }
 
     function detail($id){
