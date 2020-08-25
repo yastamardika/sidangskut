@@ -105,13 +105,8 @@ class SidangRegController extends Controller
                 'id_status' => '1',
             ]);
 
-            $notification = array(
-                'title' => 'PROSES PENGAJUAN',
-                'message' => 'Data berhasil disimpan dan sedang diajukan!',
-                'alert-type' => 'success'
-            );
-
-            return Redirect::to('/pengajuan')->with($notification);
+            alert()->success('Berhasil Diajukan','Data berhasil disimpan dan sedang diajukan.');
+            return Redirect::to('/pengajuan');
 
             // $upload->judul = $req->judul;
             // $upload->jumlah = $req->jumlah;

@@ -58,9 +58,29 @@
         </div>
         <div class="col-12 d-inline-flex flex-column-reverse flex-lg-row justify-content-end p-0 mt-4 mx-auto">
             <a href="{{ route('users.index') }}" class="btn m-1"><span class="align-middle">Batal</span></a>
-            <button type="submit" class="btn btn-primary m-1"><i class='bx bx-save bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Simpan</span></button>
+            <button type="submit" class="btn btn-primary m-1 simpan"><i class='bx bx-save bx-xs d-inline-flex pr-2 align-middle'></i><span class="align-middle">Simpan</span></button>
         </div>
     </form>
+    <script>
+        $('.simpan').on('click', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: "Perbarui Data",
+                text: "Perbarui Role untuk data User ini?",
+                icon: 'warning',
+                iconHtml: '<i class="bx bx-error bx-lg "></i>',
+                showCancelButton: true,
+                cancelButtonText: 'Kembali',
+                confirmButtonText: 'Perbarui',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById("changeRole").submit();
+                }
+            });
+        });
+    </script>
 </div>
 <!-- End isi konten -->
 

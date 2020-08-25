@@ -65,11 +65,13 @@ Route::group(['middleware' => 'auth'], function () {
     // });
 
     //route group untuk petugas akademik
-    Route::group(['middleware' => ['role:akademik']], function () {
+    Route::group(['middleware' => ['role:akademik|admin']], function () {
         Route::get('/dashboard/pendaftar-sidang', 'HistoryController@index')->name('akademik.mahasiswa');
         Route::get('/dashboard/pendaftar-sidang/{id}', 'HistoryController@detail')->name('akademik.detailmhs');
         Route::post('/dashboard/akademik/{id}', 'HistoryController@ajukan')->name('akademik.ajukan');
         Route::post('/dashboard/akademik/{id}/cancel', 'HistoryController@cancel')->name('akademik.cancel');
+        Route::post('/dashboard/pendaftar-sidang/{id}/delete', 'HistoryController@delete')->name('akademik.delete');
+        Route::put('/dashboard/pendaftar-sidang/{id}/edit', 'HistoryController@update')->name('akademik.updates');
     });
     //route yang berada dalam group ini, hanya bisa diakses oleh user
     //yang memiliki permission yang telah disebutkan dibawah

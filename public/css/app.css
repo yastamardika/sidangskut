@@ -17401,8 +17401,9 @@ td {
   border-width: 2px;
 }
 
-.show {
-  z-index: 100;
+.input-group > .form-control {
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
 }
 
 .input-group-text {
@@ -17413,7 +17414,8 @@ td {
   border-bottom-right-radius: 0.15rem !important;
 }
 
-#togglePassword, #toggleConfirmPassword {
+#togglePassword,
+#toggleConfirmPassword {
   cursor: pointer;
   position: absolute;
   height: calc(100% - 4px);
@@ -17484,7 +17486,7 @@ label {
   padding-top: 0.1rem;
 }
 
-input[type="file" i] {
+input[type=file i] {
   display: none;
 }
 
@@ -17598,6 +17600,31 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 
 .d-flow-root {
   display: flow-root;
+}
+
+.swal2-popup.swal2-toast {
+  box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1) !important;
+}
+
+#swal2-title {
+  font-size: 1rem !important;
+}
+
+.swal2-content,
+.swal2-footer {
+  font-size: 0.8rem !important;
+}
+
+.swal2-cancel {
+  background: none !important;
+  color: #454545 !important;
+  padding: 0.375rem 1.5rem !important;
+  font-size: 0.8rem !important;
+}
+
+.swal2-confirm {
+  padding: 0.375rem 1.5rem !important;
+  font-size: 0.8rem !important;
 }
 
 @media (max-width: 991px) {
