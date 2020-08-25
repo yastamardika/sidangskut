@@ -90,7 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     //route group untuk penguji
-    Route::group(['middleware' => ['role:penguji']], function () {
-        Route::get('/penguji', 'MhsDiujiController@index')->name('penguji');
+    Route::group(['middleware' => ['role:dosen_penguji']], function () {
+        Route::get('/penguji/dashboard/mahasiswa-sidang', 'MhsDiujiController@index')->name('penguji');
+        Route::get('/penguji/dashboard/mahasiswa-sidang/{id}', 'MhsDiujiController@detail')->name('penguji.detailmhs');
     });
 });

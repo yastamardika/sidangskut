@@ -1,7 +1,7 @@
 @component('layouts.template')
 
     @slot('title_page')
-        Penilaian Sidang
+        Data Sidang
     @endslot
     @slot('icon')
         bxs-spreadsheet
@@ -26,30 +26,33 @@
                     <thead>
                         <tr class="text-center">
                             <td style="width: 10px"></td>
-                            <td>Judul TA</td>
-                            <td>Status</td>
+                            <td>Nama Mahasiswa</td>
+                            <td>Tgl. Sidang</td>
                             <td>Aksi</td>
                             <td>Detail</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @php $no = 1; @endphp
+                        @php $no = 1; $count = 0; @endphp
                         @forelse ($mahasiswa as $row)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
                             <td><span class="d-inline-block text-truncate konten-tabel" style=" min-width: 100%; width: 20vw;">
-                                {{ $row->judul_idn }}
+                                {{ $user->find($sidang[$count]->id_mhs)->name }}
                             </span></td>
                             <td class="fit-content text-capitalize text-center"><span class="d-inline-block text-truncate konten-tabel" style=" min-width: 100%; width: 10vw;">
-                                {{ $status->find($row->id_status)->status }}
+                                {{ date("d F Y", strtotime($sidang[$count++]->tanggal_sidang)) }}
                             </span></td>
                             <td class="text-center p-0">
-                                <a href="{{ route('kaprodi.detailmhs',$row->id)}}" class="btn @switch($status->find($row->id_status)->status)
+                                <a href="{{ route('penguji.detailmhs',$row->id)}}" class="btn @switch($status->find($row->id_status)->status)
                                     @case('sidang')
-                                        btn-dark disabled
+                                        btn-primary
                                         @break
+                                    @case('sidang')
+                                        btn-success
+                                    @break
                                     @default
-                                        btn-warning
+                                        disabled
                                 @endswitch btn-sm px-sm-4 m-1"><i class='bx bx-calendar bx-xs align-middle'></i></a>
                             </td>
                             <td></td>
