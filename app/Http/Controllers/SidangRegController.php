@@ -48,48 +48,61 @@ class SidangRegController extends Controller
     }
 
     public function upload(Request $req){
-        $verifikasi1 = Mahasiswa::where('id_status', "3")->first();
-        $verifikasi2 = Mahasiswa::where('id_status', "3")->first();
-        $verifikasi3 = Mahasiswa::where('id_status', "1")->orWhere('id_status', "2")->first();
+        // $verifikasi1 = Mahasiswa::where('id_status', "3")->first();
+        // $verifikasi2 = Mahasiswa::where('id_status', "3")->first();
+        // $verifikasi3 = Mahasiswa::where('id_status', "1")->orWhere('id_status', "2")->first();
 
-        $validate = Validator::make($req->all(),
-        [
-            'nim' => ['required','regex:/^\d{2,}\/\d{6,}\/[A-z]{2,}\/\d{5,}$/i'],
-            'prodi' => 'required',
-            'nomerhp' => ['required','numeric'],
-            'judulIDN' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
-            'judulENG' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
-            'pembimbing' => 'required',
-            'tgl_acc' => 'required',
-            'file' => ['required','mimes:pdf','max:1000'],
-            'syarat' => 'accepted'
-        ]
-        );
+        // $validate = Validator::make($req->all(),
+        // [
+        //     'nim' => ['required','regex:/^\d{2,}\/\d{6,}\/[A-z]{2,}\/\d{5,}$/i'],
+        //     'prodi' => 'required',
+        //     'nomerhp' => ['required','numeric'],
+        //     'judulIDN' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
+        //     'judulENG' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
+        //     'pembimbing' => 'required',
+        //     'tgl_acc' => 'required',
+        //     'file' => ['required','mimes:pdf','max:1000'],
+        //     'syarat' => 'accepted'
+        // ]
+        // );
 
-        if($validate->fails()){
-            return redirect()->route('pengajuan')
-                             ->withErrors($validate)
-                             ->withInput();
-        }
-        else if ($verifikasi1 != null && $verifikasi2 != null) {
-            $notification = array(
-                'title' => 'PROSES DIBATALKAN',
-                'message' => 'Sidang Tugas Akhir sudah diterima! Silahkan lihat jadwal sidang Anda.',
-                'alert-type' => 'warning'
-            );
+        // if($validate->fails()){
+        //     return redirect()->route('pengajuan')
+        //                      ->withErrors($validate)
+        //                      ->withInput();
+        // }
+        // else if ($verifikasi1 != null && $verifikasi2 != null) {
+        //     $notification = array(
+        //         'title' => 'PROSES DIBATALKAN',
+        //         'message' => 'Sidang Tugas Akhir sudah diterima! Silahkan lihat jadwal sidang Anda.',
+        //         'alert-type' => 'warning'
+        //     );
 
-            return redirect()->route('pengajuan')->with($notification);
-        }
-        else if ($verifikasi1 != null && $verifikasi3 != null) {
-            $notification = array(
-                'title' => 'PROSES GAGAL',
-                'message' => 'Terdapat sidang Tugas Akhir yang sedang diajukan!',
-                'alert-type' => 'failed'
-            );
+        //     return redirect()->route('pengajuan')->with($notification);
+        // }
+        // else if ($verifikasi1 != null && $verifikasi3 != null) {
+        //     $notification = array(
+        //         'title' => 'PROSES GAGAL',
+        //         'message' => 'Terdapat sidang Tugas Akhir yang sedang diajukan!',
+        //         'alert-type' => 'failed'
+        //     );
 
-            return redirect()->route('pengajuan')->with($notification);
-        }
-        else {
+        //     return redirect()->route('pengajuan')->with($notification);
+        // }
+        // else {
+
+            $this->validate($req, [
+                'nim' => ['required','regex:/^\d{2,}\/\d{6,}\/[A-z]{2,}\/\d{5,}$/i'],
+                'prodi' => 'required',
+                'nomerhp' => ['required','numeric'],
+                'judulIDN' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
+                'judulENG' => ['required','not_regex:/[\/*:?"<>\\\|]/i'],
+                'pembimbing' => 'required',
+                'tgl_acc' => 'required',
+                'file' => ['required','mimes:pdf','max:1000'],
+                'syarat' => 'accepted'
+            ]);
+
             $path=$req->file;
             $nama_proposal = $this->nim_comp[1]."-".Str::words($req->judulIDN,4,'')."-".date('Ym').Str::random(16).".".$path->extension();
             $tujuan_upload = 'upload';
@@ -120,7 +133,7 @@ class SidangRegController extends Controller
 
             // return redirect()->route('buat');
             // echo $path;
-        }
+        // }
 
     }
 }
